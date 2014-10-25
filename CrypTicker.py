@@ -35,11 +35,26 @@ DataFontType = "Comic Sans MS"
 TextFontSize = 12
 DataFontSize = 14
 
+PriceAveragetext = str(" Price Average ")
+bitstampUSDtext = str(" Bitstamp ")
+btceUSDtext = str(" Btc-e ")
+coinbaseUSDtext = str(" Coinbase ")
+krakenUSDtext = str(" Kraken ")
+bitfinexUSDtext = str(" Bitfinex ")
+cryptsyUSDtext = str(" Cryptsy ")
 MyBTCtext = " My BTC "
 MyBLKtext = " My BLK "
 MyLTCtext = " My LTC "
 MyDRKtext = " My DRK "
 MyFAIRtext = " My FAIR "
+BLKpriceBTCtext = str(" BLK Price in BTC ")
+BLKpriceUSDtext = str(" BLK Price in USD ")
+LTCpriceBTCtext = str(" LTC Price in BTC ")
+LTCpriceUSDtext = str(" LTC Price in USD ")
+DRKpriceBTCtext = str(" DRK Price in BTC ")
+DRKpriceUSDtext = str(" DRK Price in USD ")
+FAIRpriceBTCtext = str(" FAIR Price in BTC ")
+FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My Bitcoins Value in USD ")
 MyBLKValueUSDtext = str(" My BLK Value in USD ")
 MyBLKValueBTCtext = str(" My BLK Value in BTC ")
@@ -56,21 +71,7 @@ UpdateIntervalSec = 12
 UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
-bitstampUSDtext = str(" Bitstamp ")
-btceUSDtext = str(" Btc-e ")
-coinbaseUSDtext = str(" Coinbase ")
-krakenUSDtext = str(" Kraken ")
-bitfinexUSDtext = str(" Bitfinex ")
-cryptsyUSDtext = str(" Cryptsy ")
-PriceAveragetext = str(" Price Average ")
-BLKpriceBTCtext = str(" BLK Price in BTC ")
-BLKpriceUSDtext = str(" BLK Price in USD ")
-LTCpriceBTCtext = str(" LTC Price in BTC ")
-LTCpriceUSDtext = str(" LTC Price in USD ")
-DRKpriceBTCtext = str(" DRK Price in BTC ")
-DRKpriceUSDtext = str(" DRK Price in USD ")
-FAIRpriceBTCtext = str(" FAIR Price in BTC ")
-FAIRpriceUSDtext = str(" FAIR Price in USD ")
+
 
 
 
