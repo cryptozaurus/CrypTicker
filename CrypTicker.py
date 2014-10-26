@@ -71,6 +71,15 @@ UpdateIntervalSec = 12
 UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
+BLKrowtext = 3
+BLKrowdata = 4
+LTCrowtext = 5
+LTCrowdata = 6
+DRKrowtext = 7
+DRKrowdata = 8
+FAIRrowtext = 9
+FAIRrowdata = 10
+
 
 
 
@@ -450,22 +459,22 @@ BTCimage.grid(row=1, column=2, rowspan=2)
 BLKimage = Text(app, height=3.1, width=6)
 BlackcoinImage = PhotoImage(file='./images/BlackcoinImage.gif')
 BLKimage.image_create(END, image=BlackcoinImage)
-BLKimage.grid(row=3, column=2, rowspan=2)
+BLKimage.grid(row=BLKrowtext, column=2, rowspan=2)
 
 LTCimage = Text(app, height=3.1, width=6)
 LitecoinImage = PhotoImage(file='./images/LitecoinImage.gif')
 LTCimage.image_create(END, image=LitecoinImage)
-LTCimage.grid(row=5, column=2, rowspan=2)
+LTCimage.grid(row=LTCrowtext, column=2, rowspan=2)
 
 DRKimage = Text(app, height=3.1, width=6)
 DarkcoinImage = PhotoImage(file='./images/DarkcoinImage.gif')
 DRKimage.image_create(END, image=DarkcoinImage)
-DRKimage.grid(row=7, column=2, rowspan=2)
+DRKimage.grid(row=DRKrowtext, column=2, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
 FAIRimage.image_create(END, image=FaircoinImage)
-FAIRimage.grid(row=9, column=2, rowspan=2)
+FAIRimage.grid(row=FAIRrowtext, column=2, rowspan=2)
 
 
 #root = Tk.Tk()
@@ -677,56 +686,56 @@ MyBTCValuelabeldata.grid(row=2, column=11)
 MyBLKvartext = StringVar()
 MyBLKlabeltext = Label(app, textvariable=MyBLKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyBLKvartext.set(MyBLKtext)
-MyBLKlabeltext.grid(row=3, column=3)
+MyBLKlabeltext.grid(row=BLKrowtext, column=3)
 #MyBLKvardata = StringVar()
 MyBLKlabeldata = Label(app, text=MyBLK, relief=RAISED, font=(DataFontType, DataFontSize))
-MyBLKlabeldata.grid(row=4, column=3)
+MyBLKlabeldata.grid(row=BLKrowdata, column=3)
 
 
 # Display Data and Text for Cryptsy - Blackcoin price in BTC
 BLKpriceBTCvartext = StringVar()
 BLKpriceBTClabeltext = Label(app, textvariable=BLKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BLKpriceBTCvartext.set(BLKpriceBTCtext)
-BLKpriceBTClabeltext.grid(row=3, column=5)
+BLKpriceBTClabeltext.grid(row=BLKrowtext, column=5)
 BLKpriceBTCvardata = StringVar()
 BLKpriceBTClabeldata = Label(app, textvariable=BLKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 BLKpriceBTCupdate()
-BLKpriceBTClabeldata.grid(row=4, column=5)
+BLKpriceBTClabeldata.grid(row=BLKrowdata, column=5)
 
 
 # Display Data and Text for Cryptsy - Blackcoin price in USD
 BLKpriceUSDvartext = StringVar()
 BLKpriceUSDlabeltext = Label(app, textvariable=BLKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BLKpriceUSDvartext.set(BLKpriceUSDtext)
-BLKpriceUSDlabeltext.grid(row=3, column=7)
+BLKpriceUSDlabeltext.grid(row=BLKrowtext, column=7)
 BLKpriceUSDvardata = StringVar()
 BLKpriceUSDlabeldata = Label(app, textvariable=BLKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 BLKpriceUSDupdate()
-BLKpriceUSDlabeldata.grid(row=4, column=7)
+BLKpriceUSDlabeldata.grid(row=BLKrowdata, column=7)
 
 
 #My BLK Value in USD
 MyBLKValueUSDvartext = StringVar()
 MyBLKValueUSDlabeltext = Label(app, textvariable=MyBLKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyBLKValueUSDvartext.set(MyBLKValueUSDtext)
-MyBLKValueUSDlabeltext.grid(row=3, column=11)
+MyBLKValueUSDlabeltext.grid(row=BLKrowtext, column=11)
 
 MyBLKValueUSDvardata = StringVar()
 MyBLKValueUSDlabeldata = Label(app, textvariable=MyBLKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyBLKValueUSDupdate()
-MyBLKValueUSDlabeldata.grid(row=4, column=11)
+MyBLKValueUSDlabeldata.grid(row=BLKrowdata, column=11)
 
 
 #My BLK Value in BTC
 MyBLKValueBTCvartext = StringVar()
 MyBLKValueBTClabeltext = Label(app, textvariable=MyBLKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyBLKValueBTCvartext.set(MyBLKValueBTCtext)
-MyBLKValueBTClabeltext.grid(row=3, column=9)
+MyBLKValueBTClabeltext.grid(row=BLKrowtext, column=9)
 
 MyBLKValueBTCvardata = StringVar()
 MyBLKValueBTClabeldata = Label(app, textvariable=MyBLKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyBLKValueBTCupdate()
-MyBLKValueBTClabeldata.grid(row=4, column=9)
+MyBLKValueBTClabeldata.grid(row=BLKrowdata, column=9)
 
 
 
@@ -735,56 +744,56 @@ MyBLKValueBTClabeldata.grid(row=4, column=9)
 MyLTCvartext = StringVar()
 MyLTClabeltext = Label(app, textvariable=MyLTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyLTCvartext.set(MyLTCtext)
-MyLTClabeltext.grid(row=5, column=3)
+MyLTClabeltext.grid(row=LTCrowtext, column=3)
 #MyLTCvardata = StringVar()
 MyLTClabeldata = Label(app, text=MyLTC, relief=RAISED, font=(DataFontType, DataFontSize))
-MyLTClabeldata.grid(row=6, column=3)
+MyLTClabeldata.grid(row=LTCrowdata, column=3)
 
 
 # Display Data and Text for Cryptsy - Litecoin price in BTC
 LTCpriceBTCvartext = StringVar()
 LTCpriceBTClabeltext = Label(app, textvariable=LTCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 LTCpriceBTCvartext.set(LTCpriceBTCtext)
-LTCpriceBTClabeltext.grid(row=5, column=5)
+LTCpriceBTClabeltext.grid(row=LTCrowtext, column=5)
 LTCpriceBTCvardata = StringVar()
 LTCpriceBTClabeldata = Label(app, textvariable=LTCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 LTCpriceBTCupdate()
-LTCpriceBTClabeldata.grid(row=6, column=5)
+LTCpriceBTClabeldata.grid(row=LTCrowdata, column=5)
 
 
 # Display Data and Text for Cryptsy - Litecoin price in USD
 LTCpriceUSDvartext = StringVar()
 LTCpriceUSDlabeltext = Label(app, textvariable=LTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 LTCpriceUSDvartext.set(LTCpriceUSDtext)
-LTCpriceUSDlabeltext.grid(row=5, column=7)
+LTCpriceUSDlabeltext.grid(row=LTCrowtext, column=7)
 LTCpriceUSDvardata = StringVar()
 LTCpriceUSDlabeldata = Label(app, textvariable=LTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 LTCpriceUSDupdate()
-LTCpriceUSDlabeldata.grid(row=6, column=7)
+LTCpriceUSDlabeldata.grid(row=LTCrowdata, column=7)
 
 
 #My LTC Value in USD
 MyLTCValueUSDvartext = StringVar()
 MyLTCValueUSDlabeltext = Label(app, textvariable=MyLTCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyLTCValueUSDvartext.set(MyLTCValueUSDtext)
-MyLTCValueUSDlabeltext.grid(row=5, column=11)
+MyLTCValueUSDlabeltext.grid(row=LTCrowtext, column=11)
 
 MyLTCValueUSDvardata = StringVar()
 MyLTCValueUSDlabeldata = Label(app, textvariable=MyLTCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyLTCValueUSDupdate()
-MyLTCValueUSDlabeldata.grid(row=6, column=11)
+MyLTCValueUSDlabeldata.grid(row=LTCrowdata, column=11)
 
 
 #My LTC Value in BTC
 MyLTCValueBTCvartext = StringVar()
 MyLTCValueBTClabeltext = Label(app, textvariable=MyLTCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyLTCValueBTCvartext.set(MyLTCValueBTCtext)
-MyLTCValueBTClabeltext.grid(row=5, column=9)
+MyLTCValueBTClabeltext.grid(row=LTCrowtext, column=9)
 
 MyLTCValueBTCvardata = StringVar()
 MyLTCValueBTClabeldata = Label(app, textvariable=MyLTCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyLTCValueBTCupdate()
-MyLTCValueBTClabeldata.grid(row=6, column=9)
+MyLTCValueBTClabeldata.grid(row=LTCrowdata, column=9)
 
 
 
@@ -793,56 +802,56 @@ MyLTCValueBTClabeldata.grid(row=6, column=9)
 MyDRKvartext = StringVar()
 MyDRKlabeltext = Label(app, textvariable=MyDRKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyDRKvartext.set(MyDRKtext)
-MyDRKlabeltext.grid(row=7, column=3)
+MyDRKlabeltext.grid(row=DRKrowtext, column=3)
 #MyDRKvardata = StringVar()
 MyDRKlabeldata = Label(app, text=MyDRK, relief=RAISED, font=(DataFontType, DataFontSize))
-MyDRKlabeldata.grid(row=8, column=3)
+MyDRKlabeldata.grid(row=DRKrowdata, column=3)
 
 
 # Display Data and Text for Cryptsy - Darkcoin price in BTC
 DRKpriceBTCvartext = StringVar()
 DRKpriceBTClabeltext = Label(app, textvariable=DRKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKpriceBTCvartext.set(DRKpriceBTCtext)
-DRKpriceBTClabeltext.grid(row=7, column=5)
+DRKpriceBTClabeltext.grid(row=DRKrowtext, column=5)
 DRKpriceBTCvardata = StringVar()
 DRKpriceBTClabeldata = Label(app, textvariable=DRKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 DRKpriceBTCupdate()
-DRKpriceBTClabeldata.grid(row=8, column=5)
+DRKpriceBTClabeldata.grid(row=DRKrowdata, column=5)
 
 
 # Display Data and Text for Cryptsy - Darkcoin price in USD
 DRKpriceUSDvartext = StringVar()
 DRKpriceUSDlabeltext = Label(app, textvariable=DRKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKpriceUSDvartext.set(DRKpriceUSDtext)
-DRKpriceUSDlabeltext.grid(row=7, column=7)
+DRKpriceUSDlabeltext.grid(row=DRKrowtext, column=7)
 DRKpriceUSDvardata = StringVar()
 DRKpriceUSDlabeldata = Label(app, textvariable=DRKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 DRKpriceUSDupdate()
-DRKpriceUSDlabeldata.grid(row=8, column=7)
+DRKpriceUSDlabeldata.grid(row=DRKrowdata, column=7)
 
 
 #My DRK Value in USD
 MyDRKValueUSDvartext = StringVar()
 MyDRKValueUSDlabeltext = Label(app, textvariable=MyDRKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyDRKValueUSDvartext.set(MyDRKValueUSDtext)
-MyDRKValueUSDlabeltext.grid(row=7, column=11)
+MyDRKValueUSDlabeltext.grid(row=DRKrowtext, column=11)
 
 MyDRKValueUSDvardata = StringVar()
 MyDRKValueUSDlabeldata = Label(app, textvariable=MyDRKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyDRKValueUSDupdate()
-MyDRKValueUSDlabeldata.grid(row=8, column=11)
+MyDRKValueUSDlabeldata.grid(row=DRKrowdata, column=11)
 
 
 #My DRK Value in BTC
 MyDRKValueBTCvartext = StringVar()
 MyDRKValueBTClabeltext = Label(app, textvariable=MyDRKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyDRKValueBTCvartext.set(MyDRKValueBTCtext)
-MyDRKValueBTClabeltext.grid(row=7, column=9)
+MyDRKValueBTClabeltext.grid(row=DRKrowtext, column=9)
 
 MyDRKValueBTCvardata = StringVar()
 MyDRKValueBTClabeldata = Label(app, textvariable=MyDRKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyDRKValueBTCupdate()
-MyDRKValueBTClabeldata.grid(row=8, column=9)
+MyDRKValueBTClabeldata.grid(row=DRKrowdata, column=9)
 
 
 
@@ -851,56 +860,56 @@ MyDRKValueBTClabeldata.grid(row=8, column=9)
 MyFAIRvartext = StringVar()
 MyFAIRlabeltext = Label(app, textvariable=MyFAIRvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyFAIRvartext.set(MyFAIRtext)
-MyFAIRlabeltext.grid(row=9, column=3)
+MyFAIRlabeltext.grid(row=FAIRrowtext, column=3)
 #MyFAIRvardata = StringVar()
 MyFAIRlabeldata = Label(app, text=MyFAIR, relief=RAISED, font=(DataFontType, DataFontSize))
-MyFAIRlabeldata.grid(row=10, column=3)
+MyFAIRlabeldata.grid(row=FAIRrowdata, column=3)
 
 
 # Display Data and Text for Cryptsy - Faircoin price in BTC
 FAIRpriceBTCvartext = StringVar()
 FAIRpriceBTClabeltext = Label(app, textvariable=FAIRpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 FAIRpriceBTCvartext.set(FAIRpriceBTCtext)
-FAIRpriceBTClabeltext.grid(row=9, column=5)
+FAIRpriceBTClabeltext.grid(row=FAIRrowtext, column=5)
 FAIRpriceBTCvardata = StringVar()
 FAIRpriceBTClabeldata = Label(app, textvariable=FAIRpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 FAIRpriceBTCupdate()
-FAIRpriceBTClabeldata.grid(row=10, column=5)
+FAIRpriceBTClabeldata.grid(row=FAIRrowdata, column=5)
 
 
 # Display Data and Text for Cryptsy - Faircoin price in USD
 FAIRpriceUSDvartext = StringVar()
 FAIRpriceUSDlabeltext = Label(app, textvariable=FAIRpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 FAIRpriceUSDvartext.set(FAIRpriceUSDtext)
-FAIRpriceUSDlabeltext.grid(row=9, column=7)
+FAIRpriceUSDlabeltext.grid(row=FAIRrowtext, column=7)
 FAIRpriceUSDvardata = StringVar()
 FAIRpriceUSDlabeldata = Label(app, textvariable=FAIRpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 FAIRpriceUSDupdate()
-FAIRpriceUSDlabeldata.grid(row=10, column=7)
+FAIRpriceUSDlabeldata.grid(row=FAIRrowdata, column=7)
 
 
 #My FAIR Value in USD
 MyFAIRValueUSDvartext = StringVar()
 MyFAIRValueUSDlabeltext = Label(app, textvariable=MyFAIRValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyFAIRValueUSDvartext.set(MyFAIRValueUSDtext)
-MyFAIRValueUSDlabeltext.grid(row=9, column=11)
+MyFAIRValueUSDlabeltext.grid(row=FAIRrowtext, column=11)
 
 MyFAIRValueUSDvardata = StringVar()
 MyFAIRValueUSDlabeldata = Label(app, textvariable=MyFAIRValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyFAIRValueUSDupdate()
-MyFAIRValueUSDlabeldata.grid(row=10, column=11)
+MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=11)
 
 
 #My FAIR Value in BTC
 MyFAIRValueBTCvartext = StringVar()
 MyFAIRValueBTClabeltext = Label(app, textvariable=MyFAIRValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyFAIRValueBTCvartext.set(MyFAIRValueBTCtext)
-MyFAIRValueBTClabeltext.grid(row=9, column=9)
+MyFAIRValueBTClabeltext.grid(row=FAIRrowtext, column=9)
 
 MyFAIRValueBTCvardata = StringVar()
 MyFAIRValueBTClabeldata = Label(app, textvariable=MyFAIRValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyFAIRValueBTCupdate()
-MyFAIRValueBTClabeldata.grid(row=10, column=9)
+MyFAIRValueBTClabeldata.grid(row=FAIRrowdata, column=9)
 
 
 
