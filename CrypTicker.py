@@ -518,7 +518,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
