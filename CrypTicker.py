@@ -11,6 +11,7 @@ MyBLK = 14361
 MyLTC = 20.78844
 MyDOGE = 100000
 MyDRK = 45
+MyPPC = 12.89
 MyFAIR = 10
 
 bitstampUSDexchangeURL = 'https://www.bitstamp.net/api/ticker/'
@@ -23,6 +24,7 @@ BLKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mark
 LTCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DRKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
+PPCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=28'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 exchangeNametext = " Exchange Name "
@@ -31,6 +33,7 @@ BLKexchangeNametext = " Cryptsy "
 LTCexchangeNametext = " Cryptsy "
 DOGEexchangeNametext = " Cryptsy "
 DRKexchangeNametext = " Cryptsy "
+PPCexchangeNametext = " Cryptsy "
 FAIRexchangeNametext = " Vaultex "
 
 TextFontType = "Georgia"
@@ -50,6 +53,7 @@ MyBLKtext = " My BLK "
 MyLTCtext = " My LTC "
 MyDOGEtext = " My DOGE "
 MyDRKtext = " My DRK "
+MyPPCtext = " My PPC "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -60,6 +64,8 @@ DOGEpriceBTCtext = str(" DOGE Price in BTC ")
 DOGEpriceUSDtext = str(" DOGE Price in USD ")
 DRKpriceBTCtext = str(" DRK Price in BTC ")
 DRKpriceUSDtext = str(" DRK Price in USD ")
+PPCpriceBTCtext = str(" PPC Price in BTC ")
+PPCpriceUSDtext = str(" PPC Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My Bitcoins Value in USD ")
@@ -71,6 +77,8 @@ MyDOGEValueUSDtext = str(" My DOGE Value in USD ")
 MyDOGEValueBTCtext = str(" My DOGE Value in BTC ")
 MyDRKValueUSDtext = str(" My DRK Value in USD ")
 MyDRKValueBTCtext = str(" My DRK Value in BTC ")
+MyPPCValueUSDtext = str(" My PPC Value in USD ")
+MyPPCValueBTCtext = str(" My PPC Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -91,8 +99,10 @@ DOGErowtext = 7
 DOGErowdata = 8
 DRKrowtext = 9
 DRKrowdata = 10
-FAIRrowtext = 11
-FAIRrowdata = 12
+PPCrowtext = 11
+PPCrowdata = 12
+FAIRrowtext = 13
+FAIRrowdata = 14
 
 BTCUSDcol = 1
 COINSimagecol = 3
@@ -401,6 +411,59 @@ def MyDRKValueBTCupdate():
     root.after(UpdateInterval, MyDRKValueBTCupdate)
 
 
+
+#PEERCOIN
+# Import and Update API DATA for Cryptsy - Peercoin price in BTC
+def PPCpriceBTC():
+    Tick = requests.get(PPCexchangeURL)
+    return Tick.json()["return"]["markets"]["PPC"]['lasttradeprice']
+
+def PPCpriceBTCupdate():
+    global PPCpriceBTCvardata
+    PPCpriceBTCvardata.set(str.format("{0:.8f}", (float(PPCpriceBTC()))))
+    print PPCpriceBTCvardata.get()
+    root.after(UpdateInterval, PPCpriceBTCupdate)
+
+
+# Calculate and Update with Price Average DATA for Cryptsy - Peercoin price in USD
+def PPCpriceUSD():
+    PPCpriceUSD = float(PPCpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
+    return PPCpriceUSD
+
+def PPCpriceUSDupdate():
+    global PPCpriceBTCvardata
+    global PPCpriceUSDvardata
+    PPCpriceUSDvardata.set(str.format("{0:.8f}", (float(PPCpriceUSD()))))
+    print PPCpriceUSDvardata.get()
+    root.after(UpdateInterval, PPCpriceUSDupdate)
+
+
+# Calculate and Update my Peercoin Value in USD
+def MyPPCValueUSD():
+    global PPCpriceBTCvardata
+    global PPCpriceUSDvardata
+    MyPPCValueUSD = float(PPCpriceUSDvardata.get()) * MyPPC
+    return MyPPCValueUSD
+
+def MyPPCValueUSDupdate():
+    global MyPPCValueUSDvardata
+    MyPPCValueUSDvardata.set(str.format("{0:.2f}", (float(MyPPCValueUSD()))))
+    root.after(UpdateInterval, MyPPCValueUSDupdate)
+
+
+# Calculate and Update my Peercoin Value in BTC
+def MyPPCValueBTC():
+    MyPPCValueBTC = float(PPCpriceBTCvardata.get()) * MyPPC
+    return MyPPCValueBTC
+
+def MyPPCValueBTCupdate():
+    global MyPPCValueBTCvardata
+    MyPPCValueBTCvardata.set(str.format("{0:.8f}", (float(MyPPCValueBTC()))))
+    root.after(UpdateInterval, MyPPCValueBTCupdate)
+
+
+
+
 #FAIRCOIN
 # Import and Update API DATA for Cryptsy - Faircoin price in BTC
 def FAIRpriceBTC():
@@ -466,7 +529,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -553,6 +616,11 @@ DRKimage = Text(app, height=3.1, width=6)
 DarkcoinImage = PhotoImage(file='./images/DarkcoinImage.gif')
 DRKimage.image_create(END, image=DarkcoinImage)
 DRKimage.grid(row=DRKrowtext, column=COINSimagecol, rowspan=2)
+
+PPCimage = Text(app, height=3.1, width=6)
+PeercoinImage = PhotoImage(file='./images/PeercoinImage.gif')
+PPCimage.image_create(END, image=PeercoinImage)
+PPCimage.grid(row=PPCrowtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
@@ -644,6 +712,12 @@ DRKexchangeNamevartext = StringVar()
 DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKexchangeNamevartext.set(DRKexchangeNametext)
 DRKexchangeNamelabeltext.grid(row=DRKrowdata, column=exchangeNamecol)
+
+#Peercoin Exchange Name
+PPCexchangeNamevartext = StringVar()
+PPCexchangeNamelabeltext = Label(app, textvariable=PPCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCexchangeNamevartext.set(PPCexchangeNametext)
+PPCexchangeNamelabeltext.grid(row=PPCrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -1012,6 +1086,65 @@ MyDRKValueUSDvardata = StringVar()
 MyDRKValueUSDlabeldata = Label(app, textvariable=MyDRKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyDRKValueUSDupdate()
 MyDRKValueUSDlabeldata.grid(row=DRKrowdata, column=ValueUSDcol)
+
+
+
+#PEERCOIN
+#MyPPC
+MyPPCvartext = StringVar()
+MyPPClabeltext = Label(app, textvariable=MyPPCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPCvartext.set(MyPPCtext)
+MyPPClabeltext.grid(row=PPCrowtext, column=MyCOINScol)
+#MyPPCvardata = StringVar()
+MyPPClabeldata = Label(app, text=MyPPC, relief=RAISED, font=(DataFontType, DataFontSize))
+MyPPClabeldata.grid(row=PPCrowdata, column=MyCOINScol)
+
+
+# Display Data and Text for Peercoin price in BTC
+PPCpriceBTCvartext = StringVar()
+PPCpriceBTClabeltext = Label(app, textvariable=PPCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCpriceBTCvartext.set(PPCpriceBTCtext)
+PPCpriceBTClabeltext.grid(row=PPCrowtext, column=PriceBTCcol)
+PPCpriceBTCvardata = StringVar()
+PPCpriceBTClabeldata = Label(app, textvariable=PPCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+PPCpriceBTCupdate()
+PPCpriceBTClabeldata.grid(row=PPCrowdata, column=PriceBTCcol)
+
+
+# Display Data and Text for Peercoin price in USD
+PPCpriceUSDvartext = StringVar()
+PPCpriceUSDlabeltext = Label(app, textvariable=PPCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCpriceUSDvartext.set(PPCpriceUSDtext)
+PPCpriceUSDlabeltext.grid(row=PPCrowtext, column=PriceUSDcol)
+PPCpriceUSDvardata = StringVar()
+PPCpriceUSDlabeldata = Label(app, textvariable=PPCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+PPCpriceUSDupdate()
+PPCpriceUSDlabeldata.grid(row=PPCrowdata, column=PriceUSDcol)
+
+
+#My PPC Value in BTC
+MyPPCValueBTCvartext = StringVar()
+MyPPCValueBTClabeltext = Label(app, textvariable=MyPPCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPCValueBTCvartext.set(MyPPCValueBTCtext)
+MyPPCValueBTClabeltext.grid(row=PPCrowtext, column=ValueBTCcol)
+
+MyPPCValueBTCvardata = StringVar()
+MyPPCValueBTClabeldata = Label(app, textvariable=MyPPCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyPPCValueBTCupdate()
+MyPPCValueBTClabeldata.grid(row=PPCrowdata, column=ValueBTCcol)
+
+
+#My PPC Value in USD
+MyPPCValueUSDvartext = StringVar()
+MyPPCValueUSDlabeltext = Label(app, textvariable=MyPPCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPCValueUSDvartext.set(MyPPCValueUSDtext)
+MyPPCValueUSDlabeltext.grid(row=PPCrowtext, column=ValueUSDcol)
+
+MyPPCValueUSDvardata = StringVar()
+MyPPCValueUSDlabeldata = Label(app, textvariable=MyPPCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyPPCValueUSDupdate()
+MyPPCValueUSDlabeldata.grid(row=PPCrowdata, column=ValueUSDcol)
+
 
 
 
