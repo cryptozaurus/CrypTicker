@@ -16,4 +16,5 @@ Supported coins for now:
 - Litecoin (LTC)
 - Dogecoin (DOGE)
 - Darkcoin (DRK)
+- Peercoin (PPC)
 - Faircoin (FAIR)
