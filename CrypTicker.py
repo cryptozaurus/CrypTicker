@@ -10,7 +10,7 @@ MyBTC = 10.78
 MyBLK = 14361
 MyLTC = 20.78844
 MyDRK = 45
-MyFAIR = 0
+MyFAIR = 10
 
 bitstampUSDexchangeURL = 'https://www.bitstamp.net/api/ticker/'
 btceUSDexchangeURL = 'https://btc-e.com/api/2/btc_usd/ticker'
@@ -938,6 +938,17 @@ MyFAIRValueUSDupdate()
 MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=ValueUSDcol)
 
 
+#TOTAL
+#My Total Value in BTC
+MyTotalValueBTCvartext = StringVar()
+MyTotalValueBTClabeltext = Label(app, textvariable=MyTotalValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyTotalValueBTCvartext.set(MyTotalValueBTCtext)
+MyTotalValueBTClabeltext.grid(row=100, column=ValueBTCcol)
+
+MyTotalValueBTCvardata = StringVar()
+MyTotalValueBTClabeldata = Label(app, textvariable=MyTotalValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyTotalValueBTCupdate()
+MyTotalValueBTClabeldata.grid(row=101, column=ValueBTCcol)
 
 
 #TOTAL
@@ -945,24 +956,13 @@ MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=ValueUSDcol)
 MyTotalValueUSDvartext = StringVar()
 MyTotalValueUSDlabeltext = Label(app, textvariable=MyTotalValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyTotalValueUSDvartext.set(MyTotalValueUSDtext)
-MyTotalValueUSDlabeltext.grid(row=100, column=11)
+MyTotalValueUSDlabeltext.grid(row=100, column=ValueUSDcol)
 
 MyTotalValueUSDvardata = StringVar()
 MyTotalValueUSDlabeldata = Label(app, textvariable=MyTotalValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 MyTotalValueUSDupdate()
-MyTotalValueUSDlabeldata.grid(row=101, column=11)
+MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
-
-#My Total Value in BTC
-MyTotalValueBTCvartext = StringVar()
-MyTotalValueBTClabeltext = Label(app, textvariable=MyTotalValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
-MyTotalValueBTCvartext.set(MyTotalValueBTCtext)
-MyTotalValueBTClabeltext.grid(row=100, column=9)
-
-MyTotalValueBTCvardata = StringVar()
-MyTotalValueBTClabeldata = Label(app, textvariable=MyTotalValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
-MyTotalValueBTCupdate()
-MyTotalValueBTClabeldata.grid(row=101, column=9)
 
 
 
