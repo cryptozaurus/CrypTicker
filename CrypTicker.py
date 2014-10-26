@@ -9,6 +9,7 @@ from Tkinter import *
 MyBTC = 10.78
 MyBLK = 14361
 MyLTC = 20.78844
+MyDOGE = 100000
 MyDRK = 45
 MyFAIR = 10
 
@@ -20,6 +21,7 @@ bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
 BLKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
 LTCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+DOGEexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DRKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
@@ -27,6 +29,7 @@ exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
 BLKexchangeNametext = " Cryptsy "
 LTCexchangeNametext = " Cryptsy "
+DOGEexchangeNametext = " Cryptsy "
 DRKexchangeNametext = " Cryptsy "
 FAIRexchangeNametext = " Vaultex "
 
@@ -45,6 +48,7 @@ cryptsyUSDtext = str(" Cryptsy ")
 MyBTCtext = " My BTC "
 MyBLKtext = " My BLK "
 MyLTCtext = " My LTC "
+MyDOGEtext = " My DOGE "
 MyDRKtext = " My DRK "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
@@ -52,6 +56,8 @@ BLKpriceBTCtext = str(" BLK Price in BTC ")
 BLKpriceUSDtext = str(" BLK Price in USD ")
 LTCpriceBTCtext = str(" LTC Price in BTC ")
 LTCpriceUSDtext = str(" LTC Price in USD ")
+DOGEpriceBTCtext = str(" DOGE Price in BTC ")
+DOGEpriceUSDtext = str(" DOGE Price in USD ")
 DRKpriceBTCtext = str(" DRK Price in BTC ")
 DRKpriceUSDtext = str(" DRK Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
@@ -61,6 +67,8 @@ MyBLKValueUSDtext = str(" My BLK Value in USD ")
 MyBLKValueBTCtext = str(" My BLK Value in BTC ")
 MyLTCValueUSDtext = str(" My LTC Value in USD ")
 MyLTCValueBTCtext = str(" My LTC Value in BTC ")
+MyDOGEValueUSDtext = str(" My DOGE Value in USD ")
+MyDOGEValueBTCtext = str(" My DOGE Value in BTC ")
 MyDRKValueUSDtext = str(" My DRK Value in USD ")
 MyDRKValueBTCtext = str(" My DRK Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
@@ -79,10 +87,12 @@ BLKrowtext = 3
 BLKrowdata = 4
 LTCrowtext = 5
 LTCrowdata = 6
-DRKrowtext = 7
-DRKrowdata = 8
-FAIRrowtext = 9
-FAIRrowdata = 10
+DOGErowtext = 7
+DOGErowdata = 8
+DRKrowtext = 9
+DRKrowdata = 10
+FAIRrowtext = 11
+FAIRrowdata = 12
 
 BTCUSDcol = 1
 COINSimagecol = 3
@@ -208,7 +218,7 @@ def BLKpriceUSD():
 def BLKpriceUSDupdate():
     global BLKpriceBTCvardata
     global BLKpriceUSDvardata
-    BLKpriceUSDvardata.set(str.format("{0:.2f}", (float(BLKpriceUSD()))))
+    BLKpriceUSDvardata.set(str.format("{0:.8f}", (float(BLKpriceUSD()))))
     print BLKpriceUSDvardata.get()
     root.after(UpdateInterval, BLKpriceUSDupdate)
 
@@ -259,7 +269,7 @@ def LTCpriceUSD():
 def LTCpriceUSDupdate():
     global LTCpriceBTCvardata
     global LTCpriceUSDvardata
-    LTCpriceUSDvardata.set(str.format("{0:.2f}", (float(LTCpriceUSD()))))
+    LTCpriceUSDvardata.set(str.format("{0:.8f}", (float(LTCpriceUSD()))))
     print LTCpriceUSDvardata.get()
     root.after(UpdateInterval, LTCpriceUSDupdate)
 
@@ -289,6 +299,58 @@ def MyLTCValueBTCupdate():
 
 
 
+#DOGECOIN
+# Import and Update API DATA for Cryptsy - Dogecoin price in BTC
+def DOGEpriceBTC():
+    Tick = requests.get(DOGEexchangeURL)
+    return Tick.json()["return"]["markets"]["DOGE"]['lasttradeprice']
+
+def DOGEpriceBTCupdate():
+    global DOGEpriceBTCvardata
+    DOGEpriceBTCvardata.set(str.format("{0:.8f}", (float(DOGEpriceBTC()))))
+    print DOGEpriceBTCvardata.get()
+    root.after(UpdateInterval, DOGEpriceBTCupdate)
+
+
+# Calculate and Update with Price Average DATA for Cryptsy - Dogecoin price in USD
+def DOGEpriceUSD():
+    DOGEpriceUSD = float(DOGEpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
+    return DOGEpriceUSD
+
+def DOGEpriceUSDupdate():
+    global DOGEpriceBTCvardata
+    global DOGEpriceUSDvardata
+    DOGEpriceUSDvardata.set(str.format("{0:.8f}", (float(DOGEpriceUSD()))))
+    print DOGEpriceUSDvardata.get()
+    root.after(UpdateInterval, DOGEpriceUSDupdate)
+
+
+# Calculate and Update my Dogecoin Value in USD
+def MyDOGEValueUSD():
+    global DOGEpriceBTCvardata
+    global DOGEpriceUSDvardata
+    MyDOGEValueUSD = float(DOGEpriceUSDvardata.get()) * MyDOGE
+    return MyDOGEValueUSD
+
+def MyDOGEValueUSDupdate():
+    global MyDOGEValueUSDvardata
+    MyDOGEValueUSDvardata.set(str.format("{0:.2f}", (float(MyDOGEValueUSD()))))
+    root.after(UpdateInterval, MyDOGEValueUSDupdate)
+
+
+# Calculate and Update my Dogecoin Value in BTC
+def MyDOGEValueBTC():
+    MyDOGEValueBTC = float(DOGEpriceBTCvardata.get()) * MyDOGE
+    return MyDOGEValueBTC
+
+def MyDOGEValueBTCupdate():
+    global MyDOGEValueBTCvardata
+    MyDOGEValueBTCvardata.set(str.format("{0:.8f}", (float(MyDOGEValueBTC()))))
+    root.after(UpdateInterval, MyDOGEValueBTCupdate)
+
+
+
+
 #DARKCOIN
 # Import and Update API DATA for Cryptsy - Darkcoin price in BTC
 def DRKpriceBTC():
@@ -310,7 +372,7 @@ def DRKpriceUSD():
 def DRKpriceUSDupdate():
     global DRKpriceBTCvardata
     global DRKpriceUSDvardata
-    DRKpriceUSDvardata.set(str.format("{0:.2f}", (float(DRKpriceUSD()))))
+    DRKpriceUSDvardata.set(str.format("{0:.8f}", (float(DRKpriceUSD()))))
     print DRKpriceUSDvardata.get()
     root.after(UpdateInterval, DRKpriceUSDupdate)
 
@@ -360,7 +422,7 @@ def FAIRpriceUSD():
 def FAIRpriceUSDupdate():
     global FAIRpriceBTCvardata
     global FAIRpriceUSDvardata
-    FAIRpriceUSDvardata.set(str.format("{0:.2f}", (float(FAIRpriceUSD()))))
+    FAIRpriceUSDvardata.set(str.format("{0:.8f}", (float(FAIRpriceUSD()))))
     print FAIRpriceUSDvardata.get()
     root.after(UpdateInterval, FAIRpriceUSDupdate)
 
@@ -393,7 +455,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
@@ -404,7 +466,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -481,6 +543,11 @@ LTCimage = Text(app, height=3.1, width=6)
 LitecoinImage = PhotoImage(file='./images/LitecoinImage.gif')
 LTCimage.image_create(END, image=LitecoinImage)
 LTCimage.grid(row=LTCrowtext, column=COINSimagecol, rowspan=2)
+
+DOGEimage = Text(app, height=3.1, width=6)
+DogecoinImage = PhotoImage(file='./images/DogecoinImage.gif')
+DOGEimage.image_create(END, image=DogecoinImage)
+DOGEimage.grid(row=DOGErowtext, column=COINSimagecol, rowspan=2)
 
 DRKimage = Text(app, height=3.1, width=6)
 DarkcoinImage = PhotoImage(file='./images/DarkcoinImage.gif')
@@ -566,6 +633,12 @@ LTCexchangeNamelabeltext = Label(app, textvariable=LTCexchangeNamevartext, relie
 LTCexchangeNamevartext.set(LTCexchangeNametext)
 LTCexchangeNamelabeltext.grid(row=LTCrowdata, column=exchangeNamecol)
 
+#Dogecoin Exchange Name
+DOGEexchangeNamevartext = StringVar()
+DOGEexchangeNamelabeltext = Label(app, textvariable=DOGEexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEexchangeNamevartext.set(DOGEexchangeNametext)
+DOGEexchangeNamelabeltext.grid(row=DOGErowdata, column=exchangeNamecol)
+
 #Darkcoin Exchange Name
 DRKexchangeNamevartext = StringVar()
 DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
@@ -643,13 +716,14 @@ PriceAverageUSDvartext = StringVar()
 PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 PriceAverageUSDvartext.set(PriceAverageUSDtext)
 PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
-
 PriceAverageUSDvardata = StringVar()
 PriceAverageUSDupdate()
 PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
 PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
 
 
+
+#BITCOIN
 #MyBTC
 MyBTCvartext = StringVar()
 MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
@@ -667,6 +741,7 @@ MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 #MyBTCentry.focus_set()
 #MyBTC = MyBTCentry.get()
 #MyBTC = 22
+
 '''
 def callback():
     UpdateIntervalSec = int(UpdateIntervalSecEntry.get())
@@ -680,6 +755,7 @@ def callback():
 
 b = Button(app, text="Update", width=10, command=callback).grid(row=3, column=0)
 '''
+
 #MyBTCvardata = StringVar()
 MyBTClabeldata = Label(app, text=MyBTC, relief=RAISED, font=(DataFontType, DataFontSize))
 MyBTClabeldata.grid(row=BTCrowdata, column=MyCOINScol)
@@ -707,6 +783,7 @@ MyBTCValueupdate()
 MyBTCValuelabeldata.grid(row=BTCrowdata, column=ValueUSDcol)
 
 
+
 #BLACKCOIN
 #MyBLK
 MyBLKvartext = StringVar()
@@ -718,7 +795,7 @@ MyBLKlabeldata = Label(app, text=MyBLK, relief=RAISED, font=(DataFontType, DataF
 MyBLKlabeldata.grid(row=BLKrowdata, column=MyCOINScol)
 
 
-# Display Data and Text for Cryptsy - Blackcoin price in BTC
+# Display Data and Text for Blackcoin price in BTC
 BLKpriceBTCvartext = StringVar()
 BLKpriceBTClabeltext = Label(app, textvariable=BLKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BLKpriceBTCvartext.set(BLKpriceBTCtext)
@@ -729,7 +806,7 @@ BLKpriceBTCupdate()
 BLKpriceBTClabeldata.grid(row=BLKrowdata, column=PriceBTCcol)
 
 
-# Display Data and Text for Cryptsy - Blackcoin price in USD
+# Display Data and Text for Blackcoin price in USD
 BLKpriceUSDvartext = StringVar()
 BLKpriceUSDlabeltext = Label(app, textvariable=BLKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BLKpriceUSDvartext.set(BLKpriceUSDtext)
@@ -776,7 +853,7 @@ MyLTClabeldata = Label(app, text=MyLTC, relief=RAISED, font=(DataFontType, DataF
 MyLTClabeldata.grid(row=LTCrowdata, column=MyCOINScol)
 
 
-# Display Data and Text for Cryptsy - Litecoin price in BTC
+# Display Data and Text for Litecoin price in BTC
 LTCpriceBTCvartext = StringVar()
 LTCpriceBTClabeltext = Label(app, textvariable=LTCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 LTCpriceBTCvartext.set(LTCpriceBTCtext)
@@ -787,7 +864,7 @@ LTCpriceBTCupdate()
 LTCpriceBTClabeldata.grid(row=LTCrowdata, column=PriceBTCcol)
 
 
-# Display Data and Text for Cryptsy - Litecoin price in USD
+# Display Data and Text for Litecoin price in USD
 LTCpriceUSDvartext = StringVar()
 LTCpriceUSDlabeltext = Label(app, textvariable=LTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 LTCpriceUSDvartext.set(LTCpriceUSDtext)
@@ -822,6 +899,63 @@ MyLTCValueUSDlabeldata.grid(row=LTCrowdata, column=ValueUSDcol)
 
 
 
+#DOGECOIN
+#MyDOGE
+MyDOGEvartext = StringVar()
+MyDOGElabeltext = Label(app, textvariable=MyDOGEvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGEvartext.set(MyDOGEtext)
+MyDOGElabeltext.grid(row=DOGErowtext, column=MyCOINScol)
+#MyDOGEvardata = StringVar()
+MyDOGElabeldata = Label(app, text=MyDOGE, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDOGElabeldata.grid(row=DOGErowdata, column=MyCOINScol)
+
+
+# Display Data and Text for Dogecoin price in BTC
+DOGEpriceBTCvartext = StringVar()
+DOGEpriceBTClabeltext = Label(app, textvariable=DOGEpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEpriceBTCvartext.set(DOGEpriceBTCtext)
+DOGEpriceBTClabeltext.grid(row=DOGErowtext, column=PriceBTCcol)
+DOGEpriceBTCvardata = StringVar()
+DOGEpriceBTClabeldata = Label(app, textvariable=DOGEpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DOGEpriceBTCupdate()
+DOGEpriceBTClabeldata.grid(row=DOGErowdata, column=PriceBTCcol)
+
+
+# Display Data and Text for Dogecoin price in USD
+DOGEpriceUSDvartext = StringVar()
+DOGEpriceUSDlabeltext = Label(app, textvariable=DOGEpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEpriceUSDvartext.set(DOGEpriceUSDtext)
+DOGEpriceUSDlabeltext.grid(row=DOGErowtext, column=PriceUSDcol)
+DOGEpriceUSDvardata = StringVar()
+DOGEpriceUSDlabeldata = Label(app, textvariable=DOGEpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DOGEpriceUSDupdate()
+DOGEpriceUSDlabeldata.grid(row=DOGErowdata, column=PriceUSDcol)
+
+
+#My DOGE Value in BTC
+MyDOGEValueBTCvartext = StringVar()
+MyDOGEValueBTClabeltext = Label(app, textvariable=MyDOGEValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGEValueBTCvartext.set(MyDOGEValueBTCtext)
+MyDOGEValueBTClabeltext.grid(row=DOGErowtext, column=ValueBTCcol)
+
+MyDOGEValueBTCvardata = StringVar()
+MyDOGEValueBTClabeldata = Label(app, textvariable=MyDOGEValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDOGEValueBTCupdate()
+MyDOGEValueBTClabeldata.grid(row=DOGErowdata, column=ValueBTCcol)
+
+#My DOGE Value in USD
+MyDOGEValueUSDvartext = StringVar()
+MyDOGEValueUSDlabeltext = Label(app, textvariable=MyDOGEValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGEValueUSDvartext.set(MyDOGEValueUSDtext)
+MyDOGEValueUSDlabeltext.grid(row=DOGErowtext, column=ValueUSDcol)
+
+MyDOGEValueUSDvardata = StringVar()
+MyDOGEValueUSDlabeldata = Label(app, textvariable=MyDOGEValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDOGEValueUSDupdate()
+MyDOGEValueUSDlabeldata.grid(row=DOGErowdata, column=ValueUSDcol)
+
+
+
 
 #DARKCOIN
 #MyDRK
@@ -834,7 +968,7 @@ MyDRKlabeldata = Label(app, text=MyDRK, relief=RAISED, font=(DataFontType, DataF
 MyDRKlabeldata.grid(row=DRKrowdata, column=MyCOINScol)
 
 
-# Display Data and Text for Cryptsy - Darkcoin price in BTC
+# Display Data and Text for Darkcoin price in BTC
 DRKpriceBTCvartext = StringVar()
 DRKpriceBTClabeltext = Label(app, textvariable=DRKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKpriceBTCvartext.set(DRKpriceBTCtext)
@@ -845,7 +979,7 @@ DRKpriceBTCupdate()
 DRKpriceBTClabeldata.grid(row=DRKrowdata, column=PriceBTCcol)
 
 
-# Display Data and Text for Cryptsy - Darkcoin price in USD
+# Display Data and Text for Darkcoin price in USD
 DRKpriceUSDvartext = StringVar()
 DRKpriceUSDlabeltext = Label(app, textvariable=DRKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKpriceUSDvartext.set(DRKpriceUSDtext)
@@ -892,7 +1026,7 @@ MyFAIRlabeldata = Label(app, text=MyFAIR, relief=RAISED, font=(DataFontType, Dat
 MyFAIRlabeldata.grid(row=FAIRrowdata, column=MyCOINScol)
 
 
-# Display Data and Text for Cryptsy - Faircoin price in BTC
+# Display Data and Text for Faircoin price in BTC
 FAIRpriceBTCvartext = StringVar()
 FAIRpriceBTClabeltext = Label(app, textvariable=FAIRpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 FAIRpriceBTCvartext.set(FAIRpriceBTCtext)
@@ -903,7 +1037,7 @@ FAIRpriceBTCupdate()
 FAIRpriceBTClabeldata.grid(row=FAIRrowdata, column=PriceBTCcol)
 
 
-# Display Data and Text for Cryptsy - Faircoin price in USD
+# Display Data and Text for Faircoin price in USD
 FAIRpriceUSDvartext = StringVar()
 FAIRpriceUSDlabeltext = Label(app, textvariable=FAIRpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 FAIRpriceUSDvartext.set(FAIRpriceUSDtext)
