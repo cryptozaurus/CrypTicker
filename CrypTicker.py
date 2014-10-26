@@ -72,6 +72,7 @@ UpdateIntervalSec = 12
 UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
+exchangeNamerowtext = 0
 BTCrowtext = 1
 BTCrowdata = 2
 BLKrowtext = 3
@@ -84,11 +85,13 @@ FAIRrowtext = 9
 FAIRrowdata = 10
 
 BTCUSDcol = 1
-MyCOINScol = 3
-PriceBTCcol = 5
-PriceUSDcol = 7
-ValueBTCcol = 9
-ValueUSDcol = 11
+COINSimagecol = 3
+MyCOINScol = 5
+PriceBTCcol = 7
+PriceUSDcol = 9
+ValueBTCcol = 11
+ValueUSDcol = 13
+exchangeNamecol = 15
 
 
 
@@ -467,27 +470,27 @@ root.config (bg = "red")
 BTCimage = Text(app, height=3.1, width=6)
 BitcoinImage = PhotoImage(file='./images/BitcoinImage.gif')
 BTCimage.image_create(END, image=BitcoinImage)
-BTCimage.grid(row=1, column=2, rowspan=2)
+BTCimage.grid(row=1, column=COINSimagecol, rowspan=2)
 
 BLKimage = Text(app, height=3.1, width=6)
 BlackcoinImage = PhotoImage(file='./images/BlackcoinImage.gif')
 BLKimage.image_create(END, image=BlackcoinImage)
-BLKimage.grid(row=BLKrowtext, column=2, rowspan=2)
+BLKimage.grid(row=BLKrowtext, column=COINSimagecol, rowspan=2)
 
 LTCimage = Text(app, height=3.1, width=6)
 LitecoinImage = PhotoImage(file='./images/LitecoinImage.gif')
 LTCimage.image_create(END, image=LitecoinImage)
-LTCimage.grid(row=LTCrowtext, column=2, rowspan=2)
+LTCimage.grid(row=LTCrowtext, column=COINSimagecol, rowspan=2)
 
 DRKimage = Text(app, height=3.1, width=6)
 DarkcoinImage = PhotoImage(file='./images/DarkcoinImage.gif')
 DRKimage.image_create(END, image=DarkcoinImage)
-DRKimage.grid(row=DRKrowtext, column=2, rowspan=2)
+DRKimage.grid(row=DRKrowtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
 FAIRimage.image_create(END, image=FaircoinImage)
-FAIRimage.grid(row=FAIRrowtext, column=2, rowspan=2)
+FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
 
 
 #root = Tk.Tk()
@@ -543,37 +546,37 @@ UpdateIntervalSeclabeldata.grid(row=4, column=0)
 exchangeNamevartext = StringVar()
 exchangeNamelabeltext = Label(app, textvariable=exchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 exchangeNamevartext.set(exchangeNametext)
-exchangeNamelabeltext.grid(row=0, column=13)
+exchangeNamelabeltext.grid(row=exchangeNamerowtext, column=exchangeNamecol)
 
 #Bitcoin Exchange Name
 BTCexchangeNamevartext = StringVar()
 BTCexchangeNamelabeltext = Label(app, textvariable=BTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BTCexchangeNamevartext.set(BTCexchangeNametext)
-BTCexchangeNamelabeltext.grid(row=2, column=13)
+BTCexchangeNamelabeltext.grid(row=BTCrowdata, column=exchangeNamecol)
 
 #Blackcoin Exchange Name
 BLKexchangeNamevartext = StringVar()
 BLKexchangeNamelabeltext = Label(app, textvariable=BLKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 BLKexchangeNamevartext.set(BLKexchangeNametext)
-BLKexchangeNamelabeltext.grid(row=4, column=13)
+BLKexchangeNamelabeltext.grid(row=BLKrowdata, column=exchangeNamecol)
 
 #Litecoin Exchange Name
 LTCexchangeNamevartext = StringVar()
 LTCexchangeNamelabeltext = Label(app, textvariable=LTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 LTCexchangeNamevartext.set(LTCexchangeNametext)
-LTCexchangeNamelabeltext.grid(row=6, column=13)
+LTCexchangeNamelabeltext.grid(row=LTCrowdata, column=exchangeNamecol)
 
 #Darkcoin Exchange Name
 DRKexchangeNamevartext = StringVar()
 DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 DRKexchangeNamevartext.set(DRKexchangeNametext)
-DRKexchangeNamelabeltext.grid(row=8, column=13)
+DRKexchangeNamelabeltext.grid(row=DRKrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
 FAIRexchangeNamelabeltext = Label(app, textvariable=FAIRexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
 FAIRexchangeNamevartext.set(FAIRexchangeNametext)
-FAIRexchangeNamelabeltext.grid(row=10, column=13)
+FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 
 
 
