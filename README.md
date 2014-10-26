@@ -14,5 +14,6 @@ Supported coins for now:
 - Bitcoin (BTC)
 - Blackcoin (BLK)
 - Litecoin (LTC)
+- Dogecoin (DOGE)
 - Darkcoin (DRK)
 - Faircoin (FAIR)
