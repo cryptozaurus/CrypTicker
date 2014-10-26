@@ -47,6 +47,7 @@ MyBLKtext = " My BLK "
 MyLTCtext = " My LTC "
 MyDRKtext = " My DRK "
 MyFAIRtext = " My FAIR "
+BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
 BLKpriceUSDtext = str(" BLK Price in USD ")
 LTCpriceBTCtext = str(" LTC Price in BTC ")
@@ -170,9 +171,10 @@ def PriceAverageUSDupdate():
     root.after(UpdateInterval, PriceAverageUSDupdate)
 
 
+
 # Calculate and Update my Bitcoin Value
 def MyBTCValue():
-    MyBTCValue = float(PriceAverageUSDvardata.get()) * MyBTC
+    MyBTCValue = float(BTCpriceUSDvardata.get()) * MyBTC
     print MyBTCValue
     return MyBTCValue
 
@@ -680,15 +682,14 @@ MyBTClabeldata = Label(app, text=MyBTC, relief=RAISED, font=(DataFontType, DataF
 MyBTClabeldata.grid(row=BTCrowdata, column=MyCOINScol)
 
 
-# Display Data and Text for PriceAverageUSD - Bitcoin price in USD
-PriceAverageUSDvartext = StringVar()
-PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
-PriceAverageUSDvartext.set(PriceAverageUSDtext)
-PriceAverageUSDlabeltext.grid(row=BTCrowtext, column=PriceUSDcol)
-PriceAverageUSDvardata = StringVar()
-PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
-PriceAverageUSDupdate()
-PriceAverageUSDlabeldata.grid(row=BTCrowdata, column=PriceUSDcol)
+# Display Data and Text for Bitcoin price in USD
+BTCpriceUSDvartext = StringVar()
+BTCpriceUSDlabeltext = Label(app, textvariable=BTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BTCpriceUSDvartext.set(BTCpriceUSDtext)
+BTCpriceUSDlabeltext.grid(row=BTCrowtext, column=PriceUSDcol)
+BTCpriceUSDvardata = PriceAverageUSDvardata
+BTCpriceUSDlabeldata = Label(app, textvariable=BTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+BTCpriceUSDlabeldata.grid(row=BTCrowdata, column=PriceUSDcol)
 
 
 #My BTC Value in USD
