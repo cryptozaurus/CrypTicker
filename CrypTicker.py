@@ -45,6 +45,9 @@ ButtonBackGroundColor = "#999999"
 ButtonForegroundColor = "red"
 TextBackgroundColor="black"
 TextForegroundColor="yellow"
+DataBackgroundColor="black"
+DataForegroundColor="yellow"
+
 
 PriceAverageUSDtext = str(" Price Average ")
 bitstampUSDtext = str(" Bitstamp ")
@@ -769,7 +772,7 @@ bitstampUSDlabeltext = Label(app, textvariable=bitstampUSDvartext, relief=FLAT, 
 bitstampUSDvartext.set(bitstampUSDtext)
 bitstampUSDlabeltext.grid(row=3, column=BTCUSDcol)
 bitstampUSDvardata = StringVar()
-bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 bitstampUSDupdate()
 bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
@@ -779,7 +782,7 @@ btceUSDlabeltext = Label(app, textvariable=btceUSDvartext, relief=FLAT, font=(Te
 btceUSDvartext.set(btceUSDtext)
 btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
-btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 btceUSDupdate()
 btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
 
@@ -789,7 +792,7 @@ coinbaseUSDlabeltext = Label(app, textvariable=coinbaseUSDvartext, relief=FLAT, 
 coinbaseUSDvartext.set(coinbaseUSDtext)
 coinbaseUSDlabeltext.grid(row=7, column=BTCUSDcol)
 coinbaseUSDvardata = StringVar()
-coinbaseUSDlabeldata = Label(app, textvariable=coinbaseUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+coinbaseUSDlabeldata = Label(app, textvariable=coinbaseUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 coinbaseUSDupdate()
 coinbaseUSDlabeldata.grid(row=8, column=BTCUSDcol)
 
@@ -798,7 +801,7 @@ krakenUSDlabeltext = Label(app, textvariable=krakenUSDvartext, relief=FLAT, font
 krakenUSDvartext.set(krakenUSDtext)
 krakenUSDlabeltext.grid(row=9, column=BTCUSDcol)
 krakenUSDvardata = StringVar()
-krakenUSDlabeldata = Label(app, textvariable=krakenUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+krakenUSDlabeldata = Label(app, textvariable=krakenUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 krakenUSDupdate()
 krakenUSDlabeldata.grid(row=10, column=BTCUSDcol)
 
@@ -807,7 +810,7 @@ bitfinexUSDlabeltext = Label(app, textvariable=bitfinexUSDvartext, relief=FLAT, 
 bitfinexUSDvartext.set(bitfinexUSDtext)
 bitfinexUSDlabeltext.grid(row=11, column=BTCUSDcol)
 bitfinexUSDvardata = StringVar()
-bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 bitfinexUSDupdate()
 bitfinexUSDlabeldata.grid(row=12, column=BTCUSDcol)
 
@@ -816,7 +819,7 @@ cryptsyUSDlabeltext = Label(app, textvariable=cryptsyUSDvartext, relief=FLAT, fo
 cryptsyUSDvartext.set(cryptsyUSDtext)
 cryptsyUSDlabeltext.grid(row=13, column=BTCUSDcol)
 cryptsyUSDvardata = StringVar()
-cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 cryptsyUSDupdate()
 cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
@@ -827,7 +830,7 @@ PriceAverageUSDvartext.set(PriceAverageUSDtext)
 PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
 PriceAverageUSDvardata = StringVar()
 PriceAverageUSDupdate()
-PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
 
 
@@ -868,7 +871,7 @@ BTCpriceUSDlabeltext = Label(app, textvariable=BTCpriceUSDvartext, relief=FLAT, 
 BTCpriceUSDvartext.set(BTCpriceUSDtext)
 BTCpriceUSDlabeltext.grid(row=BTCrowtext, column=PriceUSDcol)
 BTCpriceUSDvardata = PriceAverageUSDvardata
-BTCpriceUSDlabeldata = Label(app, textvariable=BTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+BTCpriceUSDlabeldata = Label(app, textvariable=BTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 BTCpriceUSDlabeldata.grid(row=BTCrowdata, column=PriceUSDcol)
 
 
@@ -879,7 +882,7 @@ MyBTCValuevartext.set(MyBTCValuetext)
 MyBTCValuelabeltext.grid(row=BTCrowtext, column=ValueUSDcol)
 
 MyBTCValuevardata = StringVar()
-MyBTCValuelabeldata = Label(app, textvariable=MyBTCValuevardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyBTCValuelabeldata = Label(app, textvariable=MyBTCValuevardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyBTCValueupdate()
 MyBTCValuelabeldata.grid(row=BTCrowdata, column=ValueUSDcol)
 
@@ -918,7 +921,7 @@ BLKpriceBTClabeltext = Label(app, textvariable=BLKpriceBTCvartext, relief=FLAT, 
 BLKpriceBTCvartext.set(BLKpriceBTCtext)
 BLKpriceBTClabeltext.grid(row=BLKrowtext, column=PriceBTCcol)
 BLKpriceBTCvardata = StringVar()
-BLKpriceBTClabeldata = Label(app, textvariable=BLKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+BLKpriceBTClabeldata = Label(app, textvariable=BLKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 BLKpriceBTCupdate()
 BLKpriceBTClabeldata.grid(row=BLKrowdata, column=PriceBTCcol)
 
@@ -929,7 +932,7 @@ BLKpriceUSDlabeltext = Label(app, textvariable=BLKpriceUSDvartext, relief=FLAT, 
 BLKpriceUSDvartext.set(BLKpriceUSDtext)
 BLKpriceUSDlabeltext.grid(row=BLKrowtext, column=PriceUSDcol)
 BLKpriceUSDvardata = StringVar()
-BLKpriceUSDlabeldata = Label(app, textvariable=BLKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+BLKpriceUSDlabeldata = Label(app, textvariable=BLKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 BLKpriceUSDupdate()
 BLKpriceUSDlabeldata.grid(row=BLKrowdata, column=PriceUSDcol)
 
@@ -941,7 +944,7 @@ MyBLKValueBTCvartext.set(MyBLKValueBTCtext)
 MyBLKValueBTClabeltext.grid(row=BLKrowtext, column=ValueBTCcol)
 
 MyBLKValueBTCvardata = StringVar()
-MyBLKValueBTClabeldata = Label(app, textvariable=MyBLKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyBLKValueBTClabeldata = Label(app, textvariable=MyBLKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyBLKValueBTCupdate()
 MyBLKValueBTClabeldata.grid(row=BLKrowdata, column=ValueBTCcol)
 
@@ -953,7 +956,7 @@ MyBLKValueUSDvartext.set(MyBLKValueUSDtext)
 MyBLKValueUSDlabeltext.grid(row=BLKrowtext, column=ValueUSDcol)
 
 MyBLKValueUSDvardata = StringVar()
-MyBLKValueUSDlabeldata = Label(app, textvariable=MyBLKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyBLKValueUSDlabeldata = Label(app, textvariable=MyBLKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyBLKValueUSDupdate()
 MyBLKValueUSDlabeldata.grid(row=BLKrowdata, column=ValueUSDcol)
 
@@ -992,7 +995,7 @@ LTCpriceBTClabeltext = Label(app, textvariable=LTCpriceBTCvartext, relief=FLAT, 
 LTCpriceBTCvartext.set(LTCpriceBTCtext)
 LTCpriceBTClabeltext.grid(row=LTCrowtext, column=PriceBTCcol)
 LTCpriceBTCvardata = StringVar()
-LTCpriceBTClabeldata = Label(app, textvariable=LTCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+LTCpriceBTClabeldata = Label(app, textvariable=LTCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 LTCpriceBTCupdate()
 LTCpriceBTClabeldata.grid(row=LTCrowdata, column=PriceBTCcol)
 
@@ -1003,7 +1006,7 @@ LTCpriceUSDlabeltext = Label(app, textvariable=LTCpriceUSDvartext, relief=FLAT, 
 LTCpriceUSDvartext.set(LTCpriceUSDtext)
 LTCpriceUSDlabeltext.grid(row=LTCrowtext, column=PriceUSDcol)
 LTCpriceUSDvardata = StringVar()
-LTCpriceUSDlabeldata = Label(app, textvariable=LTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+LTCpriceUSDlabeldata = Label(app, textvariable=LTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 LTCpriceUSDupdate()
 LTCpriceUSDlabeldata.grid(row=LTCrowdata, column=PriceUSDcol)
 
@@ -1015,7 +1018,7 @@ MyLTCValueBTCvartext.set(MyLTCValueBTCtext)
 MyLTCValueBTClabeltext.grid(row=LTCrowtext, column=ValueBTCcol)
 
 MyLTCValueBTCvardata = StringVar()
-MyLTCValueBTClabeldata = Label(app, textvariable=MyLTCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyLTCValueBTClabeldata = Label(app, textvariable=MyLTCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyLTCValueBTCupdate()
 MyLTCValueBTClabeldata.grid(row=LTCrowdata, column=ValueBTCcol)
 
@@ -1026,7 +1029,7 @@ MyLTCValueUSDvartext.set(MyLTCValueUSDtext)
 MyLTCValueUSDlabeltext.grid(row=LTCrowtext, column=ValueUSDcol)
 
 MyLTCValueUSDvardata = StringVar()
-MyLTCValueUSDlabeldata = Label(app, textvariable=MyLTCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyLTCValueUSDlabeldata = Label(app, textvariable=MyLTCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyLTCValueUSDupdate()
 MyLTCValueUSDlabeldata.grid(row=LTCrowdata, column=ValueUSDcol)
 
@@ -1065,7 +1068,7 @@ DOGEpriceBTClabeltext = Label(app, textvariable=DOGEpriceBTCvartext, relief=FLAT
 DOGEpriceBTCvartext.set(DOGEpriceBTCtext)
 DOGEpriceBTClabeltext.grid(row=DOGErowtext, column=PriceBTCcol)
 DOGEpriceBTCvardata = StringVar()
-DOGEpriceBTClabeldata = Label(app, textvariable=DOGEpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DOGEpriceBTClabeldata = Label(app, textvariable=DOGEpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 DOGEpriceBTCupdate()
 DOGEpriceBTClabeldata.grid(row=DOGErowdata, column=PriceBTCcol)
 
@@ -1076,7 +1079,7 @@ DOGEpriceUSDlabeltext = Label(app, textvariable=DOGEpriceUSDvartext, relief=FLAT
 DOGEpriceUSDvartext.set(DOGEpriceUSDtext)
 DOGEpriceUSDlabeltext.grid(row=DOGErowtext, column=PriceUSDcol)
 DOGEpriceUSDvardata = StringVar()
-DOGEpriceUSDlabeldata = Label(app, textvariable=DOGEpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DOGEpriceUSDlabeldata = Label(app, textvariable=DOGEpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 DOGEpriceUSDupdate()
 DOGEpriceUSDlabeldata.grid(row=DOGErowdata, column=PriceUSDcol)
 
@@ -1088,7 +1091,7 @@ MyDOGEValueBTCvartext.set(MyDOGEValueBTCtext)
 MyDOGEValueBTClabeltext.grid(row=DOGErowtext, column=ValueBTCcol)
 
 MyDOGEValueBTCvardata = StringVar()
-MyDOGEValueBTClabeldata = Label(app, textvariable=MyDOGEValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDOGEValueBTClabeldata = Label(app, textvariable=MyDOGEValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyDOGEValueBTCupdate()
 MyDOGEValueBTClabeldata.grid(row=DOGErowdata, column=ValueBTCcol)
 
@@ -1099,7 +1102,7 @@ MyDOGEValueUSDvartext.set(MyDOGEValueUSDtext)
 MyDOGEValueUSDlabeltext.grid(row=DOGErowtext, column=ValueUSDcol)
 
 MyDOGEValueUSDvardata = StringVar()
-MyDOGEValueUSDlabeldata = Label(app, textvariable=MyDOGEValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDOGEValueUSDlabeldata = Label(app, textvariable=MyDOGEValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyDOGEValueUSDupdate()
 MyDOGEValueUSDlabeldata.grid(row=DOGErowdata, column=ValueUSDcol)
 
@@ -1139,7 +1142,7 @@ DRKpriceBTClabeltext = Label(app, textvariable=DRKpriceBTCvartext, relief=FLAT, 
 DRKpriceBTCvartext.set(DRKpriceBTCtext)
 DRKpriceBTClabeltext.grid(row=DRKrowtext, column=PriceBTCcol)
 DRKpriceBTCvardata = StringVar()
-DRKpriceBTClabeldata = Label(app, textvariable=DRKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DRKpriceBTClabeldata = Label(app, textvariable=DRKpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 DRKpriceBTCupdate()
 DRKpriceBTClabeldata.grid(row=DRKrowdata, column=PriceBTCcol)
 
@@ -1150,7 +1153,7 @@ DRKpriceUSDlabeltext = Label(app, textvariable=DRKpriceUSDvartext, relief=FLAT, 
 DRKpriceUSDvartext.set(DRKpriceUSDtext)
 DRKpriceUSDlabeltext.grid(row=DRKrowtext, column=PriceUSDcol)
 DRKpriceUSDvardata = StringVar()
-DRKpriceUSDlabeldata = Label(app, textvariable=DRKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+DRKpriceUSDlabeldata = Label(app, textvariable=DRKpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 DRKpriceUSDupdate()
 DRKpriceUSDlabeldata.grid(row=DRKrowdata, column=PriceUSDcol)
 
@@ -1162,7 +1165,7 @@ MyDRKValueBTCvartext.set(MyDRKValueBTCtext)
 MyDRKValueBTClabeltext.grid(row=DRKrowtext, column=ValueBTCcol)
 
 MyDRKValueBTCvardata = StringVar()
-MyDRKValueBTClabeldata = Label(app, textvariable=MyDRKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDRKValueBTClabeldata = Label(app, textvariable=MyDRKValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyDRKValueBTCupdate()
 MyDRKValueBTClabeldata.grid(row=DRKrowdata, column=ValueBTCcol)
 
@@ -1174,7 +1177,7 @@ MyDRKValueUSDvartext.set(MyDRKValueUSDtext)
 MyDRKValueUSDlabeltext.grid(row=DRKrowtext, column=ValueUSDcol)
 
 MyDRKValueUSDvardata = StringVar()
-MyDRKValueUSDlabeldata = Label(app, textvariable=MyDRKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyDRKValueUSDlabeldata = Label(app, textvariable=MyDRKValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyDRKValueUSDupdate()
 MyDRKValueUSDlabeldata.grid(row=DRKrowdata, column=ValueUSDcol)
 
@@ -1214,7 +1217,7 @@ PPCpriceBTClabeltext = Label(app, textvariable=PPCpriceBTCvartext, relief=FLAT, 
 PPCpriceBTCvartext.set(PPCpriceBTCtext)
 PPCpriceBTClabeltext.grid(row=PPCrowtext, column=PriceBTCcol)
 PPCpriceBTCvardata = StringVar()
-PPCpriceBTClabeldata = Label(app, textvariable=PPCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+PPCpriceBTClabeldata = Label(app, textvariable=PPCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PPCpriceBTCupdate()
 PPCpriceBTClabeldata.grid(row=PPCrowdata, column=PriceBTCcol)
 
@@ -1225,7 +1228,7 @@ PPCpriceUSDlabeltext = Label(app, textvariable=PPCpriceUSDvartext, relief=FLAT, 
 PPCpriceUSDvartext.set(PPCpriceUSDtext)
 PPCpriceUSDlabeltext.grid(row=PPCrowtext, column=PriceUSDcol)
 PPCpriceUSDvardata = StringVar()
-PPCpriceUSDlabeldata = Label(app, textvariable=PPCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+PPCpriceUSDlabeldata = Label(app, textvariable=PPCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PPCpriceUSDupdate()
 PPCpriceUSDlabeldata.grid(row=PPCrowdata, column=PriceUSDcol)
 
@@ -1237,7 +1240,7 @@ MyPPCValueBTCvartext.set(MyPPCValueBTCtext)
 MyPPCValueBTClabeltext.grid(row=PPCrowtext, column=ValueBTCcol)
 
 MyPPCValueBTCvardata = StringVar()
-MyPPCValueBTClabeldata = Label(app, textvariable=MyPPCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyPPCValueBTClabeldata = Label(app, textvariable=MyPPCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyPPCValueBTCupdate()
 MyPPCValueBTClabeldata.grid(row=PPCrowdata, column=ValueBTCcol)
 
@@ -1249,7 +1252,7 @@ MyPPCValueUSDvartext.set(MyPPCValueUSDtext)
 MyPPCValueUSDlabeltext.grid(row=PPCrowtext, column=ValueUSDcol)
 
 MyPPCValueUSDvardata = StringVar()
-MyPPCValueUSDlabeldata = Label(app, textvariable=MyPPCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyPPCValueUSDlabeldata = Label(app, textvariable=MyPPCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyPPCValueUSDupdate()
 MyPPCValueUSDlabeldata.grid(row=PPCrowdata, column=ValueUSDcol)
 
@@ -1289,7 +1292,7 @@ FAIRpriceBTClabeltext = Label(app, textvariable=FAIRpriceBTCvartext, relief=FLAT
 FAIRpriceBTCvartext.set(FAIRpriceBTCtext)
 FAIRpriceBTClabeltext.grid(row=FAIRrowtext, column=PriceBTCcol)
 FAIRpriceBTCvardata = StringVar()
-FAIRpriceBTClabeldata = Label(app, textvariable=FAIRpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+FAIRpriceBTClabeldata = Label(app, textvariable=FAIRpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 FAIRpriceBTCupdate()
 FAIRpriceBTClabeldata.grid(row=FAIRrowdata, column=PriceBTCcol)
 
@@ -1300,7 +1303,7 @@ FAIRpriceUSDlabeltext = Label(app, textvariable=FAIRpriceUSDvartext, relief=FLAT
 FAIRpriceUSDvartext.set(FAIRpriceUSDtext)
 FAIRpriceUSDlabeltext.grid(row=FAIRrowtext, column=PriceUSDcol)
 FAIRpriceUSDvardata = StringVar()
-FAIRpriceUSDlabeldata = Label(app, textvariable=FAIRpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+FAIRpriceUSDlabeldata = Label(app, textvariable=FAIRpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 FAIRpriceUSDupdate()
 FAIRpriceUSDlabeldata.grid(row=FAIRrowdata, column=PriceUSDcol)
 
@@ -1312,7 +1315,7 @@ MyFAIRValueBTCvartext.set(MyFAIRValueBTCtext)
 MyFAIRValueBTClabeltext.grid(row=FAIRrowtext, column=ValueBTCcol)
 
 MyFAIRValueBTCvardata = StringVar()
-MyFAIRValueBTClabeldata = Label(app, textvariable=MyFAIRValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyFAIRValueBTClabeldata = Label(app, textvariable=MyFAIRValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyFAIRValueBTCupdate()
 MyFAIRValueBTClabeldata.grid(row=FAIRrowdata, column=ValueBTCcol)
 
@@ -1324,7 +1327,7 @@ MyFAIRValueUSDvartext.set(MyFAIRValueUSDtext)
 MyFAIRValueUSDlabeltext.grid(row=FAIRrowtext, column=ValueUSDcol)
 
 MyFAIRValueUSDvardata = StringVar()
-MyFAIRValueUSDlabeldata = Label(app, textvariable=MyFAIRValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyFAIRValueUSDlabeldata = Label(app, textvariable=MyFAIRValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyFAIRValueUSDupdate()
 MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=ValueUSDcol)
 
@@ -1337,7 +1340,7 @@ MyTotalValueBTCvartext.set(MyTotalValueBTCtext)
 MyTotalValueBTClabeltext.grid(row=100, column=ValueBTCcol)
 
 MyTotalValueBTCvardata = StringVar()
-MyTotalValueBTClabeldata = Label(app, textvariable=MyTotalValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyTotalValueBTClabeldata = Label(app, textvariable=MyTotalValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyTotalValueBTCupdate()
 MyTotalValueBTClabeldata.grid(row=101, column=ValueBTCcol)
 
@@ -1350,7 +1353,7 @@ MyTotalValueUSDvartext.set(MyTotalValueUSDtext)
 MyTotalValueUSDlabeltext.grid(row=100, column=ValueUSDcol)
 
 MyTotalValueUSDvardata = StringVar()
-MyTotalValueUSDlabeldata = Label(app, textvariable=MyTotalValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+MyTotalValueUSDlabeldata = Label(app, textvariable=MyTotalValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyTotalValueUSDupdate()
 MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
