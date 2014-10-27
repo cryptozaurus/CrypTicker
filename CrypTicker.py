@@ -40,13 +40,18 @@ TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
 TextFontSize = 12
 DataFontSize = 14
+
+#Colors
 AppWindowBackgroundColor = "black"
 ButtonBackGroundColor = "#999999"
 ButtonForegroundColor = "red"
-TextBackgroundColor="black"
-TextForegroundColor="yellow"
-DataBackgroundColor="black"
-DataForegroundColor="yellow"
+TextBackgroundColor = "black"
+TextForegroundColor = "yellow"
+DataBackgroundColor = "black"
+DataForegroundColor = "yellow"
+EntryBackgroundColor = "black"
+EntryForegroundColor = "yellow"
+COINSbackgroundColor = "black"
 
 
 PriceAverageUSDtext = str(" Price Average ")
@@ -632,37 +637,37 @@ root.title("CryptTicker")
 app.config (bg=AppWindowBackgroundColor)
 
 #Coin Images
-BTCimage = Text(app, height=3.1, width=6)
+BTCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 BitcoinImage = PhotoImage(file='./images/BitcoinImage.gif')
 BTCimage.image_create(END, image=BitcoinImage)
 BTCimage.grid(row=1, column=COINSimagecol, rowspan=2)
 
-BLKimage = Text(app, height=3.1, width=6)
+BLKimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 BlackcoinImage = PhotoImage(file='./images/BlackcoinImage.gif')
 BLKimage.image_create(END, image=BlackcoinImage)
 BLKimage.grid(row=BLKrowtext, column=COINSimagecol, rowspan=2)
 
-LTCimage = Text(app, height=3.1, width=6)
+LTCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 LitecoinImage = PhotoImage(file='./images/LitecoinImage.gif')
 LTCimage.image_create(END, image=LitecoinImage)
 LTCimage.grid(row=LTCrowtext, column=COINSimagecol, rowspan=2)
 
-DOGEimage = Text(app, height=3.1, width=6)
+DOGEimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 DogecoinImage = PhotoImage(file='./images/DogecoinImage.gif')
 DOGEimage.image_create(END, image=DogecoinImage)
 DOGEimage.grid(row=DOGErowtext, column=COINSimagecol, rowspan=2)
 
-DRKimage = Text(app, height=3.1, width=6)
+DRKimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 DarkcoinImage = PhotoImage(file='./images/DarkcoinImage.gif')
 DRKimage.image_create(END, image=DarkcoinImage)
 DRKimage.grid(row=DRKrowtext, column=COINSimagecol, rowspan=2)
 
-PPCimage = Text(app, height=3.1, width=6)
+PPCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 PeercoinImage = PhotoImage(file='./images/PeercoinImage.gif')
 PPCimage.image_create(END, image=PeercoinImage)
 PPCimage.grid(row=PPCrowtext, column=COINSimagecol, rowspan=2)
 
-FAIRimage = Text(app, height=3.1, width=6)
+FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
 FAIRimage.image_create(END, image=FaircoinImage)
 FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
@@ -705,7 +710,7 @@ UpdateIntervalSeclabeltext.grid(row=101, column=exchangeNamecol)
 
 UpdateIntervalSecvardata = StringVar()
 UpdateIntervalSecvardata.set(UpdateIntervalSec)
-UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
 
 UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=103, column=exchangeNamecol)
@@ -852,7 +857,7 @@ def MyBTCupdate():
 
 MyBTCvardata = StringVar()
 MyBTCvardata.set(MyBTC)
-MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
 
 MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BTCrowdata, column=updateMyCOINScol)
@@ -909,7 +914,7 @@ def MyBLKupdate():
 
 MyBLKvardata = StringVar()
 MyBLKvardata.set(MyBLK)
-MyBLKentry = Entry(app, textvariable=MyBLKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyBLKentry = Entry(app, textvariable=MyBLKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyBLKentry.grid(row=BLKrowdata, column=MyCOINScol)
 
 MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BLKrowdata, column=updateMyCOINScol)
@@ -983,7 +988,7 @@ def MyLTCupdate():
 
 MyLTCvardata = StringVar()
 MyLTCvardata.set(MyLTC)
-MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyLTCentry.grid(row=LTCrowdata, column=MyCOINScol)
 
 MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=LTCrowdata, column=updateMyCOINScol)
@@ -1056,7 +1061,7 @@ def MyDOGEupdate():
 
 MyDOGEvardata = StringVar()
 MyDOGEvardata.set(MyDOGE)
-MyDOGEentry = Entry(app, textvariable=MyDOGEvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyDOGEentry = Entry(app, textvariable=MyDOGEvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyDOGEentry.grid(row=DOGErowdata, column=MyCOINScol)
 
 MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=DOGErowdata, column=updateMyCOINScol)
@@ -1130,7 +1135,7 @@ def MyDRKupdate():
 
 MyDRKvardata = StringVar()
 MyDRKvardata.set(MyDRK)
-MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyDRKentry.grid(row=DRKrowdata, column=MyCOINScol)
 
 MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=DRKrowdata, column=updateMyCOINScol)
@@ -1205,7 +1210,7 @@ def MyPPCupdate():
 
 MyPPCvardata = StringVar()
 MyPPCvardata.set(MyPPC)
-MyPPCentry = Entry(app, textvariable=MyPPCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyPPCentry = Entry(app, textvariable=MyPPCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyPPCentry.grid(row=PPCrowdata, column=MyCOINScol)
 
 MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=PPCrowdata, column=updateMyCOINScol)
@@ -1280,7 +1285,7 @@ def MyFAIRupdate():
 
 MyFAIRvardata = StringVar()
 MyFAIRvardata.set(MyFAIR)
-MyFAIRentry = Entry(app, textvariable=MyFAIRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyFAIRentry = Entry(app, textvariable=MyFAIRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
 MyFAIRentry.grid(row=FAIRrowdata, column=MyCOINScol)
 
 MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=FAIRrowdata, column=updateMyCOINScol)
