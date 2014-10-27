@@ -40,9 +40,11 @@ TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
 TextFontSize = 12
 DataFontSize = 14
-AppWindowBackgroundColor = "#999999"
+AppWindowBackgroundColor = "black"
 ButtonBackGroundColor = "#999999"
-ButtonTextColor = "red"
+ButtonForegroundColor = "red"
+TextBackgroundColor="black"
+TextForegroundColor="yellow"
 
 PriceAverageUSDtext = str(" Price Average ")
 bitstampUSDtext = str(" Bitstamp ")
@@ -585,7 +587,7 @@ class Window(Frame):
         self.master.title("Crypto")
         self.pack(fill=BOTH, expand=1)
         # Quit Button
-        quitButton = Button(self, text="Quit", command=self.client_exit, bg=ButtonBackGroundColor, fg=ButtonTextColor)
+        quitButton = Button(self, text="Quit", command=self.client_exit, bg=ButtonBackGroundColor, fg=ButtonForegroundColor)
         quitButton.grid(row=0, column=0)
         #
         menu = Menu(self.master)
@@ -694,7 +696,7 @@ def UpdateIntervalSecCallback():
 
 
 UpdateIntervalSecvartext = StringVar()
-UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 UpdateIntervalSecvartext.set(UpdateIntervalSectext)
 UpdateIntervalSeclabeltext.grid(row=101, column=exchangeNamecol)
 
@@ -703,58 +705,58 @@ UpdateIntervalSecvardata.set(UpdateIntervalSec)
 UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
 
-UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=1031, column=exchangeNamecol)
+UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=103, column=exchangeNamecol)
 
-UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=104, column=exchangeNamecol)
 
 
 
 
 #Exchange Name
 exchangeNamevartext = StringVar()
-exchangeNamelabeltext = Label(app, textvariable=exchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+exchangeNamelabeltext = Label(app, textvariable=exchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 exchangeNamevartext.set(exchangeNametext)
 exchangeNamelabeltext.grid(row=exchangeNamerowtext, column=exchangeNamecol)
 
 #Bitcoin Exchange Name
 BTCexchangeNamevartext = StringVar()
-BTCexchangeNamelabeltext = Label(app, textvariable=BTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BTCexchangeNamelabeltext = Label(app, textvariable=BTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 BTCexchangeNamevartext.set(BTCexchangeNametext)
 BTCexchangeNamelabeltext.grid(row=BTCrowdata, column=exchangeNamecol)
 
 #Blackcoin Exchange Name
 BLKexchangeNamevartext = StringVar()
-BLKexchangeNamelabeltext = Label(app, textvariable=BLKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BLKexchangeNamelabeltext = Label(app, textvariable=BLKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 BLKexchangeNamevartext.set(BLKexchangeNametext)
 BLKexchangeNamelabeltext.grid(row=BLKrowdata, column=exchangeNamecol)
 
 #Litecoin Exchange Name
 LTCexchangeNamevartext = StringVar()
-LTCexchangeNamelabeltext = Label(app, textvariable=LTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+LTCexchangeNamelabeltext = Label(app, textvariable=LTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 LTCexchangeNamevartext.set(LTCexchangeNametext)
 LTCexchangeNamelabeltext.grid(row=LTCrowdata, column=exchangeNamecol)
 
 #Dogecoin Exchange Name
 DOGEexchangeNamevartext = StringVar()
-DOGEexchangeNamelabeltext = Label(app, textvariable=DOGEexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEexchangeNamelabeltext = Label(app, textvariable=DOGEexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DOGEexchangeNamevartext.set(DOGEexchangeNametext)
 DOGEexchangeNamelabeltext.grid(row=DOGErowdata, column=exchangeNamecol)
 
 #Darkcoin Exchange Name
 DRKexchangeNamevartext = StringVar()
-DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DRKexchangeNamevartext.set(DRKexchangeNametext)
 DRKexchangeNamelabeltext.grid(row=DRKrowdata, column=exchangeNamecol)
 
 #Peercoin Exchange Name
 PPCexchangeNamevartext = StringVar()
-PPCexchangeNamelabeltext = Label(app, textvariable=PPCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCexchangeNamelabeltext = Label(app, textvariable=PPCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 PPCexchangeNamevartext.set(PPCexchangeNametext)
 PPCexchangeNamelabeltext.grid(row=PPCrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
-FAIRexchangeNamelabeltext = Label(app, textvariable=FAIRexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+FAIRexchangeNamelabeltext = Label(app, textvariable=FAIRexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 FAIRexchangeNamevartext.set(FAIRexchangeNametext)
 FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 
@@ -763,7 +765,7 @@ FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 #BITCOIN
 # Display Data and Text for Bitcoin in USD
 bitstampUSDvartext = StringVar()
-bitstampUSDlabeltext = Label(app, textvariable=bitstampUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+bitstampUSDlabeltext = Label(app, textvariable=bitstampUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 bitstampUSDvartext.set(bitstampUSDtext)
 bitstampUSDlabeltext.grid(row=3, column=BTCUSDcol)
 bitstampUSDvardata = StringVar()
@@ -773,7 +775,7 @@ bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
 
 btceUSDvartext = StringVar()
-btceUSDlabeltext = Label(app, textvariable=btceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+btceUSDlabeltext = Label(app, textvariable=btceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 btceUSDvartext.set(btceUSDtext)
 btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
@@ -783,7 +785,7 @@ btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
 
 
 coinbaseUSDvartext = StringVar()
-coinbaseUSDlabeltext = Label(app, textvariable=coinbaseUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+coinbaseUSDlabeltext = Label(app, textvariable=coinbaseUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 coinbaseUSDvartext.set(coinbaseUSDtext)
 coinbaseUSDlabeltext.grid(row=7, column=BTCUSDcol)
 coinbaseUSDvardata = StringVar()
@@ -792,7 +794,7 @@ coinbaseUSDupdate()
 coinbaseUSDlabeldata.grid(row=8, column=BTCUSDcol)
 
 krakenUSDvartext = StringVar()
-krakenUSDlabeltext = Label(app, textvariable=krakenUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+krakenUSDlabeltext = Label(app, textvariable=krakenUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 krakenUSDvartext.set(krakenUSDtext)
 krakenUSDlabeltext.grid(row=9, column=BTCUSDcol)
 krakenUSDvardata = StringVar()
@@ -801,7 +803,7 @@ krakenUSDupdate()
 krakenUSDlabeldata.grid(row=10, column=BTCUSDcol)
 
 bitfinexUSDvartext = StringVar()
-bitfinexUSDlabeltext = Label(app, textvariable=bitfinexUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+bitfinexUSDlabeltext = Label(app, textvariable=bitfinexUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 bitfinexUSDvartext.set(bitfinexUSDtext)
 bitfinexUSDlabeltext.grid(row=11, column=BTCUSDcol)
 bitfinexUSDvardata = StringVar()
@@ -810,7 +812,7 @@ bitfinexUSDupdate()
 bitfinexUSDlabeldata.grid(row=12, column=BTCUSDcol)
 
 cryptsyUSDvartext = StringVar()
-cryptsyUSDlabeltext = Label(app, textvariable=cryptsyUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+cryptsyUSDlabeltext = Label(app, textvariable=cryptsyUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 cryptsyUSDvartext.set(cryptsyUSDtext)
 cryptsyUSDlabeltext.grid(row=13, column=BTCUSDcol)
 cryptsyUSDvardata = StringVar()
@@ -820,7 +822,7 @@ cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
 
 PriceAverageUSDvartext = StringVar()
-PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 PriceAverageUSDvartext.set(PriceAverageUSDtext)
 PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
 PriceAverageUSDvardata = StringVar()
@@ -833,7 +835,7 @@ PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
 #BITCOIN
 #MyBTC
 MyBTCvartext = StringVar()
-MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBTCvartext.set(MyBTCtext)
 MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 
@@ -850,7 +852,7 @@ MyBTCvardata.set(MyBTC)
 MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
 
-MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=BTCrowdata, column=updateMyCOINScol)
+MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BTCrowdata, column=updateMyCOINScol)
 
 
 
@@ -862,7 +864,7 @@ MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=Butto
 
 # Display Data and Text for Bitcoin price in USD
 BTCpriceUSDvartext = StringVar()
-BTCpriceUSDlabeltext = Label(app, textvariable=BTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BTCpriceUSDlabeltext = Label(app, textvariable=BTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 BTCpriceUSDvartext.set(BTCpriceUSDtext)
 BTCpriceUSDlabeltext.grid(row=BTCrowtext, column=PriceUSDcol)
 BTCpriceUSDvardata = PriceAverageUSDvardata
@@ -872,7 +874,7 @@ BTCpriceUSDlabeldata.grid(row=BTCrowdata, column=PriceUSDcol)
 
 #My BTC Value in USD
 MyBTCValuevartext = StringVar()
-MyBTCValuelabeltext = Label(app, textvariable=MyBTCValuevartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyBTCValuelabeltext = Label(app, textvariable=MyBTCValuevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBTCValuevartext.set(MyBTCValuetext)
 MyBTCValuelabeltext.grid(row=BTCrowtext, column=ValueUSDcol)
 
@@ -886,7 +888,7 @@ MyBTCValuelabeldata.grid(row=BTCrowdata, column=ValueUSDcol)
 #BLACKCOIN
 #MyBLK
 MyBLKvartext = StringVar()
-MyBLKlabeltext = Label(app, textvariable=MyBLKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyBLKlabeltext = Label(app, textvariable=MyBLKvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBLKvartext.set(MyBLKtext)
 MyBLKlabeltext.grid(row=BLKrowtext, column=MyCOINScol)
 
@@ -907,12 +909,12 @@ MyBLKvardata.set(MyBLK)
 MyBLKentry = Entry(app, textvariable=MyBLKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyBLKentry.grid(row=BLKrowdata, column=MyCOINScol)
 
-MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=BLKrowdata, column=updateMyCOINScol)
+MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BLKrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Blackcoin price in BTC
 BLKpriceBTCvartext = StringVar()
-BLKpriceBTClabeltext = Label(app, textvariable=BLKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BLKpriceBTClabeltext = Label(app, textvariable=BLKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 BLKpriceBTCvartext.set(BLKpriceBTCtext)
 BLKpriceBTClabeltext.grid(row=BLKrowtext, column=PriceBTCcol)
 BLKpriceBTCvardata = StringVar()
@@ -923,7 +925,7 @@ BLKpriceBTClabeldata.grid(row=BLKrowdata, column=PriceBTCcol)
 
 # Display Data and Text for Blackcoin price in USD
 BLKpriceUSDvartext = StringVar()
-BLKpriceUSDlabeltext = Label(app, textvariable=BLKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+BLKpriceUSDlabeltext = Label(app, textvariable=BLKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 BLKpriceUSDvartext.set(BLKpriceUSDtext)
 BLKpriceUSDlabeltext.grid(row=BLKrowtext, column=PriceUSDcol)
 BLKpriceUSDvardata = StringVar()
@@ -934,7 +936,7 @@ BLKpriceUSDlabeldata.grid(row=BLKrowdata, column=PriceUSDcol)
 
 #My BLK Value in BTC
 MyBLKValueBTCvartext = StringVar()
-MyBLKValueBTClabeltext = Label(app, textvariable=MyBLKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyBLKValueBTClabeltext = Label(app, textvariable=MyBLKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBLKValueBTCvartext.set(MyBLKValueBTCtext)
 MyBLKValueBTClabeltext.grid(row=BLKrowtext, column=ValueBTCcol)
 
@@ -946,7 +948,7 @@ MyBLKValueBTClabeldata.grid(row=BLKrowdata, column=ValueBTCcol)
 
 #My BLK Value in USD
 MyBLKValueUSDvartext = StringVar()
-MyBLKValueUSDlabeltext = Label(app, textvariable=MyBLKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyBLKValueUSDlabeltext = Label(app, textvariable=MyBLKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBLKValueUSDvartext.set(MyBLKValueUSDtext)
 MyBLKValueUSDlabeltext.grid(row=BLKrowtext, column=ValueUSDcol)
 
@@ -960,7 +962,7 @@ MyBLKValueUSDlabeldata.grid(row=BLKrowdata, column=ValueUSDcol)
 #LITECOIN
 #MyLTC
 MyLTCvartext = StringVar()
-MyLTClabeltext = Label(app, textvariable=MyLTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyLTClabeltext = Label(app, textvariable=MyLTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyLTCvartext.set(MyLTCtext)
 MyLTClabeltext.grid(row=LTCrowtext, column=MyCOINScol)
 
@@ -981,12 +983,12 @@ MyLTCvardata.set(MyLTC)
 MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyLTCentry.grid(row=LTCrowdata, column=MyCOINScol)
 
-MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=LTCrowdata, column=updateMyCOINScol)
+MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=LTCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Litecoin price in BTC
 LTCpriceBTCvartext = StringVar()
-LTCpriceBTClabeltext = Label(app, textvariable=LTCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+LTCpriceBTClabeltext = Label(app, textvariable=LTCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 LTCpriceBTCvartext.set(LTCpriceBTCtext)
 LTCpriceBTClabeltext.grid(row=LTCrowtext, column=PriceBTCcol)
 LTCpriceBTCvardata = StringVar()
@@ -997,7 +999,7 @@ LTCpriceBTClabeldata.grid(row=LTCrowdata, column=PriceBTCcol)
 
 # Display Data and Text for Litecoin price in USD
 LTCpriceUSDvartext = StringVar()
-LTCpriceUSDlabeltext = Label(app, textvariable=LTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+LTCpriceUSDlabeltext = Label(app, textvariable=LTCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 LTCpriceUSDvartext.set(LTCpriceUSDtext)
 LTCpriceUSDlabeltext.grid(row=LTCrowtext, column=PriceUSDcol)
 LTCpriceUSDvardata = StringVar()
@@ -1008,7 +1010,7 @@ LTCpriceUSDlabeldata.grid(row=LTCrowdata, column=PriceUSDcol)
 
 #My LTC Value in BTC
 MyLTCValueBTCvartext = StringVar()
-MyLTCValueBTClabeltext = Label(app, textvariable=MyLTCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyLTCValueBTClabeltext = Label(app, textvariable=MyLTCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyLTCValueBTCvartext.set(MyLTCValueBTCtext)
 MyLTCValueBTClabeltext.grid(row=LTCrowtext, column=ValueBTCcol)
 
@@ -1019,7 +1021,7 @@ MyLTCValueBTClabeldata.grid(row=LTCrowdata, column=ValueBTCcol)
 
 #My LTC Value in USD
 MyLTCValueUSDvartext = StringVar()
-MyLTCValueUSDlabeltext = Label(app, textvariable=MyLTCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyLTCValueUSDlabeltext = Label(app, textvariable=MyLTCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyLTCValueUSDvartext.set(MyLTCValueUSDtext)
 MyLTCValueUSDlabeltext.grid(row=LTCrowtext, column=ValueUSDcol)
 
@@ -1033,7 +1035,7 @@ MyLTCValueUSDlabeldata.grid(row=LTCrowdata, column=ValueUSDcol)
 #DOGECOIN
 #MyDOGE
 MyDOGEvartext = StringVar()
-MyDOGElabeltext = Label(app, textvariable=MyDOGEvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGElabeltext = Label(app, textvariable=MyDOGEvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDOGEvartext.set(MyDOGEtext)
 MyDOGElabeltext.grid(row=DOGErowtext, column=MyCOINScol)
 
@@ -1054,12 +1056,12 @@ MyDOGEvardata.set(MyDOGE)
 MyDOGEentry = Entry(app, textvariable=MyDOGEvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyDOGEentry.grid(row=DOGErowdata, column=MyCOINScol)
 
-MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=DOGErowdata, column=updateMyCOINScol)
+MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=DOGErowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Dogecoin price in BTC
 DOGEpriceBTCvartext = StringVar()
-DOGEpriceBTClabeltext = Label(app, textvariable=DOGEpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEpriceBTClabeltext = Label(app, textvariable=DOGEpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DOGEpriceBTCvartext.set(DOGEpriceBTCtext)
 DOGEpriceBTClabeltext.grid(row=DOGErowtext, column=PriceBTCcol)
 DOGEpriceBTCvardata = StringVar()
@@ -1070,7 +1072,7 @@ DOGEpriceBTClabeldata.grid(row=DOGErowdata, column=PriceBTCcol)
 
 # Display Data and Text for Dogecoin price in USD
 DOGEpriceUSDvartext = StringVar()
-DOGEpriceUSDlabeltext = Label(app, textvariable=DOGEpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DOGEpriceUSDlabeltext = Label(app, textvariable=DOGEpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DOGEpriceUSDvartext.set(DOGEpriceUSDtext)
 DOGEpriceUSDlabeltext.grid(row=DOGErowtext, column=PriceUSDcol)
 DOGEpriceUSDvardata = StringVar()
@@ -1081,7 +1083,7 @@ DOGEpriceUSDlabeldata.grid(row=DOGErowdata, column=PriceUSDcol)
 
 #My DOGE Value in BTC
 MyDOGEValueBTCvartext = StringVar()
-MyDOGEValueBTClabeltext = Label(app, textvariable=MyDOGEValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGEValueBTClabeltext = Label(app, textvariable=MyDOGEValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDOGEValueBTCvartext.set(MyDOGEValueBTCtext)
 MyDOGEValueBTClabeltext.grid(row=DOGErowtext, column=ValueBTCcol)
 
@@ -1092,7 +1094,7 @@ MyDOGEValueBTClabeldata.grid(row=DOGErowdata, column=ValueBTCcol)
 
 #My DOGE Value in USD
 MyDOGEValueUSDvartext = StringVar()
-MyDOGEValueUSDlabeltext = Label(app, textvariable=MyDOGEValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDOGEValueUSDlabeltext = Label(app, textvariable=MyDOGEValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDOGEValueUSDvartext.set(MyDOGEValueUSDtext)
 MyDOGEValueUSDlabeltext.grid(row=DOGErowtext, column=ValueUSDcol)
 
@@ -1107,7 +1109,7 @@ MyDOGEValueUSDlabeldata.grid(row=DOGErowdata, column=ValueUSDcol)
 #DARKCOIN
 #MyDRK
 MyDRKvartext = StringVar()
-MyDRKlabeltext = Label(app, textvariable=MyDRKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDRKlabeltext = Label(app, textvariable=MyDRKvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDRKvartext.set(MyDRKtext)
 MyDRKlabeltext.grid(row=DRKrowtext, column=MyCOINScol)
 
@@ -1128,12 +1130,12 @@ MyDRKvardata.set(MyDRK)
 MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyDRKentry.grid(row=DRKrowdata, column=MyCOINScol)
 
-MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=DRKrowdata, column=updateMyCOINScol)
+MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=DRKrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Darkcoin price in BTC
 DRKpriceBTCvartext = StringVar()
-DRKpriceBTClabeltext = Label(app, textvariable=DRKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DRKpriceBTClabeltext = Label(app, textvariable=DRKpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DRKpriceBTCvartext.set(DRKpriceBTCtext)
 DRKpriceBTClabeltext.grid(row=DRKrowtext, column=PriceBTCcol)
 DRKpriceBTCvardata = StringVar()
@@ -1144,7 +1146,7 @@ DRKpriceBTClabeldata.grid(row=DRKrowdata, column=PriceBTCcol)
 
 # Display Data and Text for Darkcoin price in USD
 DRKpriceUSDvartext = StringVar()
-DRKpriceUSDlabeltext = Label(app, textvariable=DRKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+DRKpriceUSDlabeltext = Label(app, textvariable=DRKpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 DRKpriceUSDvartext.set(DRKpriceUSDtext)
 DRKpriceUSDlabeltext.grid(row=DRKrowtext, column=PriceUSDcol)
 DRKpriceUSDvardata = StringVar()
@@ -1155,7 +1157,7 @@ DRKpriceUSDlabeldata.grid(row=DRKrowdata, column=PriceUSDcol)
 
 #My DRK Value in BTC
 MyDRKValueBTCvartext = StringVar()
-MyDRKValueBTClabeltext = Label(app, textvariable=MyDRKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDRKValueBTClabeltext = Label(app, textvariable=MyDRKValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDRKValueBTCvartext.set(MyDRKValueBTCtext)
 MyDRKValueBTClabeltext.grid(row=DRKrowtext, column=ValueBTCcol)
 
@@ -1167,7 +1169,7 @@ MyDRKValueBTClabeldata.grid(row=DRKrowdata, column=ValueBTCcol)
 
 #My DRK Value in USD
 MyDRKValueUSDvartext = StringVar()
-MyDRKValueUSDlabeltext = Label(app, textvariable=MyDRKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyDRKValueUSDlabeltext = Label(app, textvariable=MyDRKValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDRKValueUSDvartext.set(MyDRKValueUSDtext)
 MyDRKValueUSDlabeltext.grid(row=DRKrowtext, column=ValueUSDcol)
 
@@ -1181,7 +1183,7 @@ MyDRKValueUSDlabeldata.grid(row=DRKrowdata, column=ValueUSDcol)
 #PEERCOIN
 #MyPPC
 MyPPCvartext = StringVar()
-MyPPClabeltext = Label(app, textvariable=MyPPCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPClabeltext = Label(app, textvariable=MyPPCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyPPCvartext.set(MyPPCtext)
 MyPPClabeltext.grid(row=PPCrowtext, column=MyCOINScol)
 
@@ -1203,12 +1205,12 @@ MyPPCvardata.set(MyPPC)
 MyPPCentry = Entry(app, textvariable=MyPPCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyPPCentry.grid(row=PPCrowdata, column=MyCOINScol)
 
-MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=PPCrowdata, column=updateMyCOINScol)
+MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=PPCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Peercoin price in BTC
 PPCpriceBTCvartext = StringVar()
-PPCpriceBTClabeltext = Label(app, textvariable=PPCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCpriceBTClabeltext = Label(app, textvariable=PPCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 PPCpriceBTCvartext.set(PPCpriceBTCtext)
 PPCpriceBTClabeltext.grid(row=PPCrowtext, column=PriceBTCcol)
 PPCpriceBTCvardata = StringVar()
@@ -1219,7 +1221,7 @@ PPCpriceBTClabeldata.grid(row=PPCrowdata, column=PriceBTCcol)
 
 # Display Data and Text for Peercoin price in USD
 PPCpriceUSDvartext = StringVar()
-PPCpriceUSDlabeltext = Label(app, textvariable=PPCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+PPCpriceUSDlabeltext = Label(app, textvariable=PPCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 PPCpriceUSDvartext.set(PPCpriceUSDtext)
 PPCpriceUSDlabeltext.grid(row=PPCrowtext, column=PriceUSDcol)
 PPCpriceUSDvardata = StringVar()
@@ -1230,7 +1232,7 @@ PPCpriceUSDlabeldata.grid(row=PPCrowdata, column=PriceUSDcol)
 
 #My PPC Value in BTC
 MyPPCValueBTCvartext = StringVar()
-MyPPCValueBTClabeltext = Label(app, textvariable=MyPPCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPCValueBTClabeltext = Label(app, textvariable=MyPPCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyPPCValueBTCvartext.set(MyPPCValueBTCtext)
 MyPPCValueBTClabeltext.grid(row=PPCrowtext, column=ValueBTCcol)
 
@@ -1242,7 +1244,7 @@ MyPPCValueBTClabeldata.grid(row=PPCrowdata, column=ValueBTCcol)
 
 #My PPC Value in USD
 MyPPCValueUSDvartext = StringVar()
-MyPPCValueUSDlabeltext = Label(app, textvariable=MyPPCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyPPCValueUSDlabeltext = Label(app, textvariable=MyPPCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyPPCValueUSDvartext.set(MyPPCValueUSDtext)
 MyPPCValueUSDlabeltext.grid(row=PPCrowtext, column=ValueUSDcol)
 
@@ -1257,7 +1259,7 @@ MyPPCValueUSDlabeldata.grid(row=PPCrowdata, column=ValueUSDcol)
 #FAIRCOIN
 #MyFAIR
 MyFAIRvartext = StringVar()
-MyFAIRlabeltext = Label(app, textvariable=MyFAIRvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyFAIRlabeltext = Label(app, textvariable=MyFAIRvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyFAIRvartext.set(MyFAIRtext)
 MyFAIRlabeltext.grid(row=FAIRrowtext, column=MyCOINScol)
 
@@ -1278,12 +1280,12 @@ MyFAIRvardata.set(MyFAIR)
 MyFAIRentry = Entry(app, textvariable=MyFAIRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyFAIRentry.grid(row=FAIRrowdata, column=MyCOINScol)
 
-MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=FAIRrowdata, column=updateMyCOINScol)
+MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=FAIRrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Faircoin price in BTC
 FAIRpriceBTCvartext = StringVar()
-FAIRpriceBTClabeltext = Label(app, textvariable=FAIRpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+FAIRpriceBTClabeltext = Label(app, textvariable=FAIRpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 FAIRpriceBTCvartext.set(FAIRpriceBTCtext)
 FAIRpriceBTClabeltext.grid(row=FAIRrowtext, column=PriceBTCcol)
 FAIRpriceBTCvardata = StringVar()
@@ -1294,7 +1296,7 @@ FAIRpriceBTClabeldata.grid(row=FAIRrowdata, column=PriceBTCcol)
 
 # Display Data and Text for Faircoin price in USD
 FAIRpriceUSDvartext = StringVar()
-FAIRpriceUSDlabeltext = Label(app, textvariable=FAIRpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+FAIRpriceUSDlabeltext = Label(app, textvariable=FAIRpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 FAIRpriceUSDvartext.set(FAIRpriceUSDtext)
 FAIRpriceUSDlabeltext.grid(row=FAIRrowtext, column=PriceUSDcol)
 FAIRpriceUSDvardata = StringVar()
@@ -1305,7 +1307,7 @@ FAIRpriceUSDlabeldata.grid(row=FAIRrowdata, column=PriceUSDcol)
 
 #My FAIR Value in BTC
 MyFAIRValueBTCvartext = StringVar()
-MyFAIRValueBTClabeltext = Label(app, textvariable=MyFAIRValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyFAIRValueBTClabeltext = Label(app, textvariable=MyFAIRValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyFAIRValueBTCvartext.set(MyFAIRValueBTCtext)
 MyFAIRValueBTClabeltext.grid(row=FAIRrowtext, column=ValueBTCcol)
 
@@ -1317,7 +1319,7 @@ MyFAIRValueBTClabeldata.grid(row=FAIRrowdata, column=ValueBTCcol)
 
 #My FAIR Value in USD
 MyFAIRValueUSDvartext = StringVar()
-MyFAIRValueUSDlabeltext = Label(app, textvariable=MyFAIRValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyFAIRValueUSDlabeltext = Label(app, textvariable=MyFAIRValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyFAIRValueUSDvartext.set(MyFAIRValueUSDtext)
 MyFAIRValueUSDlabeltext.grid(row=FAIRrowtext, column=ValueUSDcol)
 
@@ -1330,7 +1332,7 @@ MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=ValueUSDcol)
 #TOTAL
 #My Total Value in BTC
 MyTotalValueBTCvartext = StringVar()
-MyTotalValueBTClabeltext = Label(app, textvariable=MyTotalValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyTotalValueBTClabeltext = Label(app, textvariable=MyTotalValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyTotalValueBTCvartext.set(MyTotalValueBTCtext)
 MyTotalValueBTClabeltext.grid(row=100, column=ValueBTCcol)
 
@@ -1343,7 +1345,7 @@ MyTotalValueBTClabeldata.grid(row=101, column=ValueBTCcol)
 #TOTAL
 #My Total Value in USD
 MyTotalValueUSDvartext = StringVar()
-MyTotalValueUSDlabeltext = Label(app, textvariable=MyTotalValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize))
+MyTotalValueUSDlabeltext = Label(app, textvariable=MyTotalValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyTotalValueUSDvartext.set(MyTotalValueUSDtext)
 MyTotalValueUSDlabeltext.grid(row=100, column=ValueUSDcol)
 
@@ -1371,7 +1373,7 @@ def updateALLvalue():
     MyTotalValueUSDupdate()
     MyTotalValueBTCupdate()
 
-updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=0, column=updateMyCOINScol)
+updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=updateMyCOINScol)
 
 
 
