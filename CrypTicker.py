@@ -835,6 +835,7 @@ def MyBTCupdate():
     global MyBTC
     MyBTC = float(MyBTCvardata.get())
     MyBTCValueupdate()
+    MyTotalValueUSDupdate()
     print MyBTC
     return MyBTC
 
@@ -890,6 +891,8 @@ def MyBLKupdate():
     BLKpriceUSDupdate()
     MyBLKValueUSDupdate()
     MyBLKValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyBLK
     return MyBLK
 
@@ -962,6 +965,8 @@ def MyLTCupdate():
     LTCpriceUSDupdate()
     MyLTCValueUSDupdate()
     MyLTCValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyLTC
     return MyLTC
 
@@ -1033,6 +1038,8 @@ def MyDOGEupdate():
     DOGEpriceUSDupdate()
     MyDOGEValueUSDupdate()
     MyDOGEValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyDOGE
     return MyDOGE
 
@@ -1105,6 +1112,8 @@ def MyDRKupdate():
     DRKpriceUSDupdate()
     MyDRKValueUSDupdate()
     MyDRKValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyDRK
     return MyDRK
 
@@ -1178,6 +1187,8 @@ def MyPPCupdate():
     PPCpriceUSDupdate()
     MyPPCValueUSDupdate()
     MyPPCValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyPPC
     return MyPPC
 
@@ -1251,6 +1262,8 @@ def MyFAIRupdate():
     FAIRpriceUSDupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
     print MyFAIR
     return MyFAIR
 
