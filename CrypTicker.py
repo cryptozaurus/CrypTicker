@@ -564,6 +564,13 @@ def MyTotalValueBTCupdate():
 
 
 
+# Update UpdateInterval
+def UpdateIntervalSecupdate():
+    global UpdateInterval
+    UpdateInterval = UpdateIntervalSec * 1000
+
+
+
 # Window Start
 class Window(Frame):
     def __init__(self, master = None):
@@ -670,35 +677,30 @@ scroll.pack(side=RIGHT, fill=Y)
 
 
 
+
 #Update Interval Rate Entry with Button
+def UpdateIntervalSecCallback():
+    global UpdateIntervalSec
+    UpdateIntervalSec = int(UpdateIntervalSecvardata.get())
+    UpdateIntervalSecupdate()
+    print UpdateIntervalSec
+    return UpdateIntervalSec
+
+
 UpdateIntervalSecvartext = StringVar()
 UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 UpdateIntervalSecvartext.set(UpdateIntervalSectext)
-UpdateIntervalSeclabeltext.grid(row=100, column=exchangeNamecol)
+UpdateIntervalSeclabeltext.grid(row=101, column=exchangeNamecol)
 
-UpdateIntervalSecEntry = Entry(app)
-UpdateIntervalSecEntry.grid(row=101, column=exchangeNamecol)
-UpdateIntervalSecEntry.focus_set()
+UpdateIntervalSecvardata = StringVar()
+UpdateIntervalSecvardata.set(UpdateIntervalSec)
+UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
 
+UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback).grid(row=1031, column=exchangeNamecol)
 
-def callback():
-    global UpdateIntervalSec
-    global UpdateInterval
-    UpdateIntervalSec = int(UpdateIntervalSecEntry.get())
-    print UpdateIntervalSecEntry.get()
-    UpdateIntervalSecvardata = StringVar()
-    UpdateIntervalSeclabeldata = Label(app, textvariable=UpdateIntervalSecvardata, relief=FLAT, font=(TextFontType, TextFontSize))
-    UpdateIntervalSecvardata.set(UpdateIntervalSec)
-    UpdateIntervalSeclabeldata.grid(row=103, column=exchangeNamecol)
-    UpdateInterval = UpdateIntervalSec * 1000
-    return UpdateIntervalSec
+UpdateIntervalSeclabeldata = Label(app, textvariable=UpdateIntervalSecvardata, relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
 
-b = Button(app, text="Update", width=10, command=callback).grid(row=102, column=exchangeNamecol)
-
-#UpdateIntervalSecvardata = StringVar()
-UpdateIntervalSeclabeldata = Label(app, text=UpdateIntervalSec, relief=FLAT, font=(TextFontType, TextFontSize))
-#UpdateIntervalSecvardata.set(UpdateIntervalSec.get())
-UpdateIntervalSeclabeldata.grid(row=4, column=0)
 
 
 
