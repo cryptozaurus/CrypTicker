@@ -262,7 +262,7 @@ def BLKpriceUSDupdate():
 # Calculate and Update my Blackcoin Value in USD
 def MyBLKValueUSD():
     global BLKpriceUSDvardata
-    MyBLKValueUSD = float(BLKpriceUSDvardata.get()) * MyBLK
+    MyBLKValueUSD = float(BLKpriceUSDvardata.get()) * float(MyBLKvardata.get())
     return MyBLKValueUSD
 
 def MyBLKValueUSDupdate():
@@ -273,7 +273,7 @@ def MyBLKValueUSDupdate():
 
 # Calculate and Update my Blackcoin Value in BTC
 def MyBLKValueBTC():
-    MyBLKValueBTC = float(BLKpriceBTCvardata.get()) * MyBLK
+    MyBLKValueBTC = float(BLKpriceBTCvardata.get()) * float(MyBLKvardata.get())
     return MyBLKValueBTC
 
 def MyBLKValueBTCupdate():
@@ -313,7 +313,7 @@ def LTCpriceUSDupdate():
 # Calculate and Update my Litecoin Value in USD
 def MyLTCValueUSD():
     global LTCpriceUSDvardata
-    MyLTCValueUSD = float(LTCpriceUSDvardata.get()) * MyLTC
+    MyLTCValueUSD = float(LTCpriceUSDvardata.get()) * float(MyLTCvardata.get())
     return MyLTCValueUSD
 
 def MyLTCValueUSDupdate():
@@ -324,7 +324,7 @@ def MyLTCValueUSDupdate():
 
 # Calculate and Update my Litecoin Value in BTC
 def MyLTCValueBTC():
-    MyLTCValueBTC = float(LTCpriceBTCvardata.get()) * MyLTC
+    MyLTCValueBTC = float(LTCpriceBTCvardata.get()) * float(MyLTCvardata.get())
     return MyLTCValueBTC
 
 def MyLTCValueBTCupdate():
@@ -364,7 +364,7 @@ def DOGEpriceUSDupdate():
 # Calculate and Update my Dogecoin Value in USD
 def MyDOGEValueUSD():
     global DOGEpriceUSDvardata
-    MyDOGEValueUSD = float(DOGEpriceUSDvardata.get()) * MyDOGE
+    MyDOGEValueUSD = float(DOGEpriceUSDvardata.get()) * float(MyDOGEvardata.get())
     return MyDOGEValueUSD
 
 def MyDOGEValueUSDupdate():
@@ -375,7 +375,7 @@ def MyDOGEValueUSDupdate():
 
 # Calculate and Update my Dogecoin Value in BTC
 def MyDOGEValueBTC():
-    MyDOGEValueBTC = float(DOGEpriceBTCvardata.get()) * MyDOGE
+    MyDOGEValueBTC = float(DOGEpriceBTCvardata.get()) * float(MyDOGEvardata.get())
     return MyDOGEValueBTC
 
 def MyDOGEValueBTCupdate():
@@ -416,7 +416,7 @@ def DRKpriceUSDupdate():
 # Calculate and Update my Darkcoin Value in USD
 def MyDRKValueUSD():
     global DRKpriceUSDvardata
-    MyDRKValueUSD = float(DRKpriceUSDvardata.get()) * MyDRK
+    MyDRKValueUSD = float(DRKpriceUSDvardata.get()) * float(MyDRKvardata.get())
     return MyDRKValueUSD
 
 def MyDRKValueUSDupdate():
@@ -427,7 +427,7 @@ def MyDRKValueUSDupdate():
 
 # Calculate and Update my Darkcoin Value in BTC
 def MyDRKValueBTC():
-    MyDRKValueBTC = float(DRKpriceBTCvardata.get()) * MyDRK
+    MyDRKValueBTC = float(DRKpriceBTCvardata.get()) * float(MyDRKvardata.get())
     return MyDRKValueBTC
 
 def MyDRKValueBTCupdate():
@@ -467,7 +467,7 @@ def PPCpriceUSDupdate():
 # Calculate and Update my Peercoin Value in USD
 def MyPPCValueUSD():
     global PPCpriceUSDvardata
-    MyPPCValueUSD = float(PPCpriceUSDvardata.get()) * MyPPC
+    MyPPCValueUSD = float(PPCpriceUSDvardata.get()) * float(MyPPCvardata.get())
     return MyPPCValueUSD
 
 def MyPPCValueUSDupdate():
@@ -478,7 +478,7 @@ def MyPPCValueUSDupdate():
 
 # Calculate and Update my Peercoin Value in BTC
 def MyPPCValueBTC():
-    MyPPCValueBTC = float(PPCpriceBTCvardata.get()) * MyPPC
+    MyPPCValueBTC = float(PPCpriceBTCvardata.get()) * float(MyPPCvardata.get())
     return MyPPCValueBTC
 
 def MyPPCValueBTCupdate():
@@ -494,7 +494,7 @@ def MyPPCValueBTCupdate():
 def FAIRpriceBTC():
     try:
         Tick = requests.get(FAIRexchangeURL)
-        return 0 #float(Tick.json()["last_price"])
+        return float(Tick.json()["last_price"])
     except Exception:
         print "FAIRpriceBTC API error"
         return 0
@@ -519,7 +519,7 @@ def FAIRpriceUSDupdate():
 # Calculate and Update my Faircoin Value in USD
 def MyFAIRValueUSD():
     global FAIRpriceUSDvardata
-    MyFAIRValueUSD = float(FAIRpriceUSDvardata.get()) * MyFAIR
+    MyFAIRValueUSD = float(FAIRpriceUSDvardata.get()) * float(MyFAIRvardata.get())
     return MyFAIRValueUSD
 
 def MyFAIRValueUSDupdate():
@@ -530,7 +530,7 @@ def MyFAIRValueUSDupdate():
 
 # Calculate and Update my Faircoin Value in BTC
 def MyFAIRValueBTC():
-    MyFAIRValueBTC = float(FAIRpriceBTCvardata.get()) * MyFAIR
+    MyFAIRValueBTC = float(FAIRpriceBTCvardata.get()) * float(MyFAIRvardata.get())
     return MyFAIRValueBTC
 
 def MyFAIRValueBTCupdate():
@@ -898,10 +898,6 @@ MyBLKentry.grid(row=BLKrowdata, column=MyCOINScol)
 
 MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate).grid(row=BLKrowdata, column=updateMyCOINScol)
 
-#MyBLKvardata = StringVar()
-#MyBLKlabeldata = Label(app, text=MyBLK, relief=RAISED, font=(DataFontType, DataFontSize))
-#MyBLKlabeldata.grid(row=BLKrowdata, column=MyCOINScol)
-
 
 # Display Data and Text for Blackcoin price in BTC
 BLKpriceBTCvartext = StringVar()
@@ -956,9 +952,23 @@ MyLTCvartext = StringVar()
 MyLTClabeltext = Label(app, textvariable=MyLTCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyLTCvartext.set(MyLTCtext)
 MyLTClabeltext.grid(row=LTCrowtext, column=MyCOINScol)
-#MyLTCvardata = StringVar()
-MyLTClabeldata = Label(app, text=MyLTC, relief=RAISED, font=(DataFontType, DataFontSize))
-MyLTClabeldata.grid(row=LTCrowdata, column=MyCOINScol)
+
+def MyLTCupdate():
+    global MyLTC
+    MyLTC = float(MyLTCvardata.get())
+    LTCpriceBTCupdate()
+    LTCpriceUSDupdate()
+    MyLTCValueUSDupdate()
+    MyLTCValueBTCupdate()
+    print MyLTC
+    return MyLTC
+
+MyLTCvardata = StringVar()
+MyLTCvardata.set(MyLTC)
+MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyLTCentry.grid(row=LTCrowdata, column=MyCOINScol)
+
+MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate).grid(row=LTCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Litecoin price in BTC
@@ -1013,9 +1023,23 @@ MyDOGEvartext = StringVar()
 MyDOGElabeltext = Label(app, textvariable=MyDOGEvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyDOGEvartext.set(MyDOGEtext)
 MyDOGElabeltext.grid(row=DOGErowtext, column=MyCOINScol)
-#MyDOGEvardata = StringVar()
-MyDOGElabeldata = Label(app, text=MyDOGE, relief=RAISED, font=(DataFontType, DataFontSize))
-MyDOGElabeldata.grid(row=DOGErowdata, column=MyCOINScol)
+
+def MyDOGEupdate():
+    global MyDOGE
+    MyDOGE = float(MyDOGEvardata.get())
+    DOGEpriceBTCupdate()
+    DOGEpriceUSDupdate()
+    MyDOGEValueUSDupdate()
+    MyDOGEValueBTCupdate()
+    print MyDOGE
+    return MyDOGE
+
+MyDOGEvardata = StringVar()
+MyDOGEvardata.set(MyDOGE)
+MyDOGEentry = Entry(app, textvariable=MyDOGEvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyDOGEentry.grid(row=DOGErowdata, column=MyCOINScol)
+
+MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate).grid(row=DOGErowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Dogecoin price in BTC
@@ -1071,9 +1095,23 @@ MyDRKvartext = StringVar()
 MyDRKlabeltext = Label(app, textvariable=MyDRKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyDRKvartext.set(MyDRKtext)
 MyDRKlabeltext.grid(row=DRKrowtext, column=MyCOINScol)
-#MyDRKvardata = StringVar()
-MyDRKlabeldata = Label(app, text=MyDRK, relief=RAISED, font=(DataFontType, DataFontSize))
-MyDRKlabeldata.grid(row=DRKrowdata, column=MyCOINScol)
+
+def MyDRKupdate():
+    global MyDRK
+    MyDRK = float(MyDRKvardata.get())
+    DRKpriceBTCupdate()
+    DRKpriceUSDupdate()
+    MyDRKValueUSDupdate()
+    MyDRKValueBTCupdate()
+    print MyDRK
+    return MyDRK
+
+MyDRKvardata = StringVar()
+MyDRKvardata.set(MyDRK)
+MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyDRKentry.grid(row=DRKrowdata, column=MyCOINScol)
+
+MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate).grid(row=DRKrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Darkcoin price in BTC
@@ -1129,9 +1167,24 @@ MyPPCvartext = StringVar()
 MyPPClabeltext = Label(app, textvariable=MyPPCvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyPPCvartext.set(MyPPCtext)
 MyPPClabeltext.grid(row=PPCrowtext, column=MyCOINScol)
-#MyPPCvardata = StringVar()
-MyPPClabeldata = Label(app, text=MyPPC, relief=RAISED, font=(DataFontType, DataFontSize))
-MyPPClabeldata.grid(row=PPCrowdata, column=MyCOINScol)
+
+
+def MyPPCupdate():
+    global MyPPC
+    MyPPC = float(MyPPCvardata.get())
+    PPCpriceBTCupdate()
+    PPCpriceUSDupdate()
+    MyPPCValueUSDupdate()
+    MyPPCValueBTCupdate()
+    print MyPPC
+    return MyPPC
+
+MyPPCvardata = StringVar()
+MyPPCvardata.set(MyPPC)
+MyPPCentry = Entry(app, textvariable=MyPPCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyPPCentry.grid(row=PPCrowdata, column=MyCOINScol)
+
+MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate).grid(row=PPCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Peercoin price in BTC
@@ -1188,9 +1241,23 @@ MyFAIRvartext = StringVar()
 MyFAIRlabeltext = Label(app, textvariable=MyFAIRvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyFAIRvartext.set(MyFAIRtext)
 MyFAIRlabeltext.grid(row=FAIRrowtext, column=MyCOINScol)
-#MyFAIRvardata = StringVar()
-MyFAIRlabeldata = Label(app, text=MyFAIR, relief=RAISED, font=(DataFontType, DataFontSize))
-MyFAIRlabeldata.grid(row=FAIRrowdata, column=MyCOINScol)
+
+def MyFAIRupdate():
+    global MyFAIR
+    MyFAIR = float(MyFAIRvardata.get())
+    FAIRpriceBTCupdate()
+    FAIRpriceUSDupdate()
+    MyFAIRValueUSDupdate()
+    MyFAIRValueBTCupdate()
+    print MyFAIR
+    return MyFAIR
+
+MyFAIRvardata = StringVar()
+MyFAIRvardata.set(MyFAIR)
+MyFAIRentry = Entry(app, textvariable=MyFAIRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyFAIRentry.grid(row=FAIRrowdata, column=MyCOINScol)
+
+MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate).grid(row=FAIRrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Faircoin price in BTC
