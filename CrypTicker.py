@@ -223,7 +223,6 @@ def PriceAverageUSDupdate():
 # Calculate and Update my Bitcoin Value
 def MyBTCValue():
     MyBTCValue = float(BTCpriceUSDvardata.get()) * MyBTC
-    print MyBTCValue
     return MyBTCValue
 
 def MyBTCValueupdate():
@@ -245,7 +244,6 @@ def BLKpriceBTC():
 def BLKpriceBTCupdate():
     global BLKpriceBTCvardata
     BLKpriceBTCvardata.set(str.format("{0:.8f}", (float(BLKpriceBTC()))))
-    print BLKpriceBTCvardata.get()
     root.after(UpdateInterval, BLKpriceBTCupdate)
 
 
@@ -255,16 +253,13 @@ def BLKpriceUSD():
     return BLKpriceUSD
 
 def BLKpriceUSDupdate():
-    global BLKpriceBTCvardata
     global BLKpriceUSDvardata
     BLKpriceUSDvardata.set(str.format("{0:.8f}", (float(BLKpriceUSD()))))
-    print BLKpriceUSDvardata.get()
     root.after(UpdateInterval, BLKpriceUSDupdate)
 
 
 # Calculate and Update my Blackcoin Value in USD
 def MyBLKValueUSD():
-    global BLKpriceBTCvardata
     global BLKpriceUSDvardata
     MyBLKValueUSD = float(BLKpriceUSDvardata.get()) * MyBLK
     return MyBLKValueUSD
@@ -300,7 +295,6 @@ def LTCpriceBTC():
 def LTCpriceBTCupdate():
     global LTCpriceBTCvardata
     LTCpriceBTCvardata.set(str.format("{0:.8f}", (float(LTCpriceBTC()))))
-    print LTCpriceBTCvardata.get()
     root.after(UpdateInterval, LTCpriceBTCupdate)
 
 
@@ -310,16 +304,13 @@ def LTCpriceUSD():
     return LTCpriceUSD
 
 def LTCpriceUSDupdate():
-    global LTCpriceBTCvardata
     global LTCpriceUSDvardata
     LTCpriceUSDvardata.set(str.format("{0:.8f}", (float(LTCpriceUSD()))))
-    print LTCpriceUSDvardata.get()
     root.after(UpdateInterval, LTCpriceUSDupdate)
 
 
 # Calculate and Update my Litecoin Value in USD
 def MyLTCValueUSD():
-    global LTCpriceBTCvardata
     global LTCpriceUSDvardata
     MyLTCValueUSD = float(LTCpriceUSDvardata.get()) * MyLTC
     return MyLTCValueUSD
@@ -355,7 +346,6 @@ def DOGEpriceBTC():
 def DOGEpriceBTCupdate():
     global DOGEpriceBTCvardata
     DOGEpriceBTCvardata.set(str.format("{0:.8f}", (float(DOGEpriceBTC()))))
-    print DOGEpriceBTCvardata.get()
     root.after(UpdateInterval, DOGEpriceBTCupdate)
 
 
@@ -365,16 +355,13 @@ def DOGEpriceUSD():
     return DOGEpriceUSD
 
 def DOGEpriceUSDupdate():
-    global DOGEpriceBTCvardata
     global DOGEpriceUSDvardata
     DOGEpriceUSDvardata.set(str.format("{0:.8f}", (float(DOGEpriceUSD()))))
-    print DOGEpriceUSDvardata.get()
     root.after(UpdateInterval, DOGEpriceUSDupdate)
 
 
 # Calculate and Update my Dogecoin Value in USD
 def MyDOGEValueUSD():
-    global DOGEpriceBTCvardata
     global DOGEpriceUSDvardata
     MyDOGEValueUSD = float(DOGEpriceUSDvardata.get()) * MyDOGE
     return MyDOGEValueUSD
@@ -411,7 +398,6 @@ def DRKpriceBTC():
 def DRKpriceBTCupdate():
     global DRKpriceBTCvardata
     DRKpriceBTCvardata.set(str.format("{0:.8f}", (float(DRKpriceBTC()))))
-    print DRKpriceBTCvardata.get()
     root.after(UpdateInterval, DRKpriceBTCupdate)
 
 
@@ -421,16 +407,13 @@ def DRKpriceUSD():
     return DRKpriceUSD
 
 def DRKpriceUSDupdate():
-    global DRKpriceBTCvardata
     global DRKpriceUSDvardata
     DRKpriceUSDvardata.set(str.format("{0:.8f}", (float(DRKpriceUSD()))))
-    print DRKpriceUSDvardata.get()
     root.after(UpdateInterval, DRKpriceUSDupdate)
 
 
 # Calculate and Update my Darkcoin Value in USD
 def MyDRKValueUSD():
-    global DRKpriceBTCvardata
     global DRKpriceUSDvardata
     MyDRKValueUSD = float(DRKpriceUSDvardata.get()) * MyDRK
     return MyDRKValueUSD
@@ -466,7 +449,6 @@ def PPCpriceBTC():
 def PPCpriceBTCupdate():
     global PPCpriceBTCvardata
     PPCpriceBTCvardata.set(str.format("{0:.8f}", (float(PPCpriceBTC()))))
-    print PPCpriceBTCvardata.get()
     root.after(UpdateInterval, PPCpriceBTCupdate)
 
 
@@ -476,16 +458,13 @@ def PPCpriceUSD():
     return PPCpriceUSD
 
 def PPCpriceUSDupdate():
-    global PPCpriceBTCvardata
     global PPCpriceUSDvardata
     PPCpriceUSDvardata.set(str.format("{0:.8f}", (float(PPCpriceUSD()))))
-    print PPCpriceUSDvardata.get()
     root.after(UpdateInterval, PPCpriceUSDupdate)
 
 
 # Calculate and Update my Peercoin Value in USD
 def MyPPCValueUSD():
-    global PPCpriceBTCvardata
     global PPCpriceUSDvardata
     MyPPCValueUSD = float(PPCpriceUSDvardata.get()) * MyPPC
     return MyPPCValueUSD
@@ -522,7 +501,6 @@ def FAIRpriceBTC():
 def FAIRpriceBTCupdate():
     global FAIRpriceBTCvardata
     FAIRpriceBTCvardata.set(str.format("{0:.8f}", (float(FAIRpriceBTC()))))
-    print FAIRpriceBTCvardata.get()
     root.after(UpdateInterval, FAIRpriceBTCupdate)
 
 
@@ -532,16 +510,13 @@ def FAIRpriceUSD():
     return FAIRpriceUSD
 
 def FAIRpriceUSDupdate():
-    global FAIRpriceBTCvardata
     global FAIRpriceUSDvardata
     FAIRpriceUSDvardata.set(str.format("{0:.8f}", (float(FAIRpriceUSD()))))
-    print FAIRpriceUSDvardata.get()
     root.after(UpdateInterval, FAIRpriceUSDupdate)
 
 
 # Calculate and Update my Faircoin Value in USD
 def MyFAIRValueUSD():
-    global FAIRpriceBTCvardata
     global FAIRpriceUSDvardata
     MyFAIRValueUSD = float(FAIRpriceUSDvardata.get()) * MyFAIR
     return MyFAIRValueUSD
