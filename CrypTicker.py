@@ -40,6 +40,9 @@ TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
 TextFontSize = 12
 DataFontSize = 14
+AppWindowBackgroundColor = "#999999"
+ButtonBackGroundColor = "#999999"
+ButtonTextColor = "red"
 
 PriceAverageUSDtext = str(" Price Average ")
 bitstampUSDtext = str(" Bitstamp ")
@@ -582,7 +585,7 @@ class Window(Frame):
         self.master.title("Crypto")
         self.pack(fill=BOTH, expand=1)
         # Quit Button
-        quitButton = Button(self, text="Quit", command=self.client_exit)
+        quitButton = Button(self, text="Quit", command=self.client_exit, bg=ButtonBackGroundColor, fg=ButtonTextColor)
         quitButton.grid(row=0, column=0)
         #
         menu = Menu(self.master)
@@ -621,7 +624,7 @@ root = Tk()
 #root.geometry("1400x600")
 app = Window(root)
 root.title("CryptTicker")
-root.config (bg = "red")
+app.config (bg=AppWindowBackgroundColor)
 
 #Coin Images
 BTCimage = Text(app, height=3.1, width=6)
@@ -700,7 +703,7 @@ UpdateIntervalSecvardata.set(UpdateIntervalSec)
 UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
 
-UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback).grid(row=1031, column=exchangeNamecol)
+UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=1031, column=exchangeNamecol)
 
 UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
 
@@ -847,7 +850,7 @@ MyBTCvardata.set(MyBTC)
 MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
 
-MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate).grid(row=BTCrowdata, column=updateMyCOINScol)
+MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=BTCrowdata, column=updateMyCOINScol)
 
 
 
@@ -904,7 +907,7 @@ MyBLKvardata.set(MyBLK)
 MyBLKentry = Entry(app, textvariable=MyBLKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyBLKentry.grid(row=BLKrowdata, column=MyCOINScol)
 
-MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate).grid(row=BLKrowdata, column=updateMyCOINScol)
+MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=BLKrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Blackcoin price in BTC
@@ -978,7 +981,7 @@ MyLTCvardata.set(MyLTC)
 MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyLTCentry.grid(row=LTCrowdata, column=MyCOINScol)
 
-MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate).grid(row=LTCrowdata, column=updateMyCOINScol)
+MyLTCupdatebutton = Button(app, text='Update NOW', command=MyLTCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=LTCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Litecoin price in BTC
@@ -1051,7 +1054,7 @@ MyDOGEvardata.set(MyDOGE)
 MyDOGEentry = Entry(app, textvariable=MyDOGEvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyDOGEentry.grid(row=DOGErowdata, column=MyCOINScol)
 
-MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate).grid(row=DOGErowdata, column=updateMyCOINScol)
+MyDOGEupdatebutton = Button(app, text='Update NOW', command=MyDOGEupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=DOGErowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Dogecoin price in BTC
@@ -1125,7 +1128,7 @@ MyDRKvardata.set(MyDRK)
 MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyDRKentry.grid(row=DRKrowdata, column=MyCOINScol)
 
-MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate).grid(row=DRKrowdata, column=updateMyCOINScol)
+MyDRKupdatebutton = Button(app, text='Update NOW', command=MyDRKupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=DRKrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Darkcoin price in BTC
@@ -1200,7 +1203,7 @@ MyPPCvardata.set(MyPPC)
 MyPPCentry = Entry(app, textvariable=MyPPCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyPPCentry.grid(row=PPCrowdata, column=MyCOINScol)
 
-MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate).grid(row=PPCrowdata, column=updateMyCOINScol)
+MyPPCupdatebutton = Button(app, text='Update NOW', command=MyPPCupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=PPCrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Peercoin price in BTC
@@ -1275,7 +1278,7 @@ MyFAIRvardata.set(MyFAIR)
 MyFAIRentry = Entry(app, textvariable=MyFAIRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 MyFAIRentry.grid(row=FAIRrowdata, column=MyCOINScol)
 
-MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate).grid(row=FAIRrowdata, column=updateMyCOINScol)
+MyFAIRupdatebutton = Button(app, text='Update NOW', command=MyFAIRupdate, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=FAIRrowdata, column=updateMyCOINScol)
 
 
 # Display Data and Text for Faircoin price in BTC
@@ -1368,7 +1371,7 @@ def updateALLvalue():
     MyTotalValueUSDupdate()
     MyTotalValueBTCupdate()
 
-updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue).grid(row=0, column=updateMyCOINScol)
+updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonTextColor).grid(row=0, column=updateMyCOINScol)
 
 
 
