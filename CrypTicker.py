@@ -48,7 +48,7 @@ ButtonForegroundColor = "black"
 TextBackgroundColor = "#181a1e"
 TextForegroundColor = "#8e9194"
 DataBackgroundColor = "#181a1e"
-DataForegroundColor = "#d2a152"
+DataForegroundColor = "#f89a28"
 EntryBackgroundColor = "#333333"
 EntryForegroundColor = "white"
 COINSbackgroundColor = "#181a1e"
@@ -1381,7 +1381,7 @@ def updateALLvalue():
     MyTotalValueUSDupdate()
     MyTotalValueBTCupdate()
 
-updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=updateMyCOINScol)
+updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=MyCOINScol, columnspan=2)
 
 
 
