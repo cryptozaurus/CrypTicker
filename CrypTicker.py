@@ -104,7 +104,8 @@ PPCrowdata = 12
 FAIRrowtext = 13
 FAIRrowdata = 14
 
-BTCUSDcol = 1
+BTCUSDcol = 0
+updateMyCOINScol = 2
 COINSimagecol = 3
 MyCOINScol = 5
 PriceBTCcol = 7
@@ -222,7 +223,7 @@ def PriceAverageUSDupdate():
 
 # Calculate and Update my Bitcoin Value
 def MyBTCValue():
-    MyBTCValue = float(BTCpriceUSDvardata.get()) * MyBTC
+    MyBTCValue = float(BTCpriceUSDvardata.get()) * float(MyBTCvardata.get())
     return MyBTCValue
 
 def MyBTCValueupdate():
@@ -673,10 +674,10 @@ scroll.pack(side=RIGHT, fill=Y)
 UpdateIntervalSecvartext = StringVar()
 UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 UpdateIntervalSecvartext.set(UpdateIntervalSectext)
-UpdateIntervalSeclabeltext.grid(row=1, column=0)
+UpdateIntervalSeclabeltext.grid(row=100, column=exchangeNamecol)
 
 UpdateIntervalSecEntry = Entry(app)
-UpdateIntervalSecEntry.grid(row=2, column=0)
+UpdateIntervalSecEntry.grid(row=101, column=exchangeNamecol)
 UpdateIntervalSecEntry.focus_set()
 
 
@@ -688,11 +689,11 @@ def callback():
     UpdateIntervalSecvardata = StringVar()
     UpdateIntervalSeclabeldata = Label(app, textvariable=UpdateIntervalSecvardata, relief=FLAT, font=(TextFontType, TextFontSize))
     UpdateIntervalSecvardata.set(UpdateIntervalSec)
-    UpdateIntervalSeclabeldata.grid(row=4, column=0)
+    UpdateIntervalSeclabeldata.grid(row=103, column=exchangeNamecol)
     UpdateInterval = UpdateIntervalSec * 1000
     return UpdateIntervalSec
 
-b = Button(app, text="Update", width=10, command=callback).grid(row=3, column=0)
+b = Button(app, text="Update", width=10, command=callback).grid(row=102, column=exchangeNamecol)
 
 #UpdateIntervalSecvardata = StringVar()
 UpdateIntervalSeclabeldata = Label(app, text=UpdateIntervalSec, relief=FLAT, font=(TextFontType, TextFontSize))
@@ -828,40 +829,32 @@ MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFo
 MyBTCvartext.set(MyBTCtext)
 MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 
-#MyBTCentry
-MyBTC = StringVar()
-MyBTCentry = Entry(app, textvariable=MyBTC)
 
-MyBTCentry.grid(row=5, column=0)
 
-MyBTC = MyBTCentry.get()
-MyBTC = 22
 
-'''
-v = StringVar()
-e = Entry(master, textvariable=v)
-e.pack()
+def Calculer():
+    global MyBTC
+    MyBTC = float(MyBTCvardata.get())
+    MyBTCValueupdate()
+    print MyBTC
+    return MyBTC
 
-v.set("a default value")
-s = v.get()
-'''
-'''
-def callback():
-    UpdateIntervalSec = int(UpdateIntervalSecEntry.get())
-    print UpdateIntervalSecEntry.get()
-    UpdateIntervalSecvardata = StringVar()
-    UpdateIntervalSeclabeldata = Label(app, textvariable=UpdateIntervalSecvardata, relief=FLAT, font=(TextFontType, TextFontSize))
-    UpdateIntervalSecvardata.set(UpdateIntervalSec)
-    UpdateIntervalSeclabeldata.grid(row=4, column=0)
-    UpdateInterval = UpdateIntervalSec * 1000
-    return UpdateIntervalSec
+MyBTCvardata = StringVar()
+MyBTCvardata.set(MyBTC)
+MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
 
-b = Button(app, text="Update", width=10, command=callback).grid(row=3, column=0)
-'''
+MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
+
+
+
+MyBTCupdatebutton = Button(app, text='Update NOW', command=Calculer).grid(row=0, column=MyCOINScol)
+
+
 
 #MyBTCvardata = StringVar()
-MyBTClabeldata = Label(app, text=MyBTC, relief=RAISED, font=(DataFontType, DataFontSize))
-MyBTClabeldata.grid(row=BTCrowdata, column=MyCOINScol)
+#MyBTClabeldata = Label(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
+#MyBTClabeldata.grid(row=BTCrowdata, column=MyCOINScol)
+
 
 
 # Display Data and Text for Bitcoin price in USD
