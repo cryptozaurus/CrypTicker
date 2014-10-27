@@ -105,9 +105,9 @@ FAIRrowtext = 13
 FAIRrowdata = 14
 
 BTCUSDcol = 0
-updateMyCOINScol = 2
 COINSimagecol = 3
 MyCOINScol = 5
+updateMyCOINScol = 6
 PriceBTCcol = 7
 PriceUSDcol = 9
 ValueBTCcol = 11
@@ -829,10 +829,7 @@ MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFo
 MyBTCvartext.set(MyBTCtext)
 MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 
-
-
-
-def Calculer():
+def MyBTCupdate():
     global MyBTC
     MyBTC = float(MyBTCvardata.get())
     MyBTCValueupdate()
@@ -842,12 +839,9 @@ def Calculer():
 MyBTCvardata = StringVar()
 MyBTCvardata.set(MyBTC)
 MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
-
 MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
 
-
-
-MyBTCupdatebutton = Button(app, text='Update NOW', command=Calculer).grid(row=0, column=MyCOINScol)
+MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate).grid(row=BTCrowdata, column=updateMyCOINScol)
 
 
 
@@ -886,9 +880,27 @@ MyBLKvartext = StringVar()
 MyBLKlabeltext = Label(app, textvariable=MyBLKvartext, relief=FLAT, font=(TextFontType, TextFontSize))
 MyBLKvartext.set(MyBLKtext)
 MyBLKlabeltext.grid(row=BLKrowtext, column=MyCOINScol)
+
+def MyBLKupdate():
+    global MyBLK
+    MyBLK = float(MyBLKvardata.get())
+    BLKpriceBTCupdate()
+    BLKpriceUSDupdate()
+    MyBLKValueUSDupdate()
+    MyBLKValueBTCupdate()
+    print MyBLK
+    return MyBLK
+
+MyBLKvardata = StringVar()
+MyBLKvardata.set(MyBLK)
+MyBLKentry = Entry(app, textvariable=MyBLKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER)
+MyBLKentry.grid(row=BLKrowdata, column=MyCOINScol)
+
+MyBLKupdatebutton = Button(app, text='Update NOW', command=MyBLKupdate).grid(row=BLKrowdata, column=updateMyCOINScol)
+
 #MyBLKvardata = StringVar()
-MyBLKlabeldata = Label(app, text=MyBLK, relief=RAISED, font=(DataFontType, DataFontSize))
-MyBLKlabeldata.grid(row=BLKrowdata, column=MyCOINScol)
+#MyBLKlabeldata = Label(app, text=MyBLK, relief=RAISED, font=(DataFontType, DataFontSize))
+#MyBLKlabeldata.grid(row=BLKrowdata, column=MyCOINScol)
 
 
 # Display Data and Text for Blackcoin price in BTC
