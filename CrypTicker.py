@@ -42,16 +42,16 @@ TextFontSize = 12
 DataFontSize = 14
 
 #Colors
-AppWindowBackgroundColor = "black"
-ButtonBackGroundColor = "#999999"
-ButtonForegroundColor = "red"
-TextBackgroundColor = "black"
-TextForegroundColor = "yellow"
-DataBackgroundColor = "black"
-DataForegroundColor = "yellow"
-EntryBackgroundColor = "black"
-EntryForegroundColor = "yellow"
-COINSbackgroundColor = "black"
+AppWindowBackgroundColor = "#181a1e"
+ButtonBackGroundColor = "#aaaaaa"
+ButtonForegroundColor = "black"
+TextBackgroundColor = "#181a1e"
+TextForegroundColor = "#8e9194"
+DataBackgroundColor = "#181a1e"
+DataForegroundColor = "#d2a152"
+EntryBackgroundColor = "#333333"
+EntryForegroundColor = "white"
+COINSbackgroundColor = "#181a1e"
 
 
 PriceAverageUSDtext = str(" Price Average ")
