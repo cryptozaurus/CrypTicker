@@ -1332,6 +1332,26 @@ MyTotalValueUSDupdate()
 MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
 
+#Update ALL Button
+def updateALLvalue():
+    MyBTCValueupdate()
+    MyBLKValueUSDupdate()
+    MyBLKValueBTCupdate()
+    MyLTCValueUSDupdate()
+    MyLTCValueBTCupdate()
+    MyDOGEValueUSDupdate()
+    MyDOGEValueBTCupdate()
+    MyDRKValueUSDupdate()
+    MyDRKValueBTCupdate()
+    MyPPCValueUSDupdate()
+    MyPPCValueBTCupdate()
+    MyFAIRValueUSDupdate()
+    MyFAIRValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+
+updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue).grid(row=0, column=updateMyCOINScol)
+
 
 
 '''
