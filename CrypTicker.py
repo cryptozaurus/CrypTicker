@@ -681,9 +681,12 @@ scroll.pack(side=RIGHT, fill=Y)
 #Update Interval Rate Entry with Button
 def UpdateIntervalSecCallback():
     global UpdateIntervalSec
+    global UpdateIntervalSeclabeldata
     UpdateIntervalSec = int(UpdateIntervalSecvardata.get())
     UpdateIntervalSecupdate()
     print UpdateIntervalSec
+    UpdateIntervalSeclabeldata = Label(app, text="                         ", relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+    UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
     return UpdateIntervalSec
 
 
@@ -699,7 +702,7 @@ UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
 
 UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback).grid(row=1031, column=exchangeNamecol)
 
-UpdateIntervalSeclabeldata = Label(app, textvariable=UpdateIntervalSecvardata, relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
 
 
 
