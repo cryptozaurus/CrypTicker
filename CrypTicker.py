@@ -9,7 +9,7 @@ from Tkinter import *
 MyBTC = 10.78
 MyBLK = 14361
 MyLTC = 20.78844
-MyDOGE = 100000
+MyDOGE = 113356
 MyDRK = 45
 MyPPC = 12.89
 MyFAIR = 10
@@ -122,8 +122,12 @@ exchangeNamecol = 15
 #BITCOIN
 # Import and Update API DATA for Bitcoin
 def bitstampUSD():
-    bitstampUSDtick = requests.get(bitstampUSDexchangeURL)
-    return bitstampUSDtick.json()['last']
+    try:
+        bitstampUSDtick = requests.get(bitstampUSDexchangeURL)
+        return bitstampUSDtick.json()['last']
+    except Exception:
+        print "Bitstamp API error"
+        return 0
 
 def bitstampUSDupdate():
     global bitstampUSDvardata
@@ -132,8 +136,12 @@ def bitstampUSDupdate():
 
 
 def btceUSD():
-    btceUSDtick = requests.get(btceUSDexchangeURL)
-    return btceUSDtick.json()['ticker']['last']
+    try:
+        btceUSDtick = requests.get(btceUSDexchangeURL)
+        return btceUSDtick.json()['ticker']['last']
+    except Exception:
+        print "Btc-e API error"
+        return 0
 
 def btceUSDupdate():
     global btceUSDvardata
@@ -142,8 +150,12 @@ def btceUSDupdate():
 
 
 def coinbaseUSD():
-    coinbaseUSDTick = requests.get(coinbaseUSDexchangeURL)
-    return coinbaseUSDTick.json()['amount']
+    try:
+        coinbaseUSDTick = requests.get(coinbaseUSDexchangeURL)
+        return coinbaseUSDTick.json()['amount']
+    except Exception:
+        print "Coinbase API error"
+        return 0
 
 def coinbaseUSDupdate():
     global coinbaseUSDvardata
@@ -152,9 +164,13 @@ def coinbaseUSDupdate():
 
 
 def krakenUSD():
-    krakenUSDTick = requests.post(krakenUSDexchangeURL,data=json.dumps({"pair":"XXBTZUSD"}),
-        headers={"content-type":"application/json"})
-    return krakenUSDTick.json()['result']['XXBTZUSD']['c'][0]
+    try:
+        krakenUSDTick = requests.post(krakenUSDexchangeURL,data=json.dumps({"pair":"XXBTZUSD"}),headers={"content-type":"application/json"})
+        return krakenUSDTick.json()['result']['XXBTZUSD']['c'][0]
+    except Exception:
+        print "Kraken API error"
+        return 0
+
 
 def krakenUSDupdate():
     global krakenUSDvardata
@@ -163,8 +179,12 @@ def krakenUSDupdate():
 
 
 def bitfinexUSD():
-    bitfinexUSDTick = requests.get(bitfinexUSDexchangeURL)
-    return bitfinexUSDTick.json()['last_price']
+    try:
+        bitfinexUSDTick = requests.get(bitfinexUSDexchangeURL)
+        return bitfinexUSDTick.json()['last_price']
+    except Exception:
+        print "Bitfinex API error"
+        return 0
 
 def bitfinexUSDupdate():
     global bitfinexUSDvardata
@@ -173,8 +193,12 @@ def bitfinexUSDupdate():
 
 
 def cryptsyUSD():
-    cryptsyBTCTick = requests.get(cryptsyUSDexchangeURL)
-    return cryptsyBTCTick.json()["return"]["markets"]["BTC"]['lasttradeprice']
+    try:
+        cryptsyBTCTick = requests.get(cryptsyUSDexchangeURL)
+        return cryptsyBTCTick.json()["return"]["markets"]["BTC"]['lasttradeprice']
+    except Exception:
+        print "Cryptsy API error"
+        return 0
 
 def cryptsyUSDupdate():
     global cryptsyUSDvardata
@@ -185,6 +209,7 @@ def cryptsyUSDupdate():
 def PriceAverageUSDupdate():
     global PriceAverageUSDvardatalist
     PriceAverageUSDvardatalist = [float(bitstampUSDvardata.get()), float(btceUSDvardata.get()), float(coinbaseUSDvardata.get()), float(krakenUSDvardata.get()), float(bitfinexUSDvardata.get()), float(cryptsyUSDvardata.get())]
+    PriceAverageUSDvardatalist = [x for x in PriceAverageUSDvardatalist if x != 0]
 
     global PriceAverageUSDvardata
     PriceAverageUSDvardata.set(str.format("{0:.2f}", (statistics.mean(PriceAverageUSDvardatalist))))
@@ -208,10 +233,14 @@ def MyBTCValueupdate():
 
 
 #BLACKCOIN
-# Import and Update API DATA for Cryptsy - Blackcoin price in BTC
+# Import and Update API DATA for Blackcoin price in BTC
 def BLKpriceBTC():
-    Tick = requests.get(BLKexchangeURL)
-    return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
+    try:
+        Tick = requests.get(BLKexchangeURL)
+        return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
+    except Exception:
+        print "BLKpriceBTC API error"
+        return 0
 
 def BLKpriceBTCupdate():
     global BLKpriceBTCvardata
@@ -220,7 +249,7 @@ def BLKpriceBTCupdate():
     root.after(UpdateInterval, BLKpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Blackcoin price in USD
+# Calculate and Update with Price Average DATA for Blackcoin price in USD
 def BLKpriceUSD():
     BLKpriceUSD = float(BLKpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return BLKpriceUSD
@@ -259,10 +288,14 @@ def MyBLKValueBTCupdate():
 
 
 #LITECOIN
-# Import and Update API DATA for Cryptsy - Litecoin price in BTC
+# Import and Update API DATA for Litecoin price in BTC
 def LTCpriceBTC():
-    Tick = requests.get(LTCexchangeURL)
-    return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
+    try:
+        Tick = requests.get(LTCexchangeURL)
+        return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
+    except Exception:
+        print "LTCpriceBTC API error"
+        return 0
 
 def LTCpriceBTCupdate():
     global LTCpriceBTCvardata
@@ -271,7 +304,7 @@ def LTCpriceBTCupdate():
     root.after(UpdateInterval, LTCpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Litecoin price in USD
+# Calculate and Update with Price Average DATA for Litecoin price in USD
 def LTCpriceUSD():
     LTCpriceUSD = float(LTCpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return LTCpriceUSD
@@ -310,10 +343,14 @@ def MyLTCValueBTCupdate():
 
 
 #DOGECOIN
-# Import and Update API DATA for Cryptsy - Dogecoin price in BTC
+# Import and Update API DATA for Dogecoin price in BTC
 def DOGEpriceBTC():
-    Tick = requests.get(DOGEexchangeURL)
-    return Tick.json()["return"]["markets"]["DOGE"]['lasttradeprice']
+    try:
+        Tick = requests.get(DOGEexchangeURL)
+        return Tick.json()["return"]["markets"]["DOGE"]['lasttradeprice']
+    except Exception:
+        print "DOGEpriceBTC API error"
+        return 0
 
 def DOGEpriceBTCupdate():
     global DOGEpriceBTCvardata
@@ -322,7 +359,7 @@ def DOGEpriceBTCupdate():
     root.after(UpdateInterval, DOGEpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Dogecoin price in USD
+# Calculate and Update with Price Average DATA for Dogecoin price in USD
 def DOGEpriceUSD():
     DOGEpriceUSD = float(DOGEpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return DOGEpriceUSD
@@ -362,10 +399,14 @@ def MyDOGEValueBTCupdate():
 
 
 #DARKCOIN
-# Import and Update API DATA for Cryptsy - Darkcoin price in BTC
+# Import and Update API DATA for Darkcoin price in BTC
 def DRKpriceBTC():
-    Tick = requests.get(DRKexchangeURL)
-    return Tick.json()["return"]["markets"]["DRK"]['lasttradeprice']
+    try:
+        Tick = requests.get(DRKexchangeURL)
+        return Tick.json()["return"]["markets"]["DRK"]['lasttradeprice']
+    except Exception:
+        print "DRKpriceBTC API error"
+        return 0
 
 def DRKpriceBTCupdate():
     global DRKpriceBTCvardata
@@ -374,7 +415,7 @@ def DRKpriceBTCupdate():
     root.after(UpdateInterval, DRKpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Darkcoin price in USD
+# Calculate and Update with Price Average DATA for Darkcoin price in USD
 def DRKpriceUSD():
     DRKpriceUSD = float(DRKpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return DRKpriceUSD
@@ -413,10 +454,14 @@ def MyDRKValueBTCupdate():
 
 
 #PEERCOIN
-# Import and Update API DATA for Cryptsy - Peercoin price in BTC
+# Import and Update API DATA for Peercoin price in BTC
 def PPCpriceBTC():
-    Tick = requests.get(PPCexchangeURL)
-    return Tick.json()["return"]["markets"]["PPC"]['lasttradeprice']
+    try:
+        Tick = requests.get(PPCexchangeURL)
+        return Tick.json()["return"]["markets"]["PPC"]['lasttradeprice']
+    except Exception:
+        print "PPCpriceBTC API error"
+        return 0
 
 def PPCpriceBTCupdate():
     global PPCpriceBTCvardata
@@ -425,7 +470,7 @@ def PPCpriceBTCupdate():
     root.after(UpdateInterval, PPCpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Peercoin price in USD
+# Calculate and Update with Price Average DATA for Peercoin price in USD
 def PPCpriceUSD():
     PPCpriceUSD = float(PPCpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return PPCpriceUSD
@@ -465,10 +510,14 @@ def MyPPCValueBTCupdate():
 
 
 #FAIRCOIN
-# Import and Update API DATA for Cryptsy - Faircoin price in BTC
+# Import and Update API DATA for Faircoin price in BTC
 def FAIRpriceBTC():
-    Tick = requests.get(FAIRexchangeURL)
-    return 0 #float(Tick.json()["last_price"])
+    try:
+        Tick = requests.get(FAIRexchangeURL)
+        return 0 #float(Tick.json()["last_price"])
+    except Exception:
+        print "FAIRpriceBTC API error"
+        return 0
 
 def FAIRpriceBTCupdate():
     global FAIRpriceBTCvardata
@@ -477,7 +526,7 @@ def FAIRpriceBTCupdate():
     root.after(UpdateInterval, FAIRpriceBTCupdate)
 
 
-# Calculate and Update with Price Average DATA for Cryptsy - Faircoin price in USD
+# Calculate and Update with Price Average DATA for Faircoin price in USD
 def FAIRpriceUSD():
     FAIRpriceUSD = float(FAIRpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
     return FAIRpriceUSD
@@ -805,17 +854,22 @@ MyBTCvartext.set(MyBTCtext)
 MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 
 #MyBTCentry
-#MyBTCentry = Entry(app)
-#def MyBTCentryModify():
-#    global MyBTC
-#    MyBTCentry.delete(0,Tk.END)
+MyBTC = StringVar()
+MyBTCentry = Entry(app, textvariable=MyBTC)
 
+MyBTCentry.grid(row=5, column=0)
 
-#MyBTCentry.grid(row=5, column=0)
-#MyBTCentry.focus_set()
-#MyBTC = MyBTCentry.get()
-#MyBTC = 22
+MyBTC = MyBTCentry.get()
+MyBTC = 22
 
+'''
+v = StringVar()
+e = Entry(master, textvariable=v)
+e.pack()
+
+v.set("a default value")
+s = v.get()
+'''
 '''
 def callback():
     UpdateIntervalSec = int(UpdateIntervalSecEntry.get())
