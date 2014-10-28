@@ -30,13 +30,7 @@ PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
 PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
-#Choose default exchange name:
-global DRKexchangeNamevardata
-DRKexchangeNamevardata = "three"
-global PPCexchangeNamevardata
-PPCexchangeNamevardata = "two"
-
-
+#Change exchange name
 exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
 BLKexchangeNametext = " Cryptsy "
@@ -49,6 +43,12 @@ PPCexchangeName1text = " Cryptsy "
 PPCexchangeName2text = " Btc-e "
 PPCexchangeName3text = " Bter "
 FAIRexchangeNametext = " Vaultex "
+
+#Choose default exchange name:
+global DRKexchangeNamevardata
+DRKexchangeNamevardata = "one"
+global PPCexchangeNamevardata
+PPCexchangeNamevardata = "one"
 
 TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
