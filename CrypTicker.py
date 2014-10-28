@@ -3,7 +3,8 @@ import time, json, requests
 import statistics
 from Tkinter import *
 
-
+global PPCexchangeNamevardata
+PPCexchangeNamevardata = "one"
 
 #Variables
 MyBTC = 11.11
@@ -24,7 +25,9 @@ BLKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mark
 LTCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DRKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
-PPCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=28'
+PPCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=28'
+PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
+PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 exchangeNametext = " Exchange Name "
@@ -33,7 +36,9 @@ BLKexchangeNametext = " Cryptsy "
 LTCexchangeNametext = " Cryptsy "
 DOGEexchangeNametext = " Cryptsy "
 DRKexchangeNametext = " Cryptsy "
-PPCexchangeNametext = " Cryptsy "
+PPCexchangeName1text = " Cryptsy "
+PPCexchangeName2text = " Btc-e "
+PPCexchangeName3text = " Bter "
 FAIRexchangeNametext = " Vaultex "
 
 TextFontType = "Georgia"
@@ -51,6 +56,7 @@ DataBackgroundColor = "#181a1e"
 DataForegroundColor = "#f89a28"
 EntryBackgroundColor = "#333333"
 EntryForegroundColor = "white"
+ExchangeNameActiveBackgroundColor = "#292c30"
 COINSbackgroundColor = "#181a1e"
 
 
@@ -450,15 +456,61 @@ def MyDRKValueBTCupdate():
 
 
 
+
+
 #PEERCOIN
 # Import and Update API DATA for Peercoin price in BTC
+
+def PPCexchangeNameUpdate(PPCexchangeNameValue):
+    if PPCexchangeNameValue == PPCexchangeName1text:
+        print PPCexchangeName1text
+        global PPCexchangeNamevardata
+        PPCexchangeNamevardata = "one"
+        print PPCexchangeNamevardata
+        PPCupdateALL()
+    elif PPCexchangeNameValue == PPCexchangeName2text:
+        print PPCexchangeName2text
+        PPCexchangeNamevardata = "two"
+        print PPCexchangeNamevardata
+        PPCupdateALL()
+    else:
+        print PPCexchangeName3text
+        PPCexchangeNamevardata = "three"
+        print PPCexchangeNamevardata
+        PPCupdateALL()
+
+
+
 def PPCpriceBTC():
-    try:
-        Tick = requests.get(PPCexchangeURL)
-        return Tick.json()["return"]["markets"]["PPC"]['lasttradeprice']
-    except Exception:
-        print "PPCpriceBTC API error"
-        return 0
+    if PPCexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(PPCexchangeURL1)
+            return Tick.json()["return"]["markets"]["PPC"]['lasttradeprice']
+        except Exception:
+            print "PPCpriceBTC API error"
+            return 0
+    if PPCexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(PPCexchangeURL2)
+            return Tick.json()['ticker']['last']
+        except Exception:
+            print "PPCpriceBTC API error"
+            return 0
+    if PPCexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(PPCexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "PPCpriceBTC API error"
+            return 0
+
+
+
+
+
+
+
+
 
 def PPCpriceBTCupdate():
     global PPCpriceBTCvardata
@@ -499,6 +551,14 @@ def MyPPCValueBTCupdate():
     MyPPCValueBTCvardata.set(str.format("{0:.8f}", (float(MyPPCValueBTC()))))
     root.after(UpdateInterval, MyPPCValueBTCupdate)
 
+
+def PPCupdateALL():
+        PPCpriceBTCupdate()
+        PPCpriceUSDupdate()
+        MyPPCValueBTCupdate()
+        MyPPCValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
 
 
 
@@ -756,11 +816,21 @@ DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relie
 DRKexchangeNamevartext.set(DRKexchangeNametext)
 DRKexchangeNamelabeltext.grid(row=DRKrowdata, column=exchangeNamecol)
 
+
+
+
+
 #Peercoin Exchange Name
-PPCexchangeNamevartext = StringVar()
-PPCexchangeNamelabeltext = Label(app, textvariable=PPCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-PPCexchangeNamevartext.set(PPCexchangeNametext)
-PPCexchangeNamelabeltext.grid(row=PPCrowdata, column=exchangeNamecol)
+PPCexchangeNameChoices = [PPCexchangeName1text, PPCexchangeName2text, PPCexchangeName3text]
+PPCexchangeNamevartext = StringVar(app)
+PPCexchangeNamevartext.set(PPCexchangeNameChoices[0])
+option = OptionMenu(app, PPCexchangeNamevartext, *PPCexchangeNameChoices, command=PPCexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=PPCrowdata, column=exchangeNamecol)
+
+
+
+
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -778,7 +848,7 @@ bitstampUSDvartext.set(bitstampUSDtext)
 bitstampUSDlabeltext.grid(row=3, column=BTCUSDcol)
 bitstampUSDvardata = StringVar()
 bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-bitstampUSDupdate()
+
 bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
 
@@ -788,7 +858,7 @@ btceUSDvartext.set(btceUSDtext)
 btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
 btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-btceUSDupdate()
+
 btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
 
 
@@ -798,7 +868,7 @@ coinbaseUSDvartext.set(coinbaseUSDtext)
 coinbaseUSDlabeltext.grid(row=7, column=BTCUSDcol)
 coinbaseUSDvardata = StringVar()
 coinbaseUSDlabeldata = Label(app, textvariable=coinbaseUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-coinbaseUSDupdate()
+
 coinbaseUSDlabeldata.grid(row=8, column=BTCUSDcol)
 
 krakenUSDvartext = StringVar()
@@ -807,7 +877,7 @@ krakenUSDvartext.set(krakenUSDtext)
 krakenUSDlabeltext.grid(row=9, column=BTCUSDcol)
 krakenUSDvardata = StringVar()
 krakenUSDlabeldata = Label(app, textvariable=krakenUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-krakenUSDupdate()
+
 krakenUSDlabeldata.grid(row=10, column=BTCUSDcol)
 
 bitfinexUSDvartext = StringVar()
@@ -816,7 +886,7 @@ bitfinexUSDvartext.set(bitfinexUSDtext)
 bitfinexUSDlabeltext.grid(row=11, column=BTCUSDcol)
 bitfinexUSDvardata = StringVar()
 bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-bitfinexUSDupdate()
+
 bitfinexUSDlabeldata.grid(row=12, column=BTCUSDcol)
 
 cryptsyUSDvartext = StringVar()
@@ -825,7 +895,7 @@ cryptsyUSDvartext.set(cryptsyUSDtext)
 cryptsyUSDlabeltext.grid(row=13, column=BTCUSDcol)
 cryptsyUSDvardata = StringVar()
 cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-cryptsyUSDupdate()
+
 cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
 
@@ -834,9 +904,18 @@ PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relie
 PriceAverageUSDvartext.set(PriceAverageUSDtext)
 PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
 PriceAverageUSDvardata = StringVar()
-PriceAverageUSDupdate()
+
 PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
+
+
+bitstampUSDupdate()
+btceUSDupdate()
+coinbaseUSDupdate()
+krakenUSDupdate()
+bitfinexUSDupdate()
+cryptsyUSDupdate()
+PriceAverageUSDupdate()
 
 
 
