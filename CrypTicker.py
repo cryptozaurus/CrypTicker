@@ -701,15 +701,6 @@ def MyPPCValueBTCupdate():
     root.after(UpdateInterval, MyPPCValueBTCupdate)
 
 
-def PPCupdateALL():
-        PPCpriceBTCupdate()
-        PPCpriceUSDupdate()
-        MyPPCValueBTCupdate()
-        MyPPCValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-
 
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
@@ -1633,6 +1624,14 @@ def DRKupdateALL():
         DRKpriceUSDupdate()
         MyDRKValueBTCupdate()
         MyDRKValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+def PPCupdateALL():
+        PPCpriceBTCupdate()
+        PPCpriceUSDupdate()
+        MyPPCValueBTCupdate()
+        MyPPCValueUSDupdate()
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
