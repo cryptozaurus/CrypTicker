@@ -26,8 +26,8 @@ LTCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mar
 LTCexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 LTCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
-DOGEexchangeURL2 = 'http://data.bter.com/api/1/ticker/doge_btc'
-DOGEexchangeURL3 = 'http://bittrex.com/api/v1.1/public/getticker?market=BTC-DOGE'
+DOGEexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
+DOGEexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DRKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
 DRKexchangeURL2 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-DRK'
 DRKexchangeURL3 = 'http://data.bter.com/api/1/ticker/drk_btc'
@@ -46,8 +46,8 @@ LTCexchangeName1text = " Cryptsy "
 LTCexchangeName2text = " Two "
 LTCexchangeName3text = " Three "
 DOGEexchangeName1text = " Cryptsy "
-DOGEexchangeName2text = " Bter "
-DOGEexchangeName3text = " Bittrex "
+DOGEexchangeName2text = " Two "
+DOGEexchangeName3text = " Three "
 DRKexchangeName1text = " Cryptsy "
 DRKexchangeName2text = " Bittrex "
 DRKexchangeName3text = " Bter "
@@ -477,14 +477,14 @@ def DOGEpriceBTC():
     if DOGEexchangeNamevardata == "two":
         try:
             Tick = requests.get(DOGEexchangeURL2)
-            return Tick.json()['last']
+            return Tick.json()['result']['Last']
         except Exception:
             print "DOGEpriceBTC API error"
             return 0
     if DOGEexchangeNamevardata == "three":
         try:
             Tick = requests.get(DOGEexchangeURL3)
-            return Tick.json()['result']['Last']
+            return Tick.json()['last']
         except Exception:
             print "DOGEpriceBTC API error"
             return 0
