@@ -32,9 +32,9 @@ FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 #Choose default exchange name:
 global DRKexchangeNamevardata
-DRKexchangeNamevardata = "one"
+DRKexchangeNamevardata = "three"
 global PPCexchangeNamevardata
-PPCexchangeNamevardata = "one"
+PPCexchangeNamevardata = "two"
 
 
 exchangeNametext = " Exchange Name "
@@ -844,7 +844,12 @@ DOGEexchangeNamelabeltext.grid(row=DOGErowdata, column=exchangeNamecol)
 #Darkcoin Exchange Name
 DRKexchangeNameChoices = [DRKexchangeName1text, DRKexchangeName2text, DRKexchangeName3text]
 DRKexchangeNamevartext = StringVar(app)
-DRKexchangeNamevartext.set(DRKexchangeNameChoices[0])
+if DRKexchangeNamevardata == "one":
+    DRKexchangeNamevartext.set(DRKexchangeNameChoices[0])
+if DRKexchangeNamevardata == "two":
+    DRKexchangeNamevartext.set(DRKexchangeNameChoices[1])
+if DRKexchangeNamevardata == "three":
+    DRKexchangeNamevartext.set(DRKexchangeNameChoices[2])
 option = OptionMenu(app, DRKexchangeNamevartext, *DRKexchangeNameChoices, command=DRKexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=DRKrowdata, column=exchangeNamecol)
@@ -852,7 +857,12 @@ option.grid(row=DRKrowdata, column=exchangeNamecol)
 #Peercoin Exchange Name
 PPCexchangeNameChoices = [PPCexchangeName1text, PPCexchangeName2text, PPCexchangeName3text]
 PPCexchangeNamevartext = StringVar(app)
-PPCexchangeNamevartext.set(PPCexchangeNameChoices[0])
+if PPCexchangeNamevardata == "one":
+    PPCexchangeNamevartext.set(PPCexchangeNameChoices[0])
+if PPCexchangeNamevardata == "two":
+    PPCexchangeNamevartext.set(PPCexchangeNameChoices[1])
+if PPCexchangeNamevardata == "three":
+    PPCexchangeNamevartext.set(PPCexchangeNameChoices[2])
 option = OptionMenu(app, PPCexchangeNamevartext, *PPCexchangeNameChoices, command=PPCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=PPCrowdata, column=exchangeNamecol)
