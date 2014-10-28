@@ -19,9 +19,15 @@ coinbaseUSDexchangeURL = 'https://coinbase.com/api/v1/prices/buy'
 krakenUSDexchangeURL = 'https://api.kraken.com/0/public/Ticker'
 bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
-BLKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
-LTCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
-DOGEexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
+BLKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+BLKexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+BLKexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+LTCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+LTCexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+LTCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+DOGEexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
+DOGEexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
+DOGEexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DRKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
 DRKexchangeURL2 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-DRK'
 DRKexchangeURL3 = 'http://data.bter.com/api/1/ticker/drk_btc'
@@ -33,9 +39,15 @@ FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 #Change exchange name
 exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
-BLKexchangeNametext = " Cryptsy "
-LTCexchangeNametext = " Cryptsy "
-DOGEexchangeNametext = " Cryptsy "
+BLKexchangeName1text = " Cryptsy "
+BLKexchangeName2text = " Two "
+BLKexchangeName3text = " Three "
+LTCexchangeName1text = " Cryptsy "
+LTCexchangeName2text = " Two "
+LTCexchangeName3text = " Three "
+DOGEexchangeName1text = " Cryptsy "
+DOGEexchangeName2text = " Two "
+DOGEexchangeName3text = " Three "
 DRKexchangeName1text = " Cryptsy "
 DRKexchangeName2text = " Bittrex "
 DRKexchangeName3text = " Bter "
@@ -45,6 +57,12 @@ PPCexchangeName3text = " Bter "
 FAIRexchangeNametext = " Vaultex "
 
 #Choose default exchange name:
+global BLKexchangeNamevardata
+BLKexchangeNamevardata = "one"
+global LTCexchangeNamevardata
+LTCexchangeNamevardata = "one"
+global DOGEexchangeNamevardata
+DOGEexchangeNamevardata = "one"
 global DRKexchangeNamevardata
 DRKexchangeNamevardata = "one"
 global PPCexchangeNamevardata
@@ -262,13 +280,46 @@ def MyBTCValueupdate():
 
 #BLACKCOIN
 # Import and Update API DATA for Blackcoin price in BTC
+def BLKexchangeNameUpdate(BLKexchangeNameValue):
+    if BLKexchangeNameValue == BLKexchangeName1text:
+        print BLKexchangeName1text
+        global BLKexchangeNamevardata
+        BLKexchangeNamevardata = "one"
+        print BLKexchangeNamevardata
+        BLKupdateALL()
+    elif BLKexchangeNameValue == BLKexchangeName2text:
+        print BLKexchangeName2text
+        BLKexchangeNamevardata = "two"
+        print BLKexchangeNamevardata
+        BLKupdateALL()
+    else:
+        print BLKexchangeName3text
+        BLKexchangeNamevardata = "three"
+        print BLKexchangeNamevardata
+        BLKupdateALL()
+
 def BLKpriceBTC():
-    try:
-        Tick = requests.get(BLKexchangeURL)
-        return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
-    except Exception:
-        print "BLKpriceBTC API error"
-        return 0
+    if BLKexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(BLKexchangeURL1)
+            return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
+        except Exception:
+            print "BLKpriceBTC API error"
+            return 0
+    if BLKexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(BLKexchangeURL2)
+            return Tick.json()['result']['Last']
+        except Exception:
+            print "BLKpriceBTC API error"
+            return 0
+    if BLKexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(BLKexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "BLKpriceBTC API error"
+            return 0
 
 def BLKpriceBTCupdate():
     global BLKpriceBTCvardata
@@ -313,13 +364,46 @@ def MyBLKValueBTCupdate():
 
 #LITECOIN
 # Import and Update API DATA for Litecoin price in BTC
+def LTCexchangeNameUpdate(LTCexchangeNameValue):
+    if LTCexchangeNameValue == LTCexchangeName1text:
+        print LTCexchangeName1text
+        global LTCexchangeNamevardata
+        LTCexchangeNamevardata = "one"
+        print LTCexchangeNamevardata
+        LTCupdateALL()
+    elif LTCexchangeNameValue == LTCexchangeName2text:
+        print LTCexchangeName2text
+        LTCexchangeNamevardata = "two"
+        print LTCexchangeNamevardata
+        LTCupdateALL()
+    else:
+        print LTCexchangeName3text
+        LTCexchangeNamevardata = "three"
+        print LTCexchangeNamevardata
+        LTCupdateALL()
+
 def LTCpriceBTC():
-    try:
-        Tick = requests.get(LTCexchangeURL)
-        return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
-    except Exception:
-        print "LTCpriceBTC API error"
-        return 0
+    if LTCexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(LTCexchangeURL1)
+            return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
+        except Exception:
+            print "LTCpriceBTC API error"
+            return 0
+    if LTCexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(LTCexchangeURL2)
+            return Tick.json()['result']['Last']
+        except Exception:
+            print "LTCpriceBTC API error"
+            return 0
+    if LTCexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(LTCexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "LTCpriceBTC API error"
+            return 0
 
 def LTCpriceBTCupdate():
     global LTCpriceBTCvardata
@@ -364,13 +448,47 @@ def MyLTCValueBTCupdate():
 
 #DOGECOIN
 # Import and Update API DATA for Dogecoin price in BTC
+def DOGEexchangeNameUpdate(DOGEexchangeNameValue):
+    if DOGEexchangeNameValue == DOGEexchangeName1text:
+        print DOGEexchangeName1text
+        global DOGEexchangeNamevardata
+        DOGEexchangeNamevardata = "one"
+        print DOGEexchangeNamevardata
+        DOGEupdateALL()
+    elif DOGEexchangeNameValue == DOGEexchangeName2text:
+        print DOGEexchangeName2text
+        DOGEexchangeNamevardata = "two"
+        print DOGEexchangeNamevardata
+        DOGEupdateALL()
+    else:
+        print DOGEexchangeName3text
+        DOGEexchangeNamevardata = "three"
+        print DOGEexchangeNamevardata
+        DOGEupdateALL()
+
 def DOGEpriceBTC():
-    try:
-        Tick = requests.get(DOGEexchangeURL)
-        return Tick.json()["return"]["markets"]["DOGE"]['lasttradeprice']
-    except Exception:
-        print "DOGEpriceBTC API error"
-        return 0
+    if DOGEexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(DOGEexchangeURL1)
+            return Tick.json()["return"]["markets"]["DOGE"]['lasttradeprice']
+        except Exception:
+            print "DOGEpriceBTC API error"
+            return 0
+    if DOGEexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(DOGEexchangeURL2)
+            return Tick.json()['result']['Last']
+        except Exception:
+            print "DOGEpriceBTC API error"
+            return 0
+    if DOGEexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(DOGEexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "DOGEpriceBTC API error"
+            return 0
+
 
 def DOGEpriceBTCupdate():
     global DOGEpriceBTCvardata
@@ -824,22 +942,43 @@ BTCexchangeNamevartext.set(BTCexchangeNametext)
 BTCexchangeNamelabeltext.grid(row=BTCrowdata, column=exchangeNamecol)
 
 #Blackcoin Exchange Name
-BLKexchangeNamevartext = StringVar()
-BLKexchangeNamelabeltext = Label(app, textvariable=BLKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-BLKexchangeNamevartext.set(BLKexchangeNametext)
-BLKexchangeNamelabeltext.grid(row=BLKrowdata, column=exchangeNamecol)
+BLKexchangeNameChoices = [BLKexchangeName1text, BLKexchangeName2text, BLKexchangeName3text]
+BLKexchangeNamevartext = StringVar(app)
+if BLKexchangeNamevardata == "one":
+    BLKexchangeNamevartext.set(BLKexchangeNameChoices[0])
+if BLKexchangeNamevardata == "two":
+    BLKexchangeNamevartext.set(BLKexchangeNameChoices[1])
+if BLKexchangeNamevardata == "three":
+    BLKexchangeNamevartext.set(BLKexchangeNameChoices[2])
+option = OptionMenu(app, BLKexchangeNamevartext, *BLKexchangeNameChoices, command=BLKexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=BLKrowdata, column=exchangeNamecol)
 
 #Litecoin Exchange Name
-LTCexchangeNamevartext = StringVar()
-LTCexchangeNamelabeltext = Label(app, textvariable=LTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-LTCexchangeNamevartext.set(LTCexchangeNametext)
-LTCexchangeNamelabeltext.grid(row=LTCrowdata, column=exchangeNamecol)
+LTCexchangeNameChoices = [LTCexchangeName1text, LTCexchangeName2text, LTCexchangeName3text]
+LTCexchangeNamevartext = StringVar(app)
+if LTCexchangeNamevardata == "one":
+    LTCexchangeNamevartext.set(LTCexchangeNameChoices[0])
+if LTCexchangeNamevardata == "two":
+    LTCexchangeNamevartext.set(LTCexchangeNameChoices[1])
+if LTCexchangeNamevardata == "three":
+    LTCexchangeNamevartext.set(LTCexchangeNameChoices[2])
+option = OptionMenu(app, LTCexchangeNamevartext, *LTCexchangeNameChoices, command=LTCexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=LTCrowdata, column=exchangeNamecol)
 
 #Dogecoin Exchange Name
-DOGEexchangeNamevartext = StringVar()
-DOGEexchangeNamelabeltext = Label(app, textvariable=DOGEexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-DOGEexchangeNamevartext.set(DOGEexchangeNametext)
-DOGEexchangeNamelabeltext.grid(row=DOGErowdata, column=exchangeNamecol)
+DOGEexchangeNameChoices = [DOGEexchangeName1text, DOGEexchangeName2text, DOGEexchangeName3text]
+DOGEexchangeNamevartext = StringVar(app)
+if DOGEexchangeNamevardata == "one":
+    DOGEexchangeNamevartext.set(DOGEexchangeNameChoices[0])
+if DOGEexchangeNamevardata == "two":
+    DOGEexchangeNamevartext.set(DOGEexchangeNameChoices[1])
+if DOGEexchangeNamevardata == "three":
+    DOGEexchangeNamevartext.set(DOGEexchangeNameChoices[2])
+option = OptionMenu(app, DOGEexchangeNamevartext, *DOGEexchangeNameChoices, command=DOGEexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=DOGErowdata, column=exchangeNamecol)
 
 #Darkcoin Exchange Name
 DRKexchangeNameChoices = [DRKexchangeName1text, DRKexchangeName2text, DRKexchangeName3text]
@@ -1465,6 +1604,29 @@ MyTotalValueUSDupdate()
 MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
 
+def BLKupdateALL():
+        BLKpriceBTCupdate()
+        BLKpriceUSDupdate()
+        MyBLKValueBTCupdate()
+        MyBLKValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+def LTCupdateALL():
+        LTCpriceBTCupdate()
+        LTCpriceUSDupdate()
+        MyLTCValueBTCupdate()
+        MyLTCValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+def DOGEupdateALL():
+        DOGEpriceBTCupdate()
+        DOGEpriceUSDupdate()
+        MyDOGEValueBTCupdate()
+        MyDOGEValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
 
 def DRKupdateALL():
         DRKpriceBTCupdate()
