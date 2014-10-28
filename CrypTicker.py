@@ -21,9 +21,9 @@ bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
 #BLK - BTC pair by market volume
 # Bittrex, Cryptsy, AllCoin, Melotic, Poloniex, BTER, Crypto-Trade, Bleutrade, Vircurex, CCEDK, Coin-Swap, useCryptos, Atomic Trade
-BLKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+BLKexchangeURL1 = 'http://bittrex.com/api/v1.1/public/getticker?market=BTC-BC'
 BLKexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
-BLKexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+BLKexchangeURL3 = 'https://www.allcoin.com/api2/pair/BC_BTC'
 #LTC - BTC pair by market volume
 #BTC-E, Bitfinex, HitBTC, Cryptsy, BTC China, CEX.IO, Justcoin, UpBit, Bittrex, Kraken, AllCoin, BTER, Poloniex, Bleutrade,Exmo, mcxNOW, Vircurex, Crypto-Trade, useCryptos, Bitorado, Ask Coin, BTC38, C-CEX, Cryptonit, SwissCEX, CCEDK, Cryptex, Coinbroker, Coin-Swap, Atomic Trade, Coins-E, NXT-E, Vault of Satoshi, BX Thailand, MasterXchange
 LTCexchangeURL1 = 'https://btc-e.com/api/2/ltc_btc/ticker'
@@ -43,9 +43,9 @@ FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 #Change exchange name
 exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
-BLKexchangeName1text = " Cryptsy "
-BLKexchangeName2text = " Two "
-BLKexchangeName3text = " Three "
+BLKexchangeName1text = " Bittrex "
+BLKexchangeName2text = " Cryptsy "
+BLKexchangeName3text = " Allcoin "
 LTCexchangeName1text = " Btc-e "
 LTCexchangeName2text = " Bitfinex "
 LTCexchangeName3text = " Cryptsy "
@@ -306,21 +306,21 @@ def BLKpriceBTC():
     if BLKexchangeNamevardata == "one":
         try:
             Tick = requests.get(BLKexchangeURL1)
-            return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
+            return Tick.json()['result']['Last']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
     if BLKexchangeNamevardata == "two":
         try:
             Tick = requests.get(BLKexchangeURL2)
-            return Tick.json()['result']['Last']
+            return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
     if BLKexchangeNamevardata == "three":
         try:
             Tick = requests.get(BLKexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()['data']['trade_price']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
