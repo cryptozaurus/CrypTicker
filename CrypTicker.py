@@ -19,11 +19,15 @@ coinbaseUSDexchangeURL = 'https://coinbase.com/api/v1/prices/buy'
 krakenUSDexchangeURL = 'https://api.kraken.com/0/public/Ticker'
 bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
+#BLK - BTC pair by market volume
+# Bittrex, Cryptsy, AllCoin, Melotic, Poloniex, BTER, Crypto-Trade, Bleutrade, Vircurex, CCEDK, Coin-Swap, useCryptos, Atomic Trade
 BLKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
 BLKexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
 BLKexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
-LTCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
-LTCexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+#LTC - BTC pair by market volume
+#BTC-E, Bitfinex, HitBTC, Cryptsy, BTC China, CEX.IO, Justcoin, UpBit, Bittrex, Kraken, AllCoin, BTER, Poloniex, Bleutrade,Exmo, mcxNOW, Vircurex, Crypto-Trade, useCryptos, Bitorado, Ask Coin, BTC38, C-CEX, Cryptonit, SwissCEX, CCEDK, Cryptex, Coinbroker, Coin-Swap, Atomic Trade, Coins-E, NXT-E, Vault of Satoshi, BX Thailand, MasterXchange
+LTCexchangeURL1 = 'https://btc-e.com/api/2/ltc_btc/ticker'
+LTCexchangeURL2 = 'https://api.bitfinex.com/v1/ticker/ltcbtc'
 LTCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
 DOGEexchangeURL2 = 'http://data.bter.com/api/1/ticker/doge_btc'
@@ -42,9 +46,9 @@ BTCexchangeNametext = " Price Average "
 BLKexchangeName1text = " Cryptsy "
 BLKexchangeName2text = " Two "
 BLKexchangeName3text = " Three "
-LTCexchangeName1text = " Cryptsy "
-LTCexchangeName2text = " Two "
-LTCexchangeName3text = " Three "
+LTCexchangeName1text = " Btc-e "
+LTCexchangeName2text = " Bitfinex "
+LTCexchangeName3text = " Cryptsy "
 DOGEexchangeName1text = " Cryptsy "
 DOGEexchangeName2text = " Bter "
 DOGEexchangeName3text = " Bittrex "
@@ -386,21 +390,21 @@ def LTCpriceBTC():
     if LTCexchangeNamevardata == "one":
         try:
             Tick = requests.get(LTCexchangeURL1)
-            return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
+            return Tick.json()['ticker']['last']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
     if LTCexchangeNamevardata == "two":
         try:
             Tick = requests.get(LTCexchangeURL2)
-            return Tick.json()['result']['Last']
+            return Tick.json()['last_price']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
     if LTCexchangeNamevardata == "three":
         try:
             Tick = requests.get(LTCexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
