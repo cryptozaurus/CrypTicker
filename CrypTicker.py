@@ -3,8 +3,6 @@ import time, json, requests
 import statistics
 from Tkinter import *
 
-global PPCexchangeNamevardata
-PPCexchangeNamevardata = "one"
 
 #Variables
 MyBTC = 11.11
@@ -24,18 +22,29 @@ cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketda
 BLKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
 LTCexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
-DRKexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
+DRKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
+DRKexchangeURL2 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-DRK'
+DRKexchangeURL3 = 'http://data.bter.com/api/1/ticker/drk_btc'
 PPCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=28'
 PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
 PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
+
+#Choose default exchange name:
+global DRKexchangeNamevardata
+DRKexchangeNamevardata = "one"
+global PPCexchangeNamevardata
+PPCexchangeNamevardata = "one"
+
 
 exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
 BLKexchangeNametext = " Cryptsy "
 LTCexchangeNametext = " Cryptsy "
 DOGEexchangeNametext = " Cryptsy "
-DRKexchangeNametext = " Cryptsy "
+DRKexchangeName1text = " Cryptsy "
+DRKexchangeName2text = " Bittrex "
+DRKexchangeName3text = " Bter "
 PPCexchangeName1text = " Cryptsy "
 PPCexchangeName2text = " Btc-e "
 PPCexchangeName3text = " Bter "
@@ -407,13 +416,46 @@ def MyDOGEValueBTCupdate():
 
 #DARKCOIN
 # Import and Update API DATA for Darkcoin price in BTC
+def DRKexchangeNameUpdate(DRKexchangeNameValue):
+    if DRKexchangeNameValue == DRKexchangeName1text:
+        print DRKexchangeName1text
+        global DRKexchangeNamevardata
+        DRKexchangeNamevardata = "one"
+        print DRKexchangeNamevardata
+        DRKupdateALL()
+    elif DRKexchangeNameValue == DRKexchangeName2text:
+        print DRKexchangeName2text
+        DRKexchangeNamevardata = "two"
+        print DRKexchangeNamevardata
+        DRKupdateALL()
+    else:
+        print DRKexchangeName3text
+        DRKexchangeNamevardata = "three"
+        print DRKexchangeNamevardata
+        DRKupdateALL()
+
 def DRKpriceBTC():
-    try:
-        Tick = requests.get(DRKexchangeURL)
-        return Tick.json()["return"]["markets"]["DRK"]['lasttradeprice']
-    except Exception:
-        print "DRKpriceBTC API error"
-        return 0
+    if DRKexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(DRKexchangeURL1)
+            return Tick.json()["return"]["markets"]["DRK"]['lasttradeprice']
+        except Exception:
+            print "DRKpriceBTC API error"
+            return 0
+    if DRKexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(DRKexchangeURL2)
+            return Tick.json()['result']['Last']
+        except Exception:
+            print "DRKpriceBTC API error"
+            return 0
+    if DRKexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(DRKexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "DRKpriceBTC API error"
+            return 0
 
 def DRKpriceBTCupdate():
     global DRKpriceBTCvardata
@@ -460,7 +502,6 @@ def MyDRKValueBTCupdate():
 
 #PEERCOIN
 # Import and Update API DATA for Peercoin price in BTC
-
 def PPCexchangeNameUpdate(PPCexchangeNameValue):
     if PPCexchangeNameValue == PPCexchangeName1text:
         print PPCexchangeName1text
@@ -478,8 +519,6 @@ def PPCexchangeNameUpdate(PPCexchangeNameValue):
         PPCexchangeNamevardata = "three"
         print PPCexchangeNamevardata
         PPCupdateALL()
-
-
 
 def PPCpriceBTC():
     if PPCexchangeNamevardata == "one":
@@ -503,14 +542,6 @@ def PPCpriceBTC():
         except Exception:
             print "PPCpriceBTC API error"
             return 0
-
-
-
-
-
-
-
-
 
 def PPCpriceBTCupdate():
     global PPCpriceBTCvardata
@@ -811,14 +842,12 @@ DOGEexchangeNamevartext.set(DOGEexchangeNametext)
 DOGEexchangeNamelabeltext.grid(row=DOGErowdata, column=exchangeNamecol)
 
 #Darkcoin Exchange Name
-DRKexchangeNamevartext = StringVar()
-DRKexchangeNamelabeltext = Label(app, textvariable=DRKexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-DRKexchangeNamevartext.set(DRKexchangeNametext)
-DRKexchangeNamelabeltext.grid(row=DRKrowdata, column=exchangeNamecol)
-
-
-
-
+DRKexchangeNameChoices = [DRKexchangeName1text, DRKexchangeName2text, DRKexchangeName3text]
+DRKexchangeNamevartext = StringVar(app)
+DRKexchangeNamevartext.set(DRKexchangeNameChoices[0])
+option = OptionMenu(app, DRKexchangeNamevartext, *DRKexchangeNameChoices, command=DRKexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=DRKrowdata, column=exchangeNamecol)
 
 #Peercoin Exchange Name
 PPCexchangeNameChoices = [PPCexchangeName1text, PPCexchangeName2text, PPCexchangeName3text]
@@ -827,10 +856,6 @@ PPCexchangeNamevartext.set(PPCexchangeNameChoices[0])
 option = OptionMenu(app, PPCexchangeNamevartext, *PPCexchangeNameChoices, command=PPCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=PPCrowdata, column=exchangeNamecol)
-
-
-
-
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -848,7 +873,6 @@ bitstampUSDvartext.set(bitstampUSDtext)
 bitstampUSDlabeltext.grid(row=3, column=BTCUSDcol)
 bitstampUSDvardata = StringVar()
 bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
 
@@ -858,7 +882,6 @@ btceUSDvartext.set(btceUSDtext)
 btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
 btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
 
 
@@ -868,7 +891,6 @@ coinbaseUSDvartext.set(coinbaseUSDtext)
 coinbaseUSDlabeltext.grid(row=7, column=BTCUSDcol)
 coinbaseUSDvardata = StringVar()
 coinbaseUSDlabeldata = Label(app, textvariable=coinbaseUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 coinbaseUSDlabeldata.grid(row=8, column=BTCUSDcol)
 
 krakenUSDvartext = StringVar()
@@ -877,7 +899,6 @@ krakenUSDvartext.set(krakenUSDtext)
 krakenUSDlabeltext.grid(row=9, column=BTCUSDcol)
 krakenUSDvardata = StringVar()
 krakenUSDlabeldata = Label(app, textvariable=krakenUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 krakenUSDlabeldata.grid(row=10, column=BTCUSDcol)
 
 bitfinexUSDvartext = StringVar()
@@ -886,7 +907,6 @@ bitfinexUSDvartext.set(bitfinexUSDtext)
 bitfinexUSDlabeltext.grid(row=11, column=BTCUSDcol)
 bitfinexUSDvardata = StringVar()
 bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 bitfinexUSDlabeldata.grid(row=12, column=BTCUSDcol)
 
 cryptsyUSDvartext = StringVar()
@@ -895,7 +915,6 @@ cryptsyUSDvartext.set(cryptsyUSDtext)
 cryptsyUSDlabeltext.grid(row=13, column=BTCUSDcol)
 cryptsyUSDvardata = StringVar()
 cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-
 cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
 
@@ -904,11 +923,12 @@ PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relie
 PriceAverageUSDvartext.set(PriceAverageUSDtext)
 PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
 PriceAverageUSDvardata = StringVar()
-
 PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
 
 
+
+#Update ALL Bitcoin exchanges in USD and calculate Price Average
 bitstampUSDupdate()
 btceUSDupdate()
 coinbaseUSDupdate()
@@ -940,13 +960,6 @@ MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFont
 MyBTCentry.grid(row=BTCrowdata, column=MyCOINScol)
 
 MyBTCupdatebutton = Button(app, text='Update NOW', command=MyBTCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BTCrowdata, column=updateMyCOINScol)
-
-
-
-#MyBTCvardata = StringVar()
-#MyBTClabeldata = Label(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize))
-#MyBTClabeldata.grid(row=BTCrowdata, column=MyCOINScol)
-
 
 
 # Display Data and Text for Bitcoin price in USD
@@ -1441,6 +1454,15 @@ MyTotalValueUSDlabeldata = Label(app, textvariable=MyTotalValueUSDvardata, relie
 MyTotalValueUSDupdate()
 MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
+
+
+def DRKupdateALL():
+        DRKpriceBTCupdate()
+        DRKpriceUSDupdate()
+        MyDRKValueBTCupdate()
+        MyDRKValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
 
 #Update ALL Button
 def updateALLvalue():
