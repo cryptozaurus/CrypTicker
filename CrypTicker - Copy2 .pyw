@@ -19,15 +19,19 @@ coinbaseUSDexchangeURL = 'https://coinbase.com/api/v1/prices/buy'
 krakenUSDexchangeURL = 'https://api.kraken.com/0/public/Ticker'
 bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
-BLKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
+#BLK - BTC pair by market volume
+# Bittrex, Cryptsy, AllCoin, Melotic, Poloniex, BTER, Crypto-Trade, Bleutrade, Vircurex, CCEDK, Coin-Swap, useCryptos, Atomic Trade
+BLKexchangeURL1 = 'http://bittrex.com/api/v1.1/public/getticker?market=BTC-BC'
 BLKexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
-BLKexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=179'
-LTCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
-LTCexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
+BLKexchangeURL3 = 'https://www.allcoin.com/api2/pair/BC_BTC'
+#LTC - BTC pair by market volume
+#BTC-E, Bitfinex, HitBTC, Cryptsy, BTC China, CEX.IO, Justcoin, UpBit, Bittrex, Kraken, AllCoin, BTER, Poloniex, Bleutrade,Exmo, mcxNOW, Vircurex, Crypto-Trade, useCryptos, Bitorado, Ask Coin, BTC38, C-CEX, Cryptonit, SwissCEX, CCEDK, Cryptex, Coinbroker, Coin-Swap, Atomic Trade, Coins-E, NXT-E, Vault of Satoshi, BX Thailand, MasterXchange
+LTCexchangeURL1 = 'https://btc-e.com/api/2/ltc_btc/ticker'
+LTCexchangeURL2 = 'https://api.bitfinex.com/v1/ticker/ltcbtc'
 LTCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=3'
 DOGEexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
-DOGEexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
-DOGEexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=132'
+DOGEexchangeURL2 = 'http://data.bter.com/api/1/ticker/doge_btc'
+DOGEexchangeURL3 = 'http://bittrex.com/api/v1.1/public/getticker?market=BTC-DOGE'
 DRKexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=155'
 DRKexchangeURL2 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-DRK'
 DRKexchangeURL3 = 'http://data.bter.com/api/1/ticker/drk_btc'
@@ -39,15 +43,15 @@ FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 #Change exchange name
 exchangeNametext = " Exchange Name "
 BTCexchangeNametext = " Price Average "
-BLKexchangeName1text = " Cryptsy "
-BLKexchangeName2text = " Two "
-BLKexchangeName3text = " Three "
-LTCexchangeName1text = " Cryptsy "
-LTCexchangeName2text = " Two "
-LTCexchangeName3text = " Three "
+BLKexchangeName1text = " Bittrex "
+BLKexchangeName2text = " Cryptsy "
+BLKexchangeName3text = " Allcoin "
+LTCexchangeName1text = " Btc-e "
+LTCexchangeName2text = " Bitfinex "
+LTCexchangeName3text = " Cryptsy "
 DOGEexchangeName1text = " Cryptsy "
-DOGEexchangeName2text = " Two "
-DOGEexchangeName3text = " Three "
+DOGEexchangeName2text = " Bter "
+DOGEexchangeName3text = " Bittrex "
 DRKexchangeName1text = " Cryptsy "
 DRKexchangeName2text = " Bittrex "
 DRKexchangeName3text = " Bter "
@@ -302,21 +306,21 @@ def BLKpriceBTC():
     if BLKexchangeNamevardata == "one":
         try:
             Tick = requests.get(BLKexchangeURL1)
-            return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
+            return Tick.json()['result']['Last']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
     if BLKexchangeNamevardata == "two":
         try:
             Tick = requests.get(BLKexchangeURL2)
-            return Tick.json()['result']['Last']
+            return Tick.json()["return"]["markets"]["BC"]['lasttradeprice']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
     if BLKexchangeNamevardata == "three":
         try:
             Tick = requests.get(BLKexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()['data']['trade_price']
         except Exception:
             print "BLKpriceBTC API error"
             return 0
@@ -386,21 +390,21 @@ def LTCpriceBTC():
     if LTCexchangeNamevardata == "one":
         try:
             Tick = requests.get(LTCexchangeURL1)
-            return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
+            return Tick.json()['ticker']['last']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
     if LTCexchangeNamevardata == "two":
         try:
             Tick = requests.get(LTCexchangeURL2)
-            return Tick.json()['result']['Last']
+            return Tick.json()['last_price']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
     if LTCexchangeNamevardata == "three":
         try:
             Tick = requests.get(LTCexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()["return"]["markets"]["LTC"]['lasttradeprice']
         except Exception:
             print "LTCpriceBTC API error"
             return 0
@@ -477,14 +481,14 @@ def DOGEpriceBTC():
     if DOGEexchangeNamevardata == "two":
         try:
             Tick = requests.get(DOGEexchangeURL2)
-            return Tick.json()['result']['Last']
+            return Tick.json()['last']
         except Exception:
             print "DOGEpriceBTC API error"
             return 0
     if DOGEexchangeNamevardata == "three":
         try:
             Tick = requests.get(DOGEexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()['result']['Last']
         except Exception:
             print "DOGEpriceBTC API error"
             return 0
