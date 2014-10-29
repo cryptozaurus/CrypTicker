@@ -1078,6 +1078,7 @@ app = Window(root)
 root.title("CryptTicker")
 app.config (bg=AppWindowBackgroundColor)
 
+
 #Coin Images
 BTCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 BitcoinImage = PhotoImage(file='./images/BitcoinImage.gif')
@@ -1115,11 +1116,7 @@ FAIRimage.image_create(END, image=FaircoinImage)
 FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
 
 
-
 #Update Interval Rate Entry with Button
-
-
-
 UpdateIntervalSecvartext = StringVar()
 UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 UpdateIntervalSecvartext.set(UpdateIntervalSectext)
@@ -1135,8 +1132,7 @@ UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateInter
 UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=104, column=exchangeNamecol)
 
 
-
-
+# .................... Exchange Name ....................
 #Exchange Name display TITLE
 exchangeNamevartext = StringVar()
 exchangeNamelabeltext = Label(app, textvariable=exchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
@@ -1230,7 +1226,7 @@ FAIRexchangeNamevartext.set(FAIRexchangeNametext)
 FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 
 
-
+# .................... DATA and TEXT ....................
 #BITCOIN
 # Display Data and Text for Bitcoin in USD
 bitstampUSDvartext = StringVar()
@@ -1241,7 +1237,6 @@ bitstampUSDvardata = StringVar()
 bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
-
 btceUSDvartext = StringVar()
 btceUSDlabeltext = Label(app, textvariable=btceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 btceUSDvartext.set(btceUSDtext)
@@ -1249,7 +1244,6 @@ btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
 btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
-
 
 coinbaseUSDvartext = StringVar()
 coinbaseUSDlabeltext = Label(app, textvariable=coinbaseUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
@@ -1283,7 +1277,7 @@ cryptsyUSDvardata = StringVar()
 cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
-
+#Price Average in USD
 PriceAverageUSDvartext = StringVar()
 PriceAverageUSDlabeltext = Label(app, textvariable=PriceAverageUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 PriceAverageUSDvartext.set(PriceAverageUSDtext)
@@ -1291,7 +1285,6 @@ PriceAverageUSDlabeltext.grid(row=1, column=BTCUSDcol)
 PriceAverageUSDvardata = StringVar()
 PriceAverageUSDlabeldata = Label(app, textvariable=PriceAverageUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 PriceAverageUSDlabeldata.grid(row=2, column=BTCUSDcol)
-
 
 
 #Update ALL Bitcoin exchanges in USD and calculate Price Average
@@ -1304,7 +1297,8 @@ cryptsyUSDupdate()
 PriceAverageUSDupdate()
 
 
-# .......... MY COINS ..........
+
+# .................... MY COINS ....................
 #BITCOIN
 #MyBTC
 MyBTCvartext = StringVar()
@@ -1728,7 +1722,6 @@ MyTotalValueBTCupdate()
 MyTotalValueBTClabeldata.grid(row=101, column=ValueBTCcol)
 
 
-#TOTAL
 #My Total Value in USD
 MyTotalValueUSDvartext = StringVar()
 MyTotalValueUSDlabeltext = Label(app, textvariable=MyTotalValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
@@ -1742,8 +1735,7 @@ MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
 
 
-
-
+# Update ALL Button
 updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=MyCOINScol, columnspan=2)
 
 
