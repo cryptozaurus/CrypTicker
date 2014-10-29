@@ -846,8 +846,187 @@ def UpdateIntervalSecupdate():
     UpdateInterval = UpdateIntervalSec * 1000
 
 
+def UpdateIntervalSecCallback():
+    global UpdateIntervalSec
+    global UpdateIntervalSeclabeldata
+    UpdateIntervalSec = int(UpdateIntervalSecvardata.get())
+    UpdateIntervalSecupdate()
+    print UpdateIntervalSec
+    UpdateIntervalSeclabeldata = Label(app, text="                         ", relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+    UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+    return UpdateIntervalSec
 
-# !!!!!!!!!!!!!!!!!! WINDOW START !!!!!!!!!!!!!!!!!!
+
+# .......... My COINS Update ..........
+# My Bitcoin Update
+def MyBTCupdate():
+    global MyBTC
+    MyBTC = float(MyBTCvardata.get())
+    MyBTCValueUSDupdate()
+    MyTotalValueUSDupdate()
+    print MyBTC
+    return MyBTC
+
+# My Blackcoin Update
+def MyBLKupdate():
+    global MyBLK
+    MyBLK = float(MyBLKvardata.get())
+    BLKpriceBTCupdate()
+    BLKpriceUSDupdate()
+    MyBLKValueUSDupdate()
+    MyBLKValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyBLK
+    return MyBLK
+
+# My Litecoin Update
+def MyLTCupdate():
+    global MyLTC
+    MyLTC = float(MyLTCvardata.get())
+    LTCpriceBTCupdate()
+    LTCpriceUSDupdate()
+    MyLTCValueUSDupdate()
+    MyLTCValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyLTC
+    return MyLTC
+
+# My DOGE Update
+def MyDOGEupdate():
+    global MyDOGE
+    MyDOGE = float(MyDOGEvardata.get())
+    DOGEpriceBTCupdate()
+    DOGEpriceUSDupdate()
+    MyDOGEValueUSDupdate()
+    MyDOGEValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyDOGE
+    return MyDOGE
+
+# My Darkcoin Update
+def MyDRKupdate():
+    global MyDRK
+    MyDRK = float(MyDRKvardata.get())
+    DRKpriceBTCupdate()
+    DRKpriceUSDupdate()
+    MyDRKValueUSDupdate()
+    MyDRKValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyDRK
+    return MyDRK
+
+# My Peercoin Update
+def MyPPCupdate():
+    global MyPPC
+    MyPPC = float(MyPPCvardata.get())
+    PPCpriceBTCupdate()
+    PPCpriceUSDupdate()
+    MyPPCValueUSDupdate()
+    MyPPCValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyPPC
+    return MyPPC
+
+# My Faircoin Update
+def MyFAIRupdate():
+    global MyFAIR
+    MyFAIR = float(MyFAIRvardata.get())
+    FAIRpriceBTCupdate()
+    FAIRpriceUSDupdate()
+    MyFAIRValueUSDupdate()
+    MyFAIRValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyFAIR
+    return MyFAIR
+
+
+# .......... UPDATE ALL..........
+# Bitcoin Update ALL
+def BTCupdateALL():
+        bitstampUSDupdate()
+        btceUSDupdate()
+        coinbaseUSDupdate()
+        krakenUSDupdate()
+        bitfinexUSDupdate()
+        cryptsyUSDupdate()
+        MyBTCValueUSDupdate()
+        BTCpriceUSDdataUpdate()
+        MyTotalValueUSDupdate()
+
+# Blackcoin Update ALL
+def BLKupdateALL():
+        BLKpriceBTCupdate()
+        BLKpriceUSDupdate()
+        MyBLKValueBTCupdate()
+        MyBLKValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+# Litecoin Update ALL
+def LTCupdateALL():
+        LTCpriceBTCupdate()
+        LTCpriceUSDupdate()
+        MyLTCValueBTCupdate()
+        MyLTCValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+# Dogecoin Update ALL
+def DOGEupdateALL():
+        DOGEpriceBTCupdate()
+        DOGEpriceUSDupdate()
+        MyDOGEValueBTCupdate()
+        MyDOGEValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+# Darkcoin Update ALL
+def DRKupdateALL():
+        DRKpriceBTCupdate()
+        DRKpriceUSDupdate()
+        MyDRKValueBTCupdate()
+        MyDRKValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+# Peercoin Update ALL
+def PPCupdateALL():
+        PPCpriceBTCupdate()
+        PPCpriceUSDupdate()
+        MyPPCValueBTCupdate()
+        MyPPCValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
+
+#Update ALL BUTTON
+def updateALLvalue():
+    MyBTCValueUSDupdate()
+    MyBLKValueUSDupdate()
+    MyBLKValueBTCupdate()
+    MyLTCValueUSDupdate()
+    MyLTCValueBTCupdate()
+    MyDOGEValueUSDupdate()
+    MyDOGEValueBTCupdate()
+    MyDRKValueUSDupdate()
+    MyDRKValueBTCupdate()
+    MyPPCValueUSDupdate()
+    MyPPCValueBTCupdate()
+    MyFAIRValueUSDupdate()
+    MyFAIRValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+
+
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WINDOW START !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 class Window(Frame):
     def __init__(self, master = None):
         Frame.__init__(self, master)
@@ -938,15 +1117,7 @@ FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
 
 
 #Update Interval Rate Entry with Button
-def UpdateIntervalSecCallback():
-    global UpdateIntervalSec
-    global UpdateIntervalSeclabeldata
-    UpdateIntervalSec = int(UpdateIntervalSecvardata.get())
-    UpdateIntervalSecupdate()
-    print UpdateIntervalSec
-    UpdateIntervalSeclabeldata = Label(app, text="                         ", relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
-    UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
-    return UpdateIntervalSec
+
 
 
 UpdateIntervalSecvartext = StringVar()
@@ -1141,14 +1312,6 @@ MyBTClabeltext = Label(app, textvariable=MyBTCvartext, relief=FLAT, font=(TextFo
 MyBTCvartext.set(MyBTCtext)
 MyBTClabeltext.grid(row=BTCrowtext, column=MyCOINScol)
 
-def MyBTCupdate():
-    global MyBTC
-    MyBTC = float(MyBTCvardata.get())
-    MyBTCValueUSDupdate()
-    MyTotalValueUSDupdate()
-    print MyBTC
-    return MyBTC
-
 MyBTCvardata = StringVar()
 MyBTCvardata.set(MyBTC)
 MyBTCentry = Entry(app, textvariable=MyBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
@@ -1187,18 +1350,6 @@ MyBLKvartext = StringVar()
 MyBLKlabeltext = Label(app, textvariable=MyBLKvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyBLKvartext.set(MyBLKtext)
 MyBLKlabeltext.grid(row=BLKrowtext, column=MyCOINScol)
-
-def MyBLKupdate():
-    global MyBLK
-    MyBLK = float(MyBLKvardata.get())
-    BLKpriceBTCupdate()
-    BLKpriceUSDupdate()
-    MyBLKValueUSDupdate()
-    MyBLKValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyBLK
-    return MyBLK
 
 MyBLKvardata = StringVar()
 MyBLKvardata.set(MyBLK)
@@ -1262,18 +1413,6 @@ MyLTClabeltext = Label(app, textvariable=MyLTCvartext, relief=FLAT, font=(TextFo
 MyLTCvartext.set(MyLTCtext)
 MyLTClabeltext.grid(row=LTCrowtext, column=MyCOINScol)
 
-def MyLTCupdate():
-    global MyLTC
-    MyLTC = float(MyLTCvardata.get())
-    LTCpriceBTCupdate()
-    LTCpriceUSDupdate()
-    MyLTCValueUSDupdate()
-    MyLTCValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyLTC
-    return MyLTC
-
 MyLTCvardata = StringVar()
 MyLTCvardata.set(MyLTC)
 MyLTCentry = Entry(app, textvariable=MyLTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
@@ -1334,18 +1473,6 @@ MyDOGEvartext = StringVar()
 MyDOGElabeltext = Label(app, textvariable=MyDOGEvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyDOGEvartext.set(MyDOGEtext)
 MyDOGElabeltext.grid(row=DOGErowtext, column=MyCOINScol)
-
-def MyDOGEupdate():
-    global MyDOGE
-    MyDOGE = float(MyDOGEvardata.get())
-    DOGEpriceBTCupdate()
-    DOGEpriceUSDupdate()
-    MyDOGEValueUSDupdate()
-    MyDOGEValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyDOGE
-    return MyDOGE
 
 MyDOGEvardata = StringVar()
 MyDOGEvardata.set(MyDOGE)
@@ -1409,18 +1536,6 @@ MyDRKlabeltext = Label(app, textvariable=MyDRKvartext, relief=FLAT, font=(TextFo
 MyDRKvartext.set(MyDRKtext)
 MyDRKlabeltext.grid(row=DRKrowtext, column=MyCOINScol)
 
-def MyDRKupdate():
-    global MyDRK
-    MyDRK = float(MyDRKvardata.get())
-    DRKpriceBTCupdate()
-    DRKpriceUSDupdate()
-    MyDRKValueUSDupdate()
-    MyDRKValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyDRK
-    return MyDRK
-
 MyDRKvardata = StringVar()
 MyDRKvardata.set(MyDRK)
 MyDRKentry = Entry(app, textvariable=MyDRKvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
@@ -1482,19 +1597,6 @@ MyPPCvartext = StringVar()
 MyPPClabeltext = Label(app, textvariable=MyPPCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyPPCvartext.set(MyPPCtext)
 MyPPClabeltext.grid(row=PPCrowtext, column=MyCOINScol)
-
-
-def MyPPCupdate():
-    global MyPPC
-    MyPPC = float(MyPPCvardata.get())
-    PPCpriceBTCupdate()
-    PPCpriceUSDupdate()
-    MyPPCValueUSDupdate()
-    MyPPCValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyPPC
-    return MyPPC
 
 MyPPCvardata = StringVar()
 MyPPCvardata.set(MyPPC)
@@ -1558,18 +1660,6 @@ MyFAIRvartext = StringVar()
 MyFAIRlabeltext = Label(app, textvariable=MyFAIRvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 MyFAIRvartext.set(MyFAIRtext)
 MyFAIRlabeltext.grid(row=FAIRrowtext, column=MyCOINScol)
-
-def MyFAIRupdate():
-    global MyFAIR
-    MyFAIR = float(MyFAIRvardata.get())
-    FAIRpriceBTCupdate()
-    FAIRpriceUSDupdate()
-    MyFAIRValueUSDupdate()
-    MyFAIRValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyFAIR
-    return MyFAIR
 
 MyFAIRvardata = StringVar()
 MyFAIRvardata.set(MyFAIR)
@@ -1653,77 +1743,6 @@ MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
 
 
-
-
-# .................... UPDATE ....................
-def BTCupdateALL():
-        bitstampUSDupdate()
-        btceUSDupdate()
-        coinbaseUSDupdate()
-        krakenUSDupdate()
-        bitfinexUSDupdate()
-        cryptsyUSDupdate()
-        MyBTCValueUSDupdate()
-        BTCpriceUSDdataUpdate()
-        MyTotalValueUSDupdate()
-
-def BLKupdateALL():
-        BLKpriceBTCupdate()
-        BLKpriceUSDupdate()
-        MyBLKValueBTCupdate()
-        MyBLKValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-def LTCupdateALL():
-        LTCpriceBTCupdate()
-        LTCpriceUSDupdate()
-        MyLTCValueBTCupdate()
-        MyLTCValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-def DOGEupdateALL():
-        DOGEpriceBTCupdate()
-        DOGEpriceUSDupdate()
-        MyDOGEValueBTCupdate()
-        MyDOGEValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-def DRKupdateALL():
-        DRKpriceBTCupdate()
-        DRKpriceUSDupdate()
-        MyDRKValueBTCupdate()
-        MyDRKValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-def PPCupdateALL():
-        PPCpriceBTCupdate()
-        PPCpriceUSDupdate()
-        MyPPCValueBTCupdate()
-        MyPPCValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-#Update ALL Button
-def updateALLvalue():
-    MyBTCValueUSDupdate()
-    MyBLKValueUSDupdate()
-    MyBLKValueBTCupdate()
-    MyLTCValueUSDupdate()
-    MyLTCValueBTCupdate()
-    MyDOGEValueUSDupdate()
-    MyDOGEValueBTCupdate()
-    MyDRKValueUSDupdate()
-    MyDRKValueBTCupdate()
-    MyPPCValueUSDupdate()
-    MyPPCValueBTCupdate()
-    MyFAIRValueUSDupdate()
-    MyFAIRValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
 
 updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=MyCOINScol, columnspan=2)
 
