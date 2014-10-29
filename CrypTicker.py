@@ -203,7 +203,7 @@ def BTCexchangeNameUpdate(BTCexchangeNameValue):
     elif BTCexchangeNameValue == BTCexchangeName2text:
         print BTCexchangeName2text
         BTCexchangeNamevardata = "two"
-        BTCpriceUSDvardata.set = btceUSDvardata
+        BTCpriceUSDvardata = btceUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
     else:
