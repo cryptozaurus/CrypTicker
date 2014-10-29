@@ -13,8 +13,6 @@ MyDRK = 45
 MyPPC = 12.89
 MyFAIR = 10
 
-
-#BTC - USD exchanges URL
 BTCexchangeURL1 = 'https://www.bitstamp.net/api/ticker/'
 BTCexchangeURL2 = 'https://btc-e.com/api/2/btc_usd/ticker'
 BTCexchangeURL3 = 'https://coinbase.com/api/v1/prices/buy'
@@ -45,38 +43,30 @@ PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
 PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
-
-# Change Exchange Name in Menu
+#Change exchange name
 exchangeNametext = " Exchange Name "
 BTCexchangeName0text = " Price Average "
 BTCexchangeName1text = " Bitstamp "
 BTCexchangeName2text = " Btc-e "
 BTCexchangeName3text = " Coinbase "
-
 BLKexchangeName1text = " Bittrex "
 BLKexchangeName2text = " Cryptsy "
 BLKexchangeName3text = " Allcoin "
-
 LTCexchangeName1text = " Btc-e "
 LTCexchangeName2text = " Bitfinex "
 LTCexchangeName3text = " Cryptsy "
-
 DOGEexchangeName1text = " Cryptsy "
 DOGEexchangeName2text = " Bter "
 DOGEexchangeName3text = " Bittrex "
-
 DRKexchangeName1text = " Cryptsy "
 DRKexchangeName2text = " Bittrex "
 DRKexchangeName3text = " Bter "
-
 PPCexchangeName1text = " Cryptsy "
 PPCexchangeName2text = " Btc-e "
 PPCexchangeName3text = " Bter "
-
 FAIRexchangeNametext = " Vaultex "
 
-
-# Choose Default Exchange Name:
+#Choose default exchange name:
 global BTCexchangeNamevardata
 BTCexchangeNamevardata = "priceaverage"
 global BLKexchangeNamevardata
@@ -90,15 +80,12 @@ DRKexchangeNamevardata = "one"
 global PPCexchangeNamevardata
 PPCexchangeNamevardata = "one"
 
-
-# Font Type and Size
 TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
 TextFontSize = 12
 DataFontSize = 14
 
-
-# Colors
+#Colors
 AppWindowBackgroundColor = "#181a1e"
 ButtonBackGroundColor = "#aaaaaa"
 ButtonForegroundColor = "black"
@@ -112,7 +99,6 @@ ExchangeNameActiveBackgroundColor = "#292c30"
 COINSbackgroundColor = "#181a1e"
 
 
-# Text
 PriceAverageUSDtext = str(" Price Average ")
 bitstampUSDtext = str(" Bitstamp ")
 btceUSDtext = str(" Btc-e ")
@@ -156,12 +142,10 @@ MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
 MyTotalValueBTCtext = str(" My Total Value in BTC ")
 
-# Update Interval
 UpdateIntervalSec = 30
 UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
-# Rows
 exchangeNamerowtext = 0
 BTCrowtext = 1
 BTCrowdata = 2
@@ -178,7 +162,6 @@ PPCrowdata = 12
 FAIRrowtext = 13
 FAIRrowdata = 14
 
-# Columns
 BTCUSDcol = 0
 COINSimagecol = 3
 MyCOINScol = 5
@@ -192,6 +175,13 @@ exchangeNamecol = 15
 
 
 
+
+
+'''
+    BTCpriceUSDvardata = PriceAverageUSDvardata
+    BTCpriceUSDlabeldata = Label(app, textvariable=BTCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+    BTCpriceUSDlabeldata.grid(row=BTCrowdata, column=PriceUSDcol)
+'''
 #BITCOIN
 # Import and Update API DATA for Bitcoin
 def BTCexchangeNameUpdate(BTCexchangeNameValue):
@@ -222,6 +212,40 @@ def BTCexchangeNameUpdate(BTCexchangeNameValue):
         BTCpriceUSDvardata = coinbaseUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
+
+'''
+def BTCprice():
+    if BTCexchangeNamevardata == "priceaverage":
+        try:
+            Tick = requests.get(BTCexchangeURL1)
+            return Tick.json()['last']
+        except Exception:
+            print "BTCpriceBTC API error"
+            return 0
+    if BTCexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(BTCexchangeURL1)
+            return Tick.json()['last']
+        except Exception:
+            print "BTCpriceBTC API error"
+            return 0
+    if BTCexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(BTCexchangeURL2)
+            return Tick.json()['ticker']['last']
+        except Exception:
+            print "BTCpriceBTC API error"
+            return 0
+    if BTCexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(BTCexchangeURL3)
+            return Tick.json()['amount']
+        except Exception:
+            print "BTCpriceBTC API error"
+            return 0
+'''
+
+
 
 
 def bitstampUSD():
@@ -597,6 +621,7 @@ def MyDOGEValueBTCupdate():
 
 
 
+
 #DARKCOIN
 # Import and Update API DATA for Darkcoin price in BTC
 def DRKexchangeNameUpdate(DRKexchangeNameValue):
@@ -678,6 +703,8 @@ def MyDRKValueBTCupdate():
     global MyDRKValueBTCvardata
     MyDRKValueBTCvardata.set(str.format("{0:.8f}", (float(MyDRKValueBTC()))))
     root.after(UpdateInterval, MyDRKValueBTCupdate)
+
+
 
 
 
@@ -847,7 +874,7 @@ def UpdateIntervalSecupdate():
 
 
 
-# !!!!!!!!!!!!!!!!!! WINDOW START !!!!!!!!!!!!!!!!!!
+# Window Start
 class Window(Frame):
     def __init__(self, master = None):
         Frame.__init__(self, master)
@@ -892,7 +919,7 @@ class Window(Frame):
         exit()
 
 
-# -------------------------- Window Loop Start --------------------------
+# Window Loop Start
 root = Tk()
 #root.geometry("1400x600")
 app = Window(root)
@@ -936,6 +963,23 @@ FAIRimage.image_create(END, image=FaircoinImage)
 FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
 
 
+#root = Tk.Tk()
+#root.config (bg = "red")
+#label = Tk.Label(root, text = "test")
+#label.configure(background = "#50A42D")
+#label.pack()
+
+
+# Data and Text Labels
+'''
+text2 = Text(root, height=30, width=60)
+scroll = Scrollbar(root, command=text2.yview)
+text2.configure(yscrollcommand=scroll.set)
+scroll.pack(side=RIGHT, fill=Y)
+'''
+
+
+
 
 #Update Interval Rate Entry with Button
 def UpdateIntervalSecCallback():
@@ -966,7 +1010,7 @@ UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"
 
 
 
-#Exchange Name display TITLE
+#Exchange Name
 exchangeNamevartext = StringVar()
 exchangeNamelabeltext = Label(app, textvariable=exchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 exchangeNamevartext.set(exchangeNametext)
@@ -986,6 +1030,18 @@ if BTCexchangeNamevardata == "three":
 option = OptionMenu(app, BTCexchangeNamevartext, *BTCexchangeNameChoices, command=BTCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=BTCrowdata, column=exchangeNamecol)
+
+
+
+'''
+BTCexchangeNamevartext = StringVar()
+BTCexchangeNamelabeltext = Label(app, textvariable=BTCexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+BTCexchangeNamevartext.set(BTCexchangeNametext)
+BTCexchangeNamelabeltext.grid(row=BTCrowdata, column=exchangeNamecol)
+'''
+
+
+
 
 #Blackcoin Exchange Name
 BLKexchangeNameChoices = [BLKexchangeName1text, BLKexchangeName2text, BLKexchangeName3text]
@@ -1133,7 +1189,7 @@ cryptsyUSDupdate()
 PriceAverageUSDupdate()
 
 
-# .......... MY COINS ..........
+
 #BITCOIN
 #MyBTC
 MyBTCvartext = StringVar()
@@ -1625,7 +1681,7 @@ MyFAIRValueUSDupdate()
 MyFAIRValueUSDlabeldata.grid(row=FAIRrowdata, column=ValueUSDcol)
 
 
-#.......... TOTAL ..........
+#TOTAL
 #My Total Value in BTC
 MyTotalValueBTCvartext = StringVar()
 MyTotalValueBTClabeltext = Label(app, textvariable=MyTotalValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
@@ -1651,11 +1707,9 @@ MyTotalValueUSDupdate()
 MyTotalValueUSDlabeldata.grid(row=101, column=ValueUSDcol)
 
 
+#Bitstamp
 
 
-
-
-# .................... UPDATE ....................
 def BTCupdateALL():
         bitstampUSDupdate()
         btceUSDupdate()
@@ -1728,5 +1782,11 @@ def updateALLvalue():
 updateALLbutton = Button(app, text='Update ALL', command=updateALLvalue, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=0, column=MyCOINScol, columnspan=2)
 
 
+
+'''
+EEE = Entry(app, bd =5,)
+ShowEEE = Entry(app, show = EEE)
+EEE.pack(side = RIGHT)
+'''
 
 root.mainloop()
