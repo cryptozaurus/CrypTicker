@@ -11,6 +11,7 @@ MyLTC = 30
 MyDOGE = 113356
 MyDRK = 45
 MyPPC = 12.89
+MyNXT = 127
 MyFAIR = 10
 
 
@@ -44,15 +45,22 @@ DRKexchangeURL3 = 'http://data.bter.com/api/1/ticker/drk_btc'
 PPCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=28'
 PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
 PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
+NXTexchangeURL1 = 'http://data.bter.com/api/1/ticker/nxt_btc'
+NXTexchangeURL2 = 'https://btc-e.com/api/2/NXT_btc/ticker'
+NXTexchangeURL3 = 'http://data.bter.com/api/1/ticker/NXT_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
 # Change Exchange Name in Menu
 exchangeNametext = " Exchange Name "
 BTCexchangeName0text = " Price Average "
-BTCexchangeName1text = " Bitstamp "
-BTCexchangeName2text = " Btc-e "
-BTCexchangeName3text = " Coinbase "
+BTCexchangeName1text = " Bitfinex "
+BTCexchangeName2text = " Bitstamp "
+BTCexchangeName3text = " Btc-e "
+BTCexchangeName4text = " Coinbase "
+BTCexchangeName5text = " Kraken "
+BTCexchangeName6text = " Cryptsy "
+BTCexchangeName7text = " Local Bitcoins "
 
 BLKexchangeName1text = " Bittrex "
 BLKexchangeName2text = " Cryptsy "
@@ -74,6 +82,10 @@ PPCexchangeName1text = " Cryptsy "
 PPCexchangeName2text = " Btc-e "
 PPCexchangeName3text = " Bter "
 
+NXTexchangeName1text = " Bter "
+NXTexchangeName2text = " Btc-e "
+NXTexchangeName3text = " Bter "
+
 FAIRexchangeNametext = " Vaultex "
 
 
@@ -90,6 +102,8 @@ global DRKexchangeNamevardata
 DRKexchangeNamevardata = "one"
 global PPCexchangeNamevardata
 PPCexchangeNamevardata = "one"
+global NXTexchangeNamevardata
+NXTexchangeNamevardata = "one"
 
 
 # Font Type and Size
@@ -128,6 +142,7 @@ MyLTCtext = " My LTC "
 MyDOGEtext = " My DOGE "
 MyDRKtext = " My DRK "
 MyPPCtext = " My PPC "
+MyNXTtext = " My NXT "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -140,6 +155,8 @@ DRKpriceBTCtext = str(" DRK Price in BTC ")
 DRKpriceUSDtext = str(" DRK Price in USD ")
 PPCpriceBTCtext = str(" PPC Price in BTC ")
 PPCpriceUSDtext = str(" PPC Price in USD ")
+NXTpriceBTCtext = str(" NXT Price in BTC ")
+NXTpriceUSDtext = str(" NXT Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My BTC Value in USD ")
@@ -153,6 +170,8 @@ MyDRKValueUSDtext = str(" My DRK Value in USD ")
 MyDRKValueBTCtext = str(" My DRK Value in BTC ")
 MyPPCValueUSDtext = str(" My PPC Value in USD ")
 MyPPCValueBTCtext = str(" My PPC Value in BTC ")
+MyNXTValueUSDtext = str(" My NXT Value in USD ")
+MyNXTValueBTCtext = str(" My NXT Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -186,8 +205,10 @@ DRKrowtext = 9
 DRKrowdata = 10
 PPCrowtext = 11
 PPCrowdata = 12
-FAIRrowtext = 13
-FAIRrowdata = 14
+NXTrowtext = 13
+NXTrowdata = 14
+FAIRrowtext = 15
+FAIRrowdata = 16
 
 # Columns
 BTCUSDcol = 0
@@ -207,7 +228,7 @@ exchangeNamecol = 15
 # Import and Update API DATA for Bitcoin
 def BTCexchangeNameUpdate(BTCexchangeNameValue):
     if BTCexchangeNameValue == BTCexchangeName0text:
-        print BTCexchangeName1text
+        print BTCexchangeName0text
         global BTCexchangeNamevardata
         global BTCpriceUSDvardata
         BTCexchangeNamevardata = "priceaverage"
@@ -215,22 +236,46 @@ def BTCexchangeNameUpdate(BTCexchangeNameValue):
         BTCpriceUSDvardata = PriceAverageUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
-    elif BTCexchangeNameValue == BTCexchangeName1text:
-        print BTCexchangeName2text
+    if BTCexchangeNameValue == BTCexchangeName1text:
+        print BTCexchangeName1text
         BTCexchangeNamevardata = "one"
+        BTCpriceUSDvardata = bitfinexUSDvardata
+        print BTCexchangeNamevardata
+        BTCupdateALL()
+    if BTCexchangeNameValue == BTCexchangeName2text:
+        print BTCexchangeName2text
+        BTCexchangeNamevardata = "two"
         BTCpriceUSDvardata = bitstampUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
-    elif BTCexchangeNameValue == BTCexchangeName2text:
-        print BTCexchangeName2text
-        BTCexchangeNamevardata = "two"
+    if BTCexchangeNameValue == BTCexchangeName3text:
+        print BTCexchangeName3text
+        BTCexchangeNamevardata = "three"
         BTCpriceUSDvardata = btceUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
-    else:
-        print BTCexchangeName3text
-        BTCexchangeNamevardata = "three"
+    if BTCexchangeNameValue == BTCexchangeName4text:
+        print BTCexchangeName4text
+        BTCexchangeNamevardata = "four"
         BTCpriceUSDvardata = coinbaseUSDvardata
+        print BTCexchangeNamevardata
+        BTCupdateALL()
+    if BTCexchangeNameValue == BTCexchangeName5text:
+        print BTCexchangeName5text
+        BTCexchangeNamevardata = "five"
+        BTCpriceUSDvardata = krakenUSDvardata
+        print BTCexchangeNamevardata
+        BTCupdateALL()
+    if BTCexchangeNameValue == BTCexchangeName6text:
+        print BTCexchangeName6text
+        BTCexchangeNamevardata = "six"
+        BTCpriceUSDvardata = cryptsyUSDvardata
+        print BTCexchangeNamevardata
+        BTCupdateALL()
+    if BTCexchangeNameValue == BTCexchangeName7text:
+        print BTCexchangeName7text
+        BTCexchangeNamevardata = "seven"
+        BTCpriceUSDvardata = localbitcoinsUSDvardata
         print BTCexchangeNamevardata
         BTCupdateALL()
 
@@ -790,6 +835,91 @@ def MyPPCValueBTCupdate():
 
 
 
+#NXTcoin
+# Import and Update API DATA for NXTcoin price in BTC
+def NXTexchangeNameUpdate(NXTexchangeNameValue):
+    if NXTexchangeNameValue == NXTexchangeName1text:
+        print NXTexchangeName1text
+        global NXTexchangeNamevardata
+        NXTexchangeNamevardata = "one"
+        print NXTexchangeNamevardata
+        NXTupdateALL()
+    elif NXTexchangeNameValue == NXTexchangeName2text:
+        print NXTexchangeName2text
+        NXTexchangeNamevardata = "two"
+        print NXTexchangeNamevardata
+        NXTupdateALL()
+    else:
+        print NXTexchangeName3text
+        NXTexchangeNamevardata = "three"
+        print NXTexchangeNamevardata
+        NXTupdateALL()
+
+def NXTpriceBTC():
+    if NXTexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(NXTexchangeURL1)
+            return Tick.json()['last']
+        except Exception:
+            print "NXTpriceBTC API error"
+            return 0
+    if NXTexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(NXTexchangeURL2)
+            return Tick.json()['ticker']['last']
+        except Exception:
+            print "NXTpriceBTC API error"
+            return 0
+    if NXTexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(NXTexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "NXTpriceBTC API error"
+            return 0
+
+def NXTpriceBTCupdate():
+    global NXTpriceBTCvardata
+    NXTpriceBTCvardata.set(str.format("{0:.8f}", (float(NXTpriceBTC()))))
+    root.after(UpdateInterval, NXTpriceBTCupdate)
+
+
+# Calculate and Update with Price Average DATA for NXTcoin price in USD
+def NXTpriceUSD():
+    NXTpriceUSD = float(NXTpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
+    return NXTpriceUSD
+
+def NXTpriceUSDupdate():
+    global NXTpriceUSDvardata
+    NXTpriceUSDvardata.set(str.format("{0:.8f}", (float(NXTpriceUSD()))))
+    root.after(UpdateInterval, NXTpriceUSDupdate)
+
+
+# Calculate and Update my NXTcoin Value in USD
+def MyNXTValueUSD():
+    global NXTpriceUSDvardata
+    MyNXTValueUSD = float(NXTpriceUSDvardata.get()) * float(MyNXTvardata.get())
+    return MyNXTValueUSD
+
+def MyNXTValueUSDupdate():
+    global MyNXTValueUSDvardata
+    MyNXTValueUSDvardata.set(str.format("{0:.2f}", (float(MyNXTValueUSD()))))
+    root.after(UpdateInterval, MyNXTValueUSDupdate)
+
+
+# Calculate and Update my NXTcoin Value in BTC
+def MyNXTValueBTC():
+    MyNXTValueBTC = float(NXTpriceBTCvardata.get()) * float(MyNXTvardata.get())
+    return MyNXTValueBTC
+
+def MyNXTValueBTCupdate():
+    global MyNXTValueBTCvardata
+    MyNXTValueBTCvardata.set(str.format("{0:.8f}", (float(MyNXTValueBTC()))))
+    root.after(UpdateInterval, MyNXTValueBTCupdate)
+
+
+
+
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
 def FAIRpriceBTC():
@@ -844,7 +974,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
@@ -855,7 +985,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -957,6 +1087,20 @@ def MyPPCupdate():
     print MyPPC
     return MyPPC
 
+# My NXTcoin Update
+def MyNXTupdate():
+    global MyNXT
+    MyNXT = float(MyNXTvardata.get())
+    NXTpriceBTCupdate()
+    NXTpriceUSDupdate()
+    MyNXTValueUSDupdate()
+    MyNXTValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyNXT
+    return MyNXT
+
+
 # My Faircoin Update
 def MyFAIRupdate():
     global MyFAIR
@@ -1030,6 +1174,15 @@ def PPCupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
+# NXTcoin Update ALL
+def NXTupdateALL():
+        NXTpriceBTCupdate()
+        NXTpriceUSDupdate()
+        MyNXTValueBTCupdate()
+        MyNXTValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
 
 #Update ALL BUTTON
 def updateALLvalue():
@@ -1044,6 +1197,8 @@ def updateALLvalue():
     MyDRKValueBTCupdate()
     MyPPCValueUSDupdate()
     MyPPCValueBTCupdate()
+    MyNXTValueUSDupdate()
+    MyNXTValueBTCupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
     MyTotalValueUSDupdate()
@@ -1136,6 +1291,12 @@ PeercoinImage = PhotoImage(file='./images/PeercoinImage.gif')
 PPCimage.image_create(END, image=PeercoinImage)
 PPCimage.grid(row=PPCrowtext, column=COINSimagecol, rowspan=2)
 
+NXTimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
+NXTcoinImage = PhotoImage(file='./images/NXTcoinImage.gif')
+NXTimage.image_create(END, image=NXTcoinImage)
+NXTimage.grid(row=NXTrowtext, column=COINSimagecol, rowspan=2)
+
+
 FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
 FAIRimage.image_create(END, image=FaircoinImage)
@@ -1166,7 +1327,7 @@ exchangeNamevartext.set(exchangeNametext)
 exchangeNamelabeltext.grid(row=exchangeNamerowtext, column=exchangeNamecol)
 
 #Bitcoin Exchange Name
-BTCexchangeNameChoices = [BTCexchangeName0text, BTCexchangeName1text, BTCexchangeName2text, BTCexchangeName3text]
+BTCexchangeNameChoices = [BTCexchangeName0text, BTCexchangeName1text, BTCexchangeName2text, BTCexchangeName3text, BTCexchangeName4text, BTCexchangeName5text, BTCexchangeName6text, BTCexchangeName7text]
 BTCexchangeNamevartext = StringVar(app)
 if BTCexchangeNamevardata == "priceaverage":
     BTCexchangeNamevartext.set(BTCexchangeNameChoices[0])
@@ -1176,6 +1337,14 @@ if BTCexchangeNamevardata == "two":
     BTCexchangeNamevartext.set(BTCexchangeNameChoices[2])
 if BTCexchangeNamevardata == "three":
     BTCexchangeNamevartext.set(BTCexchangeNameChoices[3])
+if BTCexchangeNamevardata == "four":
+    BTCexchangeNamevartext.set(BTCexchangeNameChoices[4])
+if BTCexchangeNamevardata == "five":
+    BTCexchangeNamevartext.set(BTCexchangeNameChoices[5])
+if BTCexchangeNamevardata == "six":
+    BTCexchangeNamevartext.set(BTCexchangeNameChoices[6])
+if BTCexchangeNamevardata == "seven":
+    BTCexchangeNamevartext.set(BTCexchangeNameChoices[7])
 option = OptionMenu(app, BTCexchangeNamevartext, *BTCexchangeNameChoices, command=BTCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=BTCrowdata, column=exchangeNamecol)
@@ -1244,6 +1413,20 @@ if PPCexchangeNamevardata == "three":
 option = OptionMenu(app, PPCexchangeNamevartext, *PPCexchangeNameChoices, command=PPCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=PPCrowdata, column=exchangeNamecol)
+
+#NXTcoin Exchange Name
+NXTexchangeNameChoices = [NXTexchangeName1text, NXTexchangeName2text, NXTexchangeName3text]
+NXTexchangeNamevartext = StringVar(app)
+if NXTexchangeNamevardata == "one":
+    NXTexchangeNamevartext.set(NXTexchangeNameChoices[0])
+if NXTexchangeNamevardata == "two":
+    NXTexchangeNamevartext.set(NXTexchangeNameChoices[1])
+if NXTexchangeNamevardata == "three":
+    NXTexchangeNamevartext.set(NXTexchangeNameChoices[2])
+option = OptionMenu(app, NXTexchangeNamevartext, *NXTexchangeNameChoices, command=NXTexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=NXTrowdata, column=exchangeNamecol)
+
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -1679,6 +1862,68 @@ MyPPCValueUSDvardata = StringVar()
 MyPPCValueUSDlabeldata = Label(app, textvariable=MyPPCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyPPCValueUSDupdate()
 MyPPCValueUSDlabeldata.grid(row=PPCrowdata, column=ValueUSDcol)
+
+
+
+#NXTcoin
+#MyNXT
+MyNXTvartext = StringVar()
+MyNXTlabeltext = Label(app, textvariable=MyNXTvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyNXTvartext.set(MyNXTtext)
+MyNXTlabeltext.grid(row=NXTrowtext, column=MyCOINScol)
+
+MyNXTvardata = StringVar()
+MyNXTvardata.set(MyNXT)
+MyNXTentry = Entry(app, textvariable=MyNXTvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
+MyNXTentry.grid(row=NXTrowdata, column=MyCOINScol)
+
+MyNXTupdatebutton = Button(app, text='Update NOW', command=MyNXTupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=NXTrowdata, column=updateMyCOINScol)
+
+
+# Display Data and Text for NXTcoin price in BTC
+NXTpriceBTCvartext = StringVar()
+NXTpriceBTClabeltext = Label(app, textvariable=NXTpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+NXTpriceBTCvartext.set(NXTpriceBTCtext)
+NXTpriceBTClabeltext.grid(row=NXTrowtext, column=PriceBTCcol)
+NXTpriceBTCvardata = StringVar()
+NXTpriceBTClabeldata = Label(app, textvariable=NXTpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+NXTpriceBTCupdate()
+NXTpriceBTClabeldata.grid(row=NXTrowdata, column=PriceBTCcol)
+
+
+# Display Data and Text for NXTcoin price in USD
+NXTpriceUSDvartext = StringVar()
+NXTpriceUSDlabeltext = Label(app, textvariable=NXTpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+NXTpriceUSDvartext.set(NXTpriceUSDtext)
+NXTpriceUSDlabeltext.grid(row=NXTrowtext, column=PriceUSDcol)
+NXTpriceUSDvardata = StringVar()
+NXTpriceUSDlabeldata = Label(app, textvariable=NXTpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+NXTpriceUSDupdate()
+NXTpriceUSDlabeldata.grid(row=NXTrowdata, column=PriceUSDcol)
+
+
+#My NXT Value in BTC
+MyNXTValueBTCvartext = StringVar()
+MyNXTValueBTClabeltext = Label(app, textvariable=MyNXTValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyNXTValueBTCvartext.set(MyNXTValueBTCtext)
+MyNXTValueBTClabeltext.grid(row=NXTrowtext, column=ValueBTCcol)
+
+MyNXTValueBTCvardata = StringVar()
+MyNXTValueBTClabeldata = Label(app, textvariable=MyNXTValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyNXTValueBTCupdate()
+MyNXTValueBTClabeldata.grid(row=NXTrowdata, column=ValueBTCcol)
+
+
+#My NXT Value in USD
+MyNXTValueUSDvartext = StringVar()
+MyNXTValueUSDlabeltext = Label(app, textvariable=MyNXTValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyNXTValueUSDvartext.set(MyNXTValueUSDtext)
+MyNXTValueUSDlabeltext.grid(row=NXTrowtext, column=ValueUSDcol)
+
+MyNXTValueUSDvardata = StringVar()
+MyNXTValueUSDlabeldata = Label(app, textvariable=MyNXTValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyNXTValueUSDupdate()
+MyNXTValueUSDlabeldata.grid(row=NXTrowdata, column=ValueUSDcol)
 
 
 
