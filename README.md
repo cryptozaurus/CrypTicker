@@ -18,4 +18,5 @@ Supported coins for now:
 - Darkcoin (DRK)
 - Peercoin (PPC)
 - NXTcoin (NXT)
+- Counterparty (XCP)
 - Faircoin (FAIR)
