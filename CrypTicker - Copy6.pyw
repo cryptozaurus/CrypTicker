@@ -12,7 +12,6 @@ MyDOGE = 113356
 MyDRK = 45
 MyPPC = 12.89
 MyNXT = 127
-MyXCP = 3.4032
 MyFAIR = 10
 
 
@@ -49,9 +48,6 @@ PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 NXTexchangeURL1 = 'http://data.bter.com/api/1/ticker/nxt_btc'
 NXTexchangeURL2 = 'https://btc-e.com/api/2/NXT_btc/ticker'
 NXTexchangeURL3 = 'http://data.bter.com/api/1/ticker/NXT_btc'
-XCPexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
-XCPexchangeURL2 = 'https://btc-e.com/api/2/XCP_btc/ticker'
-XCPexchangeURL3 = 'http://data.bter.com/api/1/ticker/XCP_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
@@ -90,10 +86,6 @@ NXTexchangeName1text = " Bter "
 NXTexchangeName2text = " Btc-e "
 NXTexchangeName3text = " Bter "
 
-XCPexchangeName1text = " Poloniex "
-XCPexchangeName2text = " Btc-e "
-XCPexchangeName3text = " Bter "
-
 FAIRexchangeNametext = " Vaultex "
 
 
@@ -112,8 +104,6 @@ global PPCexchangeNamevardata
 PPCexchangeNamevardata = "one"
 global NXTexchangeNamevardata
 NXTexchangeNamevardata = "one"
-global XCPexchangeNamevardata
-XCPexchangeNamevardata = "one"
 
 
 # Font Type and Size
@@ -153,7 +143,6 @@ MyDOGEtext = " My DOGE "
 MyDRKtext = " My DRK "
 MyPPCtext = " My PPC "
 MyNXTtext = " My NXT "
-MyXCPtext = " My XCP "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -168,8 +157,6 @@ PPCpriceBTCtext = str(" PPC Price in BTC ")
 PPCpriceUSDtext = str(" PPC Price in USD ")
 NXTpriceBTCtext = str(" NXT Price in BTC ")
 NXTpriceUSDtext = str(" NXT Price in USD ")
-XCPpriceBTCtext = str(" XCP Price in BTC ")
-XCPpriceUSDtext = str(" XCP Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My BTC Value in USD ")
@@ -185,8 +172,6 @@ MyPPCValueUSDtext = str(" My PPC Value in USD ")
 MyPPCValueBTCtext = str(" My PPC Value in BTC ")
 MyNXTValueUSDtext = str(" My NXT Value in USD ")
 MyNXTValueBTCtext = str(" My NXT Value in BTC ")
-MyXCPValueUSDtext = str(" My XCP Value in USD ")
-MyXCPValueBTCtext = str(" My XCP Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -222,10 +207,8 @@ PPCrowtext = 11
 PPCrowdata = 12
 NXTrowtext = 13
 NXTrowdata = 14
-XCProwtext = 15
-XCProwdata = 16
-FAIRrowtext = 17
-FAIRrowdata = 18
+FAIRrowtext = 15
+FAIRrowdata = 16
 
 # Columns
 BTCUSDcol = 0
@@ -936,90 +919,6 @@ def MyNXTValueBTCupdate():
 
 
 
-#Counterparty
-# Import and Update API DATA for Counterparty price in BTC
-def XCPexchangeNameUpdate(XCPexchangeNameValue):
-    if XCPexchangeNameValue == XCPexchangeName1text:
-        print XCPexchangeName1text
-        global XCPexchangeNamevardata
-        XCPexchangeNamevardata = "one"
-        print XCPexchangeNamevardata
-        XCPupdateALL()
-    elif XCPexchangeNameValue == XCPexchangeName2text:
-        print XCPexchangeName2text
-        XCPexchangeNamevardata = "two"
-        print XCPexchangeNamevardata
-        XCPupdateALL()
-    else:
-        print XCPexchangeName3text
-        XCPexchangeNamevardata = "three"
-        print XCPexchangeNamevardata
-        XCPupdateALL()
-
-def XCPpriceBTC():
-    if XCPexchangeNamevardata == "one":
-        try:
-            Tick = requests.get(XCPexchangeURL1)
-            return Tick.json()['BTC_XCP']['last']
-        except Exception:
-            print "XCPpriceBTC API error"
-            return 0
-    if XCPexchangeNamevardata == "two":
-        try:
-            Tick = requests.get(XCPexchangeURL2)
-            return Tick.json()['ticker']['last']
-        except Exception:
-            print "XCPpriceBTC API error"
-            return 0
-    if XCPexchangeNamevardata == "three":
-        try:
-            Tick = requests.get(XCPexchangeURL3)
-            return Tick.json()['last']
-        except Exception:
-            print "XCPpriceBTC API error"
-            return 0
-
-def XCPpriceBTCupdate():
-    global XCPpriceBTCvardata
-    XCPpriceBTCvardata.set(str.format("{0:.8f}", (float(XCPpriceBTC()))))
-    root.after(UpdateInterval, XCPpriceBTCupdate)
-
-
-# Calculate and Update with Price Average DATA for Counterparty price in USD
-def XCPpriceUSD():
-    XCPpriceUSD = float(XCPpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
-    return XCPpriceUSD
-
-def XCPpriceUSDupdate():
-    global XCPpriceUSDvardata
-    XCPpriceUSDvardata.set(str.format("{0:.8f}", (float(XCPpriceUSD()))))
-    root.after(UpdateInterval, XCPpriceUSDupdate)
-
-
-# Calculate and Update my Counterparty Value in USD
-def MyXCPValueUSD():
-    global XCPpriceUSDvardata
-    MyXCPValueUSD = float(XCPpriceUSDvardata.get()) * float(MyXCPvardata.get())
-    return MyXCPValueUSD
-
-def MyXCPValueUSDupdate():
-    global MyXCPValueUSDvardata
-    MyXCPValueUSDvardata.set(str.format("{0:.2f}", (float(MyXCPValueUSD()))))
-    root.after(UpdateInterval, MyXCPValueUSDupdate)
-
-
-# Calculate and Update my Counterparty Value in BTC
-def MyXCPValueBTC():
-    MyXCPValueBTC = float(XCPpriceBTCvardata.get()) * float(MyXCPvardata.get())
-    return MyXCPValueBTC
-
-def MyXCPValueBTCupdate():
-    global MyXCPValueBTCvardata
-    MyXCPValueBTCvardata.set(str.format("{0:.8f}", (float(MyXCPValueBTC()))))
-    root.after(UpdateInterval, MyXCPValueBTCupdate)
-
-
-
 
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
@@ -1075,7 +974,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyXCPValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
@@ -1086,7 +985,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -1201,20 +1100,6 @@ def MyNXTupdate():
     print MyNXT
     return MyNXT
 
-# My Counterparty Update
-def MyXCPupdate():
-    global MyXCP
-    MyXCP = float(MyXCPvardata.get())
-    XCPpriceBTCupdate()
-    XCPpriceUSDupdate()
-    MyXCPValueUSDupdate()
-    MyXCPValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyXCP
-    return MyXCP
-
-
 
 # My Faircoin Update
 def MyFAIRupdate():
@@ -1298,16 +1183,6 @@ def NXTupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
-# Counterparty Update ALL
-def XCPupdateALL():
-        XCPpriceBTCupdate()
-        XCPpriceUSDupdate()
-        MyXCPValueBTCupdate()
-        MyXCPValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-
 
 #Update ALL BUTTON
 def updateALLvalue():
@@ -1324,8 +1199,6 @@ def updateALLvalue():
     MyPPCValueBTCupdate()
     MyNXTValueUSDupdate()
     MyNXTValueBTCupdate()
-    MyXCPValueUSDupdate()
-    MyXCPValueBTCupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
     MyTotalValueUSDupdate()
@@ -1423,10 +1296,6 @@ NXTcoinImage = PhotoImage(file='./images/NXTcoinImage.gif')
 NXTimage.image_create(END, image=NXTcoinImage)
 NXTimage.grid(row=NXTrowtext, column=COINSimagecol, rowspan=2)
 
-XCPimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
-CounterpartyImage = PhotoImage(file='./images/CounterpartyImage.gif')
-XCPimage.image_create(END, image=CounterpartyImage)
-XCPimage.grid(row=XCProwtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
@@ -1558,18 +1427,6 @@ option = OptionMenu(app, NXTexchangeNamevartext, *NXTexchangeNameChoices, comman
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=NXTrowdata, column=exchangeNamecol)
 
-#Counterparty Exchange Name
-XCPexchangeNameChoices = [XCPexchangeName1text, XCPexchangeName2text, XCPexchangeName3text]
-XCPexchangeNamevartext = StringVar(app)
-if XCPexchangeNamevardata == "one":
-    XCPexchangeNamevartext.set(XCPexchangeNameChoices[0])
-if XCPexchangeNamevardata == "two":
-    XCPexchangeNamevartext.set(XCPexchangeNameChoices[1])
-if XCPexchangeNamevardata == "three":
-    XCPexchangeNamevartext.set(XCPexchangeNameChoices[2])
-option = OptionMenu(app, XCPexchangeNamevartext, *XCPexchangeNameChoices, command=XCPexchangeNameUpdate)
-option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
-option.grid(row=XCProwdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -2068,67 +1925,6 @@ MyNXTValueUSDlabeldata = Label(app, textvariable=MyNXTValueUSDvardata, relief=RA
 MyNXTValueUSDupdate()
 MyNXTValueUSDlabeldata.grid(row=NXTrowdata, column=ValueUSDcol)
 
-
-
-#Counterparty
-#MyXCP
-MyXCPvartext = StringVar()
-MyXCPlabeltext = Label(app, textvariable=MyXCPvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyXCPvartext.set(MyXCPtext)
-MyXCPlabeltext.grid(row=XCProwtext, column=MyCOINScol)
-
-MyXCPvardata = StringVar()
-MyXCPvardata.set(MyXCP)
-MyXCPentry = Entry(app, textvariable=MyXCPvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
-MyXCPentry.grid(row=XCProwdata, column=MyCOINScol)
-
-MyXCPupdatebutton = Button(app, text='Update NOW', command=MyXCPupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=XCProwdata, column=updateMyCOINScol)
-
-
-# Display Data and Text for Counterparty price in BTC
-XCPpriceBTCvartext = StringVar()
-XCPpriceBTClabeltext = Label(app, textvariable=XCPpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-XCPpriceBTCvartext.set(XCPpriceBTCtext)
-XCPpriceBTClabeltext.grid(row=XCProwtext, column=PriceBTCcol)
-XCPpriceBTCvardata = StringVar()
-XCPpriceBTClabeldata = Label(app, textvariable=XCPpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-XCPpriceBTCupdate()
-XCPpriceBTClabeldata.grid(row=XCProwdata, column=PriceBTCcol)
-
-
-# Display Data and Text for Counterparty price in USD
-XCPpriceUSDvartext = StringVar()
-XCPpriceUSDlabeltext = Label(app, textvariable=XCPpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-XCPpriceUSDvartext.set(XCPpriceUSDtext)
-XCPpriceUSDlabeltext.grid(row=XCProwtext, column=PriceUSDcol)
-XCPpriceUSDvardata = StringVar()
-XCPpriceUSDlabeldata = Label(app, textvariable=XCPpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-XCPpriceUSDupdate()
-XCPpriceUSDlabeldata.grid(row=XCProwdata, column=PriceUSDcol)
-
-
-#My XCP Value in BTC
-MyXCPValueBTCvartext = StringVar()
-MyXCPValueBTClabeltext = Label(app, textvariable=MyXCPValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyXCPValueBTCvartext.set(MyXCPValueBTCtext)
-MyXCPValueBTClabeltext.grid(row=XCProwtext, column=ValueBTCcol)
-
-MyXCPValueBTCvardata = StringVar()
-MyXCPValueBTClabeldata = Label(app, textvariable=MyXCPValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-MyXCPValueBTCupdate()
-MyXCPValueBTClabeldata.grid(row=XCProwdata, column=ValueBTCcol)
-
-
-#My XCP Value in USD
-MyXCPValueUSDvartext = StringVar()
-MyXCPValueUSDlabeltext = Label(app, textvariable=MyXCPValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyXCPValueUSDvartext.set(MyXCPValueUSDtext)
-MyXCPValueUSDlabeltext.grid(row=XCProwtext, column=ValueUSDcol)
-
-MyXCPValueUSDvardata = StringVar()
-MyXCPValueUSDlabeldata = Label(app, textvariable=MyXCPValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-MyXCPValueUSDupdate()
-MyXCPValueUSDlabeldata.grid(row=XCProwdata, column=ValueUSDcol)
 
 
 
