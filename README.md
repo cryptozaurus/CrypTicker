@@ -17,4 +17,5 @@ Supported coins for now:
 - Dogecoin (DOGE)
 - Darkcoin (DRK)
 - Peercoin (PPC)
+- NXTcoin (NXT)
 - Faircoin (FAIR)
