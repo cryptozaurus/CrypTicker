@@ -24,7 +24,6 @@ coinbaseUSDexchangeURL = 'https://coinbase.com/api/v1/prices/buy'
 krakenUSDexchangeURL = 'https://api.kraken.com/0/public/Ticker'
 bitfinexUSDexchangeURL = "https://api.bitfinex.com/v1/ticker/btcusd"
 cryptsyUSDexchangeURL = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=2'
-localbitcoinsUSDexchangeURL = 'https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/'
 #BLK - BTC pair by market volume
 # Bittrex, Cryptsy, AllCoin, Melotic, Poloniex, BTER, Crypto-Trade, Bleutrade, Vircurex, CCEDK, Coin-Swap, useCryptos, Atomic Trade
 BLKexchangeURL1 = 'http://bittrex.com/api/v1.1/public/getticker?market=BTC-BC'
@@ -96,7 +95,7 @@ PPCexchangeNamevardata = "one"
 TextFontType = "Georgia"
 DataFontType = "Comic Sans MS"
 TextFontSize = 12
-DataFontSize = 15
+DataFontSize = 14
 
 
 # Colors
@@ -121,7 +120,6 @@ coinbaseUSDtext = str(" Coinbase ")
 krakenUSDtext = str(" Kraken ")
 bitfinexUSDtext = str(" Bitfinex ")
 cryptsyUSDtext = str(" Cryptsy ")
-localbitcoinsUSDtext = str(" Local Bitcoins ")
 MyBTCtext = " My BTC "
 MyBLKtext = " My BLK "
 MyLTCtext = " My LTC "
@@ -164,15 +162,6 @@ UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
 # Rows
-# BTC price in USD
-bitfinexUSDrow = 3
-bitstampUSDrow = 5
-btceUSDrow = 7
-coinbaseUSDrow = 9
-krakenUSDrow = 11
-cryptsyUSDrow = 13
-localbitcoinsUSDrow = 15
-# COINS
 exchangeNamerowtext = 0
 BTCrowtext = 1
 BTCrowdata = 2
@@ -320,23 +309,9 @@ def cryptsyUSDupdate():
     root.after(UpdateInterval, cryptsyUSDupdate)
 
 
-def localbitcoinsUSD():
-    try:
-        localbitcoinsBTCTick = requests.get(localbitcoinsUSDexchangeURL)
-        return localbitcoinsBTCTick.json()["USD"]["avg_12h"]
-    except Exception:
-        print "Local Bitcoins API error"
-        return 0
-
-def localbitcoinsUSDupdate():
-    global localbitcoinsUSDvardata
-    localbitcoinsUSDvardata.set(str.format("{0:.2f}", (float(localbitcoinsUSD()))))
-    root.after(UpdateInterval, localbitcoinsUSDupdate)
-
-
 def PriceAverageUSDupdate():
     global PriceAverageUSDvardatalist
-    PriceAverageUSDvardatalist = [float(bitstampUSDvardata.get()), float(btceUSDvardata.get()), float(coinbaseUSDvardata.get()), float(krakenUSDvardata.get()), float(bitfinexUSDvardata.get()), float(cryptsyUSDvardata.get()), float(localbitcoinsUSDvardata.get())]
+    PriceAverageUSDvardatalist = [float(bitstampUSDvardata.get()), float(btceUSDvardata.get()), float(coinbaseUSDvardata.get()), float(krakenUSDvardata.get()), float(bitfinexUSDvardata.get()), float(cryptsyUSDvardata.get())]
     PriceAverageUSDvardatalist = [x for x in PriceAverageUSDvardatalist if x != 0]
 
     global PriceAverageUSDvardata
@@ -980,7 +955,6 @@ def BTCupdateALL():
         krakenUSDupdate()
         bitfinexUSDupdate()
         cryptsyUSDupdate()
-        localbitcoinsUSDupdate()
         MyBTCValueUSDupdate()
         BTCpriceUSDdataUpdate()
         MyTotalValueUSDupdate()
@@ -1255,61 +1229,53 @@ FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 # .................... DATA and TEXT ....................
 #BITCOIN
 # Display Data and Text for Bitcoin in USD
-bitfinexUSDvartext = StringVar()
-bitfinexUSDlabeltext = Label(app, textvariable=bitfinexUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-bitfinexUSDvartext.set(bitfinexUSDtext)
-bitfinexUSDlabeltext.grid(row=bitfinexUSDrow, column=BTCUSDcol)
-bitfinexUSDvardata = StringVar()
-bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-bitfinexUSDlabeldata.grid(row=bitfinexUSDrow + 1, column=BTCUSDcol)
-
 bitstampUSDvartext = StringVar()
 bitstampUSDlabeltext = Label(app, textvariable=bitstampUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 bitstampUSDvartext.set(bitstampUSDtext)
-bitstampUSDlabeltext.grid(row=bitstampUSDrow, column=BTCUSDcol)
+bitstampUSDlabeltext.grid(row=3, column=BTCUSDcol)
 bitstampUSDvardata = StringVar()
 bitstampUSDlabeldata = Label(app, textvariable=bitstampUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-bitstampUSDlabeldata.grid(row=bitstampUSDrow + 1, column=BTCUSDcol)
+bitstampUSDlabeldata.grid(row=4, column=BTCUSDcol)
 
 btceUSDvartext = StringVar()
 btceUSDlabeltext = Label(app, textvariable=btceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 btceUSDvartext.set(btceUSDtext)
-btceUSDlabeltext.grid(row=btceUSDrow, column=BTCUSDcol)
+btceUSDlabeltext.grid(row=5, column=BTCUSDcol)
 btceUSDvardata = StringVar()
 btceUSDlabeldata = Label(app, textvariable=btceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-btceUSDlabeldata.grid(row=btceUSDrow + 1, column=BTCUSDcol)
+btceUSDlabeldata.grid(row=6, column=BTCUSDcol)
 
 coinbaseUSDvartext = StringVar()
 coinbaseUSDlabeltext = Label(app, textvariable=coinbaseUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 coinbaseUSDvartext.set(coinbaseUSDtext)
-coinbaseUSDlabeltext.grid(row=coinbaseUSDrow, column=BTCUSDcol)
+coinbaseUSDlabeltext.grid(row=7, column=BTCUSDcol)
 coinbaseUSDvardata = StringVar()
 coinbaseUSDlabeldata = Label(app, textvariable=coinbaseUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-coinbaseUSDlabeldata.grid(row=coinbaseUSDrow + 1, column=BTCUSDcol)
+coinbaseUSDlabeldata.grid(row=8, column=BTCUSDcol)
 
 krakenUSDvartext = StringVar()
 krakenUSDlabeltext = Label(app, textvariable=krakenUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 krakenUSDvartext.set(krakenUSDtext)
-krakenUSDlabeltext.grid(row=krakenUSDrow, column=BTCUSDcol)
+krakenUSDlabeltext.grid(row=9, column=BTCUSDcol)
 krakenUSDvardata = StringVar()
 krakenUSDlabeldata = Label(app, textvariable=krakenUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-krakenUSDlabeldata.grid(row=krakenUSDrow + 1, column=BTCUSDcol)
+krakenUSDlabeldata.grid(row=10, column=BTCUSDcol)
+
+bitfinexUSDvartext = StringVar()
+bitfinexUSDlabeltext = Label(app, textvariable=bitfinexUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+bitfinexUSDvartext.set(bitfinexUSDtext)
+bitfinexUSDlabeltext.grid(row=11, column=BTCUSDcol)
+bitfinexUSDvardata = StringVar()
+bitfinexUSDlabeldata = Label(app, textvariable=bitfinexUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+bitfinexUSDlabeldata.grid(row=12, column=BTCUSDcol)
 
 cryptsyUSDvartext = StringVar()
 cryptsyUSDlabeltext = Label(app, textvariable=cryptsyUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 cryptsyUSDvartext.set(cryptsyUSDtext)
-cryptsyUSDlabeltext.grid(row=cryptsyUSDrow, column=BTCUSDcol)
+cryptsyUSDlabeltext.grid(row=13, column=BTCUSDcol)
 cryptsyUSDvardata = StringVar()
 cryptsyUSDlabeldata = Label(app, textvariable=cryptsyUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-cryptsyUSDlabeldata.grid(row=cryptsyUSDrow + 1, column=BTCUSDcol)
-
-localbitcoinsUSDvartext = StringVar()
-localbitcoinsUSDlabeltext = Label(app, textvariable=localbitcoinsUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-localbitcoinsUSDvartext.set(localbitcoinsUSDtext)
-localbitcoinsUSDlabeltext.grid(row=localbitcoinsUSDrow, column=BTCUSDcol)
-localbitcoinsUSDvardata = StringVar()
-localbitcoinsUSDlabeldata = Label(app, textvariable=localbitcoinsUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-localbitcoinsUSDlabeldata.grid(row=localbitcoinsUSDrow + 1, column=BTCUSDcol)
+cryptsyUSDlabeldata.grid(row=14, column=BTCUSDcol)
 
 #Price Average in USD
 PriceAverageUSDvartext = StringVar()
@@ -1328,7 +1294,6 @@ coinbaseUSDupdate()
 krakenUSDupdate()
 bitfinexUSDupdate()
 cryptsyUSDupdate()
-localbitcoinsUSDupdate()
 PriceAverageUSDupdate()
 
 
