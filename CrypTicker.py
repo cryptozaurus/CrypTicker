@@ -47,11 +47,11 @@ PPCexchangeURL1 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mar
 PPCexchangeURL2 = 'https://btc-e.com/api/2/ppc_btc/ticker'
 PPCexchangeURL3 = 'http://data.bter.com/api/1/ticker/ppc_btc'
 NXTexchangeURL1 = 'http://data.bter.com/api/1/ticker/nxt_btc'
-NXTexchangeURL2 = 'https://btc-e.com/api/2/NXT_btc/ticker'
-NXTexchangeURL3 = 'http://data.bter.com/api/1/ticker/NXT_btc'
+NXTexchangeURL2 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=159'
+NXTexchangeURL3 = 'https://api.hitbtc.com/api/1/public/ticker'
 XCPexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
-XCPexchangeURL2 = 'https://btc-e.com/api/2/XCP_btc/ticker'
-XCPexchangeURL3 = 'http://data.bter.com/api/1/ticker/XCP_btc'
+XCPexchangeURL2 = 'http://data.bter.com/api/1/ticker/XCP_btc'
+XCPexchangeURL3 = 'https://www.melotic.com/api/markets'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
@@ -87,12 +87,12 @@ PPCexchangeName2text = " Btc-e "
 PPCexchangeName3text = " Bter "
 
 NXTexchangeName1text = " Bter "
-NXTexchangeName2text = " Btc-e "
-NXTexchangeName3text = " Bter "
+NXTexchangeName2text = " Cryptsy "
+NXTexchangeName3text = " HitBTC "
 
 XCPexchangeName1text = " Poloniex "
-XCPexchangeName2text = " Btc-e "
-XCPexchangeName3text = " Bter "
+XCPexchangeName2text = " Bter "
+XCPexchangeName3text = " Melotic "
 
 FAIRexchangeNametext = " Vaultex "
 
@@ -883,14 +883,14 @@ def NXTpriceBTC():
     if NXTexchangeNamevardata == "two":
         try:
             Tick = requests.get(NXTexchangeURL2)
-            return Tick.json()['ticker']['last']
+            return Tick.json()["return"]["markets"]["NXT"]['lasttradeprice']
         except Exception:
             print "NXTpriceBTC API error"
             return 0
     if NXTexchangeNamevardata == "three":
         try:
             Tick = requests.get(NXTexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()['NXTBTC']['last']
         except Exception:
             print "NXTpriceBTC API error"
             return 0
@@ -967,14 +967,14 @@ def XCPpriceBTC():
     if XCPexchangeNamevardata == "two":
         try:
             Tick = requests.get(XCPexchangeURL2)
-            return Tick.json()['ticker']['last']
+            return Tick.json()['last']
         except Exception:
             print "XCPpriceBTC API error"
             return 0
     if XCPexchangeNamevardata == "three":
         try:
             Tick = requests.get(XCPexchangeURL3)
-            return Tick.json()['last']
+            return Tick.json()['xcp-btc']['latest_price']
         except Exception:
             print "XCPpriceBTC API error"
             return 0
