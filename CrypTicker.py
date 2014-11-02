@@ -130,7 +130,7 @@ ButtonForegroundColor = "black"
 TextBackgroundColor = "#181a1e"
 TextForegroundColor = "#8e9194"
 DataBackgroundColor = "#181a1e"
-DataForegroundColor = "#f89a28"
+DataForegroundColor = "#00cc00" #00cc00, #f89a28
 EntryBackgroundColor = "#333333"
 EntryForegroundColor = "white"
 ExchangeNameActiveBackgroundColor = "#292c30"
@@ -193,7 +193,7 @@ MyTotalValueUSDtext = str(" My Total Value in USD ")
 MyTotalValueBTCtext = str(" My Total Value in BTC ")
 
 # Update Interval
-UpdateIntervalSec = 30
+UpdateIntervalSec = 60
 UpdateInterval = UpdateIntervalSec * 1000
 UpdateIntervalSectext = str(" Update Interval (s) ")
 
@@ -1108,8 +1108,8 @@ def UpdateIntervalSecCallback():
     UpdateIntervalSec = int(UpdateIntervalSecvardata.get())
     UpdateIntervalSecupdate()
     print UpdateIntervalSec
-    UpdateIntervalSeclabeldata = Label(app, text="                         ", relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
-    UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize)).grid(row=104, column=exchangeNamecol)
+    UpdateIntervalSeclabeldata = Label(app, text="                         ", relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=103, column=BTCUSDcol)
+    UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=103, column=BTCUSDcol)
     return UpdateIntervalSec
 
 
@@ -1438,16 +1438,16 @@ FAIRimage.grid(row=FAIRrowtext, column=COINSimagecol, rowspan=2)
 UpdateIntervalSecvartext = StringVar()
 UpdateIntervalSeclabeltext = Label(app, textvariable=UpdateIntervalSecvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
 UpdateIntervalSecvartext.set(UpdateIntervalSectext)
-UpdateIntervalSeclabeltext.grid(row=101, column=exchangeNamecol)
+UpdateIntervalSeclabeltext.grid(row=100, column=BTCUSDcol)
 
 UpdateIntervalSecvardata = StringVar()
 UpdateIntervalSecvardata.set(UpdateIntervalSec)
 UpdateIntervalSecentry = Entry(app, textvariable=UpdateIntervalSecvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
-UpdateIntervalSecentry.grid(row=102, column=exchangeNamecol)
+UpdateIntervalSecentry.grid(row=101, column=BTCUSDcol)
 
-UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=103, column=exchangeNamecol)
+UpdateIntervalSecCallbackbutton = Button(app, text='Update', command=UpdateIntervalSecCallback, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=102, column=BTCUSDcol)
 
-UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=104, column=exchangeNamecol)
+UpdateIntervalSeclabeldata = Label(app, text=str(UpdateIntervalSec) + str(" sec"), relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor).grid(row=103, column=BTCUSDcol)
 
 
 # .................... Exchange Name ....................
