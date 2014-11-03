@@ -11,9 +11,8 @@ MyLTC = 30
 MyDOGE = 113356
 MyDRK = 45
 MyPPC = 12.89
-MyNXT = 125.99
+MyNXT = 127
 MyXCP = 3.4032
-MyNMC = 5.4
 MyFAIR = 10
 
 
@@ -53,9 +52,6 @@ NXTexchangeURL3 = 'https://api.hitbtc.com/api/1/public/ticker'
 XCPexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
 XCPexchangeURL2 = 'http://data.bter.com/api/1/ticker/XCP_btc'
 XCPexchangeURL3 = 'https://www.melotic.com/api/markets'
-NMCexchangeURL1 = 'https://btc-e.com/api/2/nmc_btc/ticker'
-NMCexchangeURL2 = 'https://cex.io/api/ticker/NMC/BTC'
-NMCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=29'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
@@ -98,11 +94,6 @@ XCPexchangeName1text = " Poloniex "
 XCPexchangeName2text = " Bter "
 XCPexchangeName3text = " Melotic "
 
-NMCexchangeName1text = " Btc-e "
-NMCexchangeName2text = " CEX.io "
-NMCexchangeName3text = " Cryptsy "
-
-
 FAIRexchangeNametext = " Vaultex "
 
 
@@ -123,8 +114,6 @@ global NXTexchangeNamevardata
 NXTexchangeNamevardata = "one"
 global XCPexchangeNamevardata
 XCPexchangeNamevardata = "one"
-global NMCexchangeNamevardata
-NMCexchangeNamevardata = "one"
 
 
 # Font Type and Size
@@ -165,7 +154,6 @@ MyDRKtext = " My DRK "
 MyPPCtext = " My PPC "
 MyNXTtext = " My NXT "
 MyXCPtext = " My XCP "
-MyNMCtext = " My NMC "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -182,8 +170,6 @@ NXTpriceBTCtext = str(" NXT Price in BTC ")
 NXTpriceUSDtext = str(" NXT Price in USD ")
 XCPpriceBTCtext = str(" XCP Price in BTC ")
 XCPpriceUSDtext = str(" XCP Price in USD ")
-NMCpriceBTCtext = str(" NMC Price in BTC ")
-NMCpriceUSDtext = str(" NMC Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My BTC Value in USD ")
@@ -201,8 +187,6 @@ MyNXTValueUSDtext = str(" My NXT Value in USD ")
 MyNXTValueBTCtext = str(" My NXT Value in BTC ")
 MyXCPValueUSDtext = str(" My XCP Value in USD ")
 MyXCPValueBTCtext = str(" My XCP Value in BTC ")
-MyNMCValueUSDtext = str(" My NMC Value in USD ")
-MyNMCValueBTCtext = str(" My NMC Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -240,10 +224,8 @@ NXTrowtext = 13
 NXTrowdata = 14
 XCProwtext = 15
 XCProwdata = 16
-NMCrowtext = 17
-NMCrowdata = 18
-FAIRrowtext = 19
-FAIRrowdata = 20
+FAIRrowtext = 17
+FAIRrowdata = 18
 
 # Columns
 BTCUSDcol = 0
@@ -1038,90 +1020,6 @@ def MyXCPValueBTCupdate():
 
 
 
-#Namecoin
-# Import and Update API DATA for Namecoin price in BTC
-def NMCexchangeNameUpdate(NMCexchangeNameValue):
-    if NMCexchangeNameValue == NMCexchangeName1text:
-        print NMCexchangeName1text
-        global NMCexchangeNamevardata
-        NMCexchangeNamevardata = "one"
-        print NMCexchangeNamevardata
-        NMCupdateALL()
-    elif NMCexchangeNameValue == NMCexchangeName2text:
-        print NMCexchangeName2text
-        NMCexchangeNamevardata = "two"
-        print NMCexchangeNamevardata
-        NMCupdateALL()
-    else:
-        print NMCexchangeName3text
-        NMCexchangeNamevardata = "three"
-        print NMCexchangeNamevardata
-        NMCupdateALL()
-
-def NMCpriceBTC():
-    if NMCexchangeNamevardata == "one":
-        try:
-            Tick = requests.get(NMCexchangeURL1)
-            return Tick.json()['ticker']['last']
-        except Exception:
-            print "NMCpriceBTC API error"
-            return 0
-    if NMCexchangeNamevardata == "two":
-        try:
-            Tick = requests.get(NMCexchangeURL2)
-            return Tick.json()['last']
-        except Exception:
-            print "NMCpriceBTC API error"
-            return 0
-    if NMCexchangeNamevardata == "three":
-        try:
-            Tick = requests.get(NMCexchangeURL3)
-            return Tick.json()["return"]["markets"]["NMC"]['lasttradeprice']
-        except Exception:
-            print "NMCpriceBTC API error"
-            return 0
-
-def NMCpriceBTCupdate():
-    global NMCpriceBTCvardata
-    NMCpriceBTCvardata.set(str.format("{0:.8f}", (float(NMCpriceBTC()))))
-    root.after(UpdateInterval, NMCpriceBTCupdate)
-
-
-# Calculate and Update with Price Average DATA for Namecoin price in USD
-def NMCpriceUSD():
-    NMCpriceUSD = float(NMCpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
-    return NMCpriceUSD
-
-def NMCpriceUSDupdate():
-    global NMCpriceUSDvardata
-    NMCpriceUSDvardata.set(str.format("{0:.8f}", (float(NMCpriceUSD()))))
-    root.after(UpdateInterval, NMCpriceUSDupdate)
-
-
-# Calculate and Update my Namecoin Value in USD
-def MyNMCValueUSD():
-    global NMCpriceUSDvardata
-    MyNMCValueUSD = float(NMCpriceUSDvardata.get()) * float(MyNMCvardata.get())
-    return MyNMCValueUSD
-
-def MyNMCValueUSDupdate():
-    global MyNMCValueUSDvardata
-    MyNMCValueUSDvardata.set(str.format("{0:.2f}", (float(MyNMCValueUSD()))))
-    root.after(UpdateInterval, MyNMCValueUSDupdate)
-
-
-# Calculate and Update my Namecoin Value in BTC
-def MyNMCValueBTC():
-    MyNMCValueBTC = float(NMCpriceBTCvardata.get()) * float(MyNMCvardata.get())
-    return MyNMCValueBTC
-
-def MyNMCValueBTCupdate():
-    global MyNMCValueBTCvardata
-    MyNMCValueBTCvardata.set(str.format("{0:.8f}", (float(MyNMCValueBTC()))))
-    root.after(UpdateInterval, MyNMCValueBTCupdate)
-
-
-
 
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
@@ -1177,7 +1075,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyXCPValueUSDvardata.get()) + float(MyNMCValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyXCPValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
@@ -1188,7 +1086,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyNMCValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -1316,18 +1214,7 @@ def MyXCPupdate():
     print MyXCP
     return MyXCP
 
-# My Namecoin Update
-def MyNMCupdate():
-    global MyNMC
-    MyNMC = float(MyNMCvardata.get())
-    NMCpriceBTCupdate()
-    NMCpriceUSDupdate()
-    MyNMCValueUSDupdate()
-    MyNMCValueBTCupdate()
-    MyTotalValueUSDupdate()
-    MyTotalValueBTCupdate()
-    print MyNMC
-    return MyNMC
+
 
 # My Faircoin Update
 def MyFAIRupdate():
@@ -1420,15 +1307,6 @@ def XCPupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
-# Namecoin Update ALL
-def NMCupdateALL():
-        NMCpriceBTCupdate()
-        NMCpriceUSDupdate()
-        MyNMCValueBTCupdate()
-        MyNMCValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
 
 
 #Update ALL BUTTON
@@ -1448,8 +1326,6 @@ def updateALLvalue():
     MyNXTValueBTCupdate()
     MyXCPValueUSDupdate()
     MyXCPValueBTCupdate()
-    MyNMCValueUSDupdate()
-    MyNMCValueBTCupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
     MyTotalValueUSDupdate()
@@ -1551,11 +1427,6 @@ XCPimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 CounterpartyImage = PhotoImage(file='./images/CounterpartyImage.gif')
 XCPimage.image_create(END, image=CounterpartyImage)
 XCPimage.grid(row=XCProwtext, column=COINSimagecol, rowspan=2)
-
-NMCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
-NamecoinImage = PhotoImage(file='./images/NamecoinImage.gif')
-NMCimage.image_create(END, image=NamecoinImage)
-NMCimage.grid(row=NMCrowtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
@@ -1699,19 +1570,6 @@ if XCPexchangeNamevardata == "three":
 option = OptionMenu(app, XCPexchangeNamevartext, *XCPexchangeNameChoices, command=XCPexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=XCProwdata, column=exchangeNamecol)
-
-#Namecoin Exchange Name
-NMCexchangeNameChoices = [NMCexchangeName1text, NMCexchangeName2text, NMCexchangeName3text]
-NMCexchangeNamevartext = StringVar(app)
-if NMCexchangeNamevardata == "one":
-    NMCexchangeNamevartext.set(NMCexchangeNameChoices[0])
-if NMCexchangeNamevardata == "two":
-    NMCexchangeNamevartext.set(NMCexchangeNameChoices[1])
-if NMCexchangeNamevardata == "three":
-    NMCexchangeNamevartext.set(NMCexchangeNameChoices[2])
-option = OptionMenu(app, NMCexchangeNamevartext, *NMCexchangeNameChoices, command=NMCexchangeNameUpdate)
-option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
-option.grid(row=NMCrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -2271,68 +2129,6 @@ MyXCPValueUSDvardata = StringVar()
 MyXCPValueUSDlabeldata = Label(app, textvariable=MyXCPValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyXCPValueUSDupdate()
 MyXCPValueUSDlabeldata.grid(row=XCProwdata, column=ValueUSDcol)
-
-
-
-#Namecoin
-#MyNMC
-MyNMCvartext = StringVar()
-MyNMClabeltext = Label(app, textvariable=MyNMCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyNMCvartext.set(MyNMCtext)
-MyNMClabeltext.grid(row=NMCrowtext, column=MyCOINScol)
-
-MyNMCvardata = StringVar()
-MyNMCvardata.set(MyNMC)
-MyNMCentry = Entry(app, textvariable=MyNMCvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
-MyNMCentry.grid(row=NMCrowdata, column=MyCOINScol)
-
-MyNMCupdatebutton = Button(app, text='Update NOW', command=MyNMCupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=NMCrowdata, column=updateMyCOINScol)
-
-
-# Display Data and Text for Namecoin price in BTC
-NMCpriceBTCvartext = StringVar()
-NMCpriceBTClabeltext = Label(app, textvariable=NMCpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-NMCpriceBTCvartext.set(NMCpriceBTCtext)
-NMCpriceBTClabeltext.grid(row=NMCrowtext, column=PriceBTCcol)
-NMCpriceBTCvardata = StringVar()
-NMCpriceBTClabeldata = Label(app, textvariable=NMCpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-NMCpriceBTCupdate()
-NMCpriceBTClabeldata.grid(row=NMCrowdata, column=PriceBTCcol)
-
-
-# Display Data and Text for Namecoin price in USD
-NMCpriceUSDvartext = StringVar()
-NMCpriceUSDlabeltext = Label(app, textvariable=NMCpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-NMCpriceUSDvartext.set(NMCpriceUSDtext)
-NMCpriceUSDlabeltext.grid(row=NMCrowtext, column=PriceUSDcol)
-NMCpriceUSDvardata = StringVar()
-NMCpriceUSDlabeldata = Label(app, textvariable=NMCpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-NMCpriceUSDupdate()
-NMCpriceUSDlabeldata.grid(row=NMCrowdata, column=PriceUSDcol)
-
-
-#My NMC Value in BTC
-MyNMCValueBTCvartext = StringVar()
-MyNMCValueBTClabeltext = Label(app, textvariable=MyNMCValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyNMCValueBTCvartext.set(MyNMCValueBTCtext)
-MyNMCValueBTClabeltext.grid(row=NMCrowtext, column=ValueBTCcol)
-
-MyNMCValueBTCvardata = StringVar()
-MyNMCValueBTClabeldata = Label(app, textvariable=MyNMCValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-MyNMCValueBTCupdate()
-MyNMCValueBTClabeldata.grid(row=NMCrowdata, column=ValueBTCcol)
-
-
-#My NMC Value in USD
-MyNMCValueUSDvartext = StringVar()
-MyNMCValueUSDlabeltext = Label(app, textvariable=MyNMCValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
-MyNMCValueUSDvartext.set(MyNMCValueUSDtext)
-MyNMCValueUSDlabeltext.grid(row=NMCrowtext, column=ValueUSDcol)
-
-MyNMCValueUSDvardata = StringVar()
-MyNMCValueUSDlabeldata = Label(app, textvariable=MyNMCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
-MyNMCValueUSDupdate()
-MyNMCValueUSDlabeldata.grid(row=NMCrowdata, column=ValueUSDcol)
 
 
 
