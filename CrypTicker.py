@@ -14,6 +14,7 @@ MyPPC = 12.89
 MyNXT = 125.99
 MyXCP = 3.4032
 MyNMC = 5.4
+MyXMR = 20
 MyFAIR = 10
 
 
@@ -56,6 +57,9 @@ XCPexchangeURL3 = 'https://www.melotic.com/api/markets'
 NMCexchangeURL1 = 'https://btc-e.com/api/2/nmc_btc/ticker'
 NMCexchangeURL2 = 'https://cex.io/api/ticker/NMC/BTC'
 NMCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=29'
+XMRexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
+XMRexchangeURL2 = 'https://api.hitbtc.com/api/1/public/ticker'
+XMRexchangeURL3 = 'http://data.bter.com/api/1/ticker/xmr_btc'
 FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
@@ -102,6 +106,9 @@ NMCexchangeName1text = " Btc-e "
 NMCexchangeName2text = " CEX.io "
 NMCexchangeName3text = " Cryptsy "
 
+XMRexchangeName1text = " Poloniex "
+XMRexchangeName2text = " HitBTC "
+XMRexchangeName3text = " Bter "
 
 FAIRexchangeNametext = " Vaultex "
 
@@ -125,6 +132,8 @@ global XCPexchangeNamevardata
 XCPexchangeNamevardata = "one"
 global NMCexchangeNamevardata
 NMCexchangeNamevardata = "one"
+global XMRexchangeNamevardata
+XMRexchangeNamevardata = "one"
 
 
 # Font Type and Size
@@ -166,6 +175,7 @@ MyPPCtext = " My PPC "
 MyNXTtext = " My NXT "
 MyXCPtext = " My XCP "
 MyNMCtext = " My NMC "
+MyXMRtext = " My XMR "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -184,6 +194,8 @@ XCPpriceBTCtext = str(" XCP Price in BTC ")
 XCPpriceUSDtext = str(" XCP Price in USD ")
 NMCpriceBTCtext = str(" NMC Price in BTC ")
 NMCpriceUSDtext = str(" NMC Price in USD ")
+XMRpriceBTCtext = str(" XMR Price in BTC ")
+XMRpriceUSDtext = str(" XMR Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My BTC Value in USD ")
@@ -203,6 +215,8 @@ MyXCPValueUSDtext = str(" My XCP Value in USD ")
 MyXCPValueBTCtext = str(" My XCP Value in BTC ")
 MyNMCValueUSDtext = str(" My NMC Value in USD ")
 MyNMCValueBTCtext = str(" My NMC Value in BTC ")
+MyXMRValueUSDtext = str(" My XMR Value in USD ")
+MyXMRValueBTCtext = str(" My XMR Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -242,8 +256,10 @@ XCProwtext = 15
 XCProwdata = 16
 NMCrowtext = 17
 NMCrowdata = 18
-FAIRrowtext = 19
-FAIRrowdata = 20
+XMRrowtext = 19
+XMRrowdata = 20
+FAIRrowtext = 21
+FAIRrowdata = 22
 
 # Columns
 BTCUSDcol = 0
@@ -1121,6 +1137,89 @@ def MyNMCValueBTCupdate():
     root.after(UpdateInterval, MyNMCValueBTCupdate)
 
 
+#Monero
+# Import and Update API DATA for Monero price in BTC
+def XMRexchangeNameUpdate(XMRexchangeNameValue):
+    if XMRexchangeNameValue == XMRexchangeName1text:
+        print XMRexchangeName1text
+        global XMRexchangeNamevardata
+        XMRexchangeNamevardata = "one"
+        print XMRexchangeNamevardata
+        XMRupdateALL()
+    elif XMRexchangeNameValue == XMRexchangeName2text:
+        print XMRexchangeName2text
+        XMRexchangeNamevardata = "two"
+        print XMRexchangeNamevardata
+        XMRupdateALL()
+    else:
+        print XMRexchangeName3text
+        XMRexchangeNamevardata = "three"
+        print XMRexchangeNamevardata
+        XMRupdateALL()
+
+def XMRpriceBTC():
+    if XMRexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(XMRexchangeURL1)
+            return Tick.json()['BTC_XMR']['last']
+        except Exception:
+            print "XMRpriceBTC API error"
+            return 0
+    if XMRexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(XMRexchangeURL2)
+            return Tick.json()['XMRBTC']['last']
+        except Exception:
+            print "XMRpriceBTC API error"
+            return 0
+    if XMRexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(XMRexchangeURL3)
+            return Tick.json()['last']
+        except Exception:
+            print "XMRpriceBTC API error"
+            return 0
+
+def XMRpriceBTCupdate():
+    global XMRpriceBTCvardata
+    XMRpriceBTCvardata.set(str.format("{0:.8f}", (float(XMRpriceBTC()))))
+    root.after(UpdateInterval, XMRpriceBTCupdate)
+
+
+# Calculate and Update with Price Average DATA for Monero price in USD
+def XMRpriceUSD():
+    XMRpriceUSD = float(XMRpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
+    return XMRpriceUSD
+
+def XMRpriceUSDupdate():
+    global XMRpriceUSDvardata
+    XMRpriceUSDvardata.set(str.format("{0:.8f}", (float(XMRpriceUSD()))))
+    root.after(UpdateInterval, XMRpriceUSDupdate)
+
+
+# Calculate and Update my Monero Value in USD
+def MyXMRValueUSD():
+    global XMRpriceUSDvardata
+    MyXMRValueUSD = float(XMRpriceUSDvardata.get()) * float(MyXMRvardata.get())
+    return MyXMRValueUSD
+
+def MyXMRValueUSDupdate():
+    global MyXMRValueUSDvardata
+    MyXMRValueUSDvardata.set(str.format("{0:.2f}", (float(MyXMRValueUSD()))))
+    root.after(UpdateInterval, MyXMRValueUSDupdate)
+
+
+# Calculate and Update my Monero Value in BTC
+def MyXMRValueBTC():
+    MyXMRValueBTC = float(XMRpriceBTCvardata.get()) * float(MyXMRvardata.get())
+    return MyXMRValueBTC
+
+def MyXMRValueBTCupdate():
+    global MyXMRValueBTCvardata
+    MyXMRValueBTCvardata.set(str.format("{0:.8f}", (float(MyXMRValueBTC()))))
+    root.after(UpdateInterval, MyXMRValueBTCupdate)
+
+
 
 
 #FAIRCOIN
@@ -1177,7 +1276,7 @@ def MyFAIRValueBTCupdate():
 #TOTAL
 # Calculate and Update my Total Value in USD
 def MyTotalValueUSD():
-    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyXCPValueUSDvardata.get()) + float(MyNMCValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
+    MyTotalValueUSD = float(MyBTCValuevardata.get()) + float(MyBLKValueUSDvardata.get()) + float(MyLTCValueUSDvardata.get()) + float(MyDOGEValueUSDvardata.get()) + float(MyDRKValueUSDvardata.get()) + float(MyPPCValueUSDvardata.get()) + float(MyNXTValueUSDvardata.get()) + float(MyXCPValueUSDvardata.get()) + float(MyNMCValueUSDvardata.get()) + float(MyXMRValueUSDvardata.get()) + float(MyFAIRValueUSDvardata.get())
     return MyTotalValueUSD
 
 def MyTotalValueUSDupdate():
@@ -1188,7 +1287,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyNMCValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyNMCValueBTCvardata.get()) + float(MyXMRValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -1329,6 +1428,20 @@ def MyNMCupdate():
     print MyNMC
     return MyNMC
 
+# My Monero Update
+def MyXMRupdate():
+    global MyXMR
+    MyXMR = float(MyXMRvardata.get())
+    XMRpriceBTCupdate()
+    XMRpriceUSDupdate()
+    MyXMRValueUSDupdate()
+    MyXMRValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyXMR
+    return MyXMR
+
+
 # My Faircoin Update
 def MyFAIRupdate():
     global MyFAIR
@@ -1429,6 +1542,14 @@ def NMCupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
+# Monero Update ALL
+def XMRupdateALL():
+        XMRpriceBTCupdate()
+        XMRpriceUSDupdate()
+        MyXMRValueBTCupdate()
+        MyXMRValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
 
 
 #Update ALL BUTTON
@@ -1450,6 +1571,8 @@ def updateALLvalue():
     MyXCPValueBTCupdate()
     MyNMCValueUSDupdate()
     MyNMCValueBTCupdate()
+    MyXMRValueUSDupdate()
+    MyXMRValueBTCupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
     MyTotalValueUSDupdate()
@@ -1556,6 +1679,11 @@ NMCimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 NamecoinImage = PhotoImage(file='./images/NamecoinImage.gif')
 NMCimage.image_create(END, image=NamecoinImage)
 NMCimage.grid(row=NMCrowtext, column=COINSimagecol, rowspan=2)
+
+XMRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
+MoneroImage = PhotoImage(file='./images/MoneroImage.gif')
+XMRimage.image_create(END, image=MoneroImage)
+XMRimage.grid(row=XMRrowtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
@@ -1712,6 +1840,19 @@ if NMCexchangeNamevardata == "three":
 option = OptionMenu(app, NMCexchangeNamevartext, *NMCexchangeNameChoices, command=NMCexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=NMCrowdata, column=exchangeNamecol)
+
+#Monero Exchange Name
+XMRexchangeNameChoices = [XMRexchangeName1text, XMRexchangeName2text, XMRexchangeName3text]
+XMRexchangeNamevartext = StringVar(app)
+if XMRexchangeNamevardata == "one":
+    XMRexchangeNamevartext.set(XMRexchangeNameChoices[0])
+if XMRexchangeNamevardata == "two":
+    XMRexchangeNamevartext.set(XMRexchangeNameChoices[1])
+if XMRexchangeNamevardata == "three":
+    XMRexchangeNamevartext.set(XMRexchangeNameChoices[2])
+option = OptionMenu(app, XMRexchangeNamevartext, *XMRexchangeNameChoices, command=XMRexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=XMRrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
 FAIRexchangeNamevartext = StringVar()
@@ -2333,6 +2474,68 @@ MyNMCValueUSDvardata = StringVar()
 MyNMCValueUSDlabeldata = Label(app, textvariable=MyNMCValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyNMCValueUSDupdate()
 MyNMCValueUSDlabeldata.grid(row=NMCrowdata, column=ValueUSDcol)
+
+
+
+#Monero
+#MyXMR
+MyXMRvartext = StringVar()
+MyXMRlabeltext = Label(app, textvariable=MyXMRvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyXMRvartext.set(MyXMRtext)
+MyXMRlabeltext.grid(row=XMRrowtext, column=MyCOINScol)
+
+MyXMRvardata = StringVar()
+MyXMRvardata.set(MyXMR)
+MyXMRentry = Entry(app, textvariable=MyXMRvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
+MyXMRentry.grid(row=XMRrowdata, column=MyCOINScol)
+
+MyXMRupdatebutton = Button(app, text='Update NOW', command=MyXMRupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=XMRrowdata, column=updateMyCOINScol)
+
+
+# Display Data and Text for Monero price in BTC
+XMRpriceBTCvartext = StringVar()
+XMRpriceBTClabeltext = Label(app, textvariable=XMRpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+XMRpriceBTCvartext.set(XMRpriceBTCtext)
+XMRpriceBTClabeltext.grid(row=XMRrowtext, column=PriceBTCcol)
+XMRpriceBTCvardata = StringVar()
+XMRpriceBTClabeldata = Label(app, textvariable=XMRpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+XMRpriceBTCupdate()
+XMRpriceBTClabeldata.grid(row=XMRrowdata, column=PriceBTCcol)
+
+
+# Display Data and Text for Monero price in USD
+XMRpriceUSDvartext = StringVar()
+XMRpriceUSDlabeltext = Label(app, textvariable=XMRpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+XMRpriceUSDvartext.set(XMRpriceUSDtext)
+XMRpriceUSDlabeltext.grid(row=XMRrowtext, column=PriceUSDcol)
+XMRpriceUSDvardata = StringVar()
+XMRpriceUSDlabeldata = Label(app, textvariable=XMRpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+XMRpriceUSDupdate()
+XMRpriceUSDlabeldata.grid(row=XMRrowdata, column=PriceUSDcol)
+
+
+#My XMR Value in BTC
+MyXMRValueBTCvartext = StringVar()
+MyXMRValueBTClabeltext = Label(app, textvariable=MyXMRValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyXMRValueBTCvartext.set(MyXMRValueBTCtext)
+MyXMRValueBTClabeltext.grid(row=XMRrowtext, column=ValueBTCcol)
+
+MyXMRValueBTCvardata = StringVar()
+MyXMRValueBTClabeldata = Label(app, textvariable=MyXMRValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyXMRValueBTCupdate()
+MyXMRValueBTClabeldata.grid(row=XMRrowdata, column=ValueBTCcol)
+
+
+#My XMR Value in USD
+MyXMRValueUSDvartext = StringVar()
+MyXMRValueUSDlabeltext = Label(app, textvariable=MyXMRValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyXMRValueUSDvartext.set(MyXMRValueUSDtext)
+MyXMRValueUSDlabeltext.grid(row=XMRrowtext, column=ValueUSDcol)
+
+MyXMRValueUSDvardata = StringVar()
+MyXMRValueUSDlabeldata = Label(app, textvariable=MyXMRValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyXMRValueUSDupdate()
+MyXMRValueUSDlabeldata.grid(row=XMRrowdata, column=ValueUSDcol)
 
 
 
