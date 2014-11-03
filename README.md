@@ -19,4 +19,5 @@ Supported coins for now:
 - Peercoin (PPC)
 - NXTcoin (NXT)
 - Counterparty (XCP)
+- Namecoin (NMC)
 - Faircoin (FAIR)
