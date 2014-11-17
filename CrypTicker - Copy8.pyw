@@ -15,7 +15,7 @@ MyNXT = 125.99
 MyXCP = 3.4032
 MyNMC = 5.4
 MyXMR = 20
-MyFAIR = 39213
+MyFAIR = 10
 
 
 #BTC - USD exchanges URL
@@ -60,10 +60,7 @@ NMCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mar
 XMRexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
 XMRexchangeURL2 = 'https://api.hitbtc.com/api/1/public/ticker'
 XMRexchangeURL3 = 'http://data.bter.com/api/1/ticker/xmr_btc'
-FAIRexchangeURL1 = 'https://alcurex.org/api/market.php?pair=fair_btc&last=last'
-FAIRexchangeURL2 = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
-FAIRexchangeURL3 = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
-
+FAIRexchangeURL = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
 # Change Exchange Name in Menu
@@ -113,9 +110,7 @@ XMRexchangeName1text = " Poloniex "
 XMRexchangeName2text = " HitBTC "
 XMRexchangeName3text = " Bter "
 
-FAIRexchangeName1text = " Alcurex "
-FAIRexchangeName2text = " Vaultex "
-FAIRexchangeName3text = " Vaultex "
+FAIRexchangeNametext = " Vaultex "
 
 
 # Choose Default Exchange Name:
@@ -139,8 +134,6 @@ global NMCexchangeNamevardata
 NMCexchangeNamevardata = "one"
 global XMRexchangeNamevardata
 XMRexchangeNamevardata = "one"
-global FAIRexchangeNamevardata
-FAIRexchangeNamevardata = "one"
 
 
 # Font Type and Size
@@ -1231,47 +1224,13 @@ def MyXMRValueBTCupdate():
 
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
-def FAIRexchangeNameUpdate(FAIRexchangeNameValue):
-    if FAIRexchangeNameValue == FAIRexchangeName1text:
-        print FAIRexchangeName1text
-        global FAIRexchangeNamevardata
-        FAIRexchangeNamevardata = "one"
-        print FAIRexchangeNamevardata
-        FAIRupdateALL()
-    elif FAIRexchangeNameValue == FAIRexchangeName2text:
-        print FAIRexchangeName2text
-        FAIRexchangeNamevardata = "two"
-        print FAIRexchangeNamevardata
-        FAIRupdateALL()
-    else:
-        print FAIRexchangeName3text
-        FAIRexchangeNamevardata = "three"
-        print FAIRexchangeNamevardata
-        FAIRupdateALL()
-
 def FAIRpriceBTC():
-    if FAIRexchangeNamevardata == "one":
-        try:
-            Tick = requests.get(FAIRexchangeURL1)
-            return Tick.json()['price']
-        except Exception:
-            print "FAIRpriceBTC API error"
-            return 0
-    if FAIRexchangeNamevardata == "two":
-        try:
-            Tick = requests.get(FAIRexchangeURL2)
-            return Tick.json()['last_price']
-        except Exception:
-            print "FAIRpriceBTC API error"
-            return 0
-    if FAIRexchangeNamevardata == "three":
-        try:
-            Tick = requests.get(FAIRexchangeURL3)
-            return Tick.json()['last_price']
-        except Exception:
-            print "FAIRpriceBTC API error"
-            return 0
-
+    try:
+        Tick = requests.get(FAIRexchangeURL)
+        return float(Tick.json()["last_price"])
+    except Exception:
+        print "FAIRpriceBTC API error"
+        return 0
 
 def FAIRpriceBTCupdate():
     global FAIRpriceBTCvardata
@@ -1592,16 +1551,6 @@ def XMRupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
-# Faircoin Update ALL
-def FAIRupdateALL():
-        FAIRpriceBTCupdate()
-        FAIRpriceUSDupdate()
-        MyFAIRValueBTCupdate()
-        MyFAIRValueUSDupdate()
-        MyTotalValueBTCupdate()
-        MyTotalValueUSDupdate()
-
-
 
 #Update ALL BUTTON
 def updateALLvalue():
@@ -1645,7 +1594,7 @@ class Window(Frame):
         # Quit Button
         quitButton = Button(self, text="Quit", command=self.client_exit, bg=ButtonBackGroundColor, fg=ButtonForegroundColor)
         quitButton.grid(row=0, column=0)
-        # Menu
+        #
         menu = Menu(self.master)
         self.master.config(menu=menu)
         file = Menu(menu)
@@ -1906,17 +1855,10 @@ option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundC
 option.grid(row=XMRrowdata, column=exchangeNamecol)
 
 #Faircoin Exchange Name
-FAIRexchangeNameChoices = [FAIRexchangeName1text, FAIRexchangeName2text, FAIRexchangeName3text]
-FAIRexchangeNamevartext = StringVar(app)
-if FAIRexchangeNamevardata == "one":
-    FAIRexchangeNamevartext.set(FAIRexchangeNameChoices[0])
-if FAIRexchangeNamevardata == "two":
-    FAIRexchangeNamevartext.set(FAIRexchangeNameChoices[1])
-if FAIRexchangeNamevardata == "three":
-    FAIRexchangeNamevartext.set(FAIRexchangeNameChoices[2])
-option = OptionMenu(app, FAIRexchangeNamevartext, *FAIRexchangeNameChoices, command=FAIRexchangeNameUpdate)
-option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
-option.grid(row=FAIRrowdata, column=exchangeNamecol)
+FAIRexchangeNamevartext = StringVar()
+FAIRexchangeNamelabeltext = Label(app, textvariable=FAIRexchangeNamevartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+FAIRexchangeNamevartext.set(FAIRexchangeNametext)
+FAIRexchangeNamelabeltext.grid(row=FAIRrowdata, column=exchangeNamecol)
 
 
 # .................... DATA and TEXT ....................
