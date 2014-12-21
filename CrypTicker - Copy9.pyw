@@ -11,11 +11,11 @@ MyLTC = 30
 MyDOGE = 113356
 MyDRK = 45
 MyPPC = 12.89
-MyNXT = 794
+MyNXT = 125.99
 MyXCP = 3.4032
 MyNMC = 5.4
 MyXMR = 20
-MyFAIR = 33408
+MyFAIR = 39213
 
 
 #BTC - USD exchanges URL
@@ -60,9 +60,9 @@ NMCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mar
 XMRexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
 XMRexchangeURL2 = 'https://api.hitbtc.com/api/1/public/ticker'
 XMRexchangeURL3 = 'http://data.bter.com/api/1/ticker/xmr_btc'
-FAIRexchangeURL1 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-FAIR'
+FAIRexchangeURL1 = 'https://alcurex.org/api/market.php?pair=fair_btc&last=last'
 FAIRexchangeURL2 = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
-FAIRexchangeURL3 = 'https://alcurex.org/api/market.php?pair=fair_btc&last=last'
+FAIRexchangeURL3 = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 
 
 
@@ -113,9 +113,9 @@ XMRexchangeName1text = " Poloniex "
 XMRexchangeName2text = " HitBTC "
 XMRexchangeName3text = " Bter "
 
-FAIRexchangeName1text = " Bittrex "
+FAIRexchangeName1text = " Alcurex "
 FAIRexchangeName2text = " Vaultex "
-FAIRexchangeName3text = " Alcurex "
+FAIRexchangeName3text = " Vaultex "
 
 
 # Choose Default Exchange Name:
@@ -1253,27 +1253,21 @@ def FAIRpriceBTC():
     if FAIRexchangeNamevardata == "one":
         try:
             Tick = requests.get(FAIRexchangeURL1)
-            print Tick
-            print Tick.json()
-            return Tick.json()['result']['Last']
-        except Exception as Err:
+            return Tick.json()['price']
+        except Exception:
             print "FAIRpriceBTC API error"
-            print FAIRexchangeURL1
-            print Err
             return 0
     if FAIRexchangeNamevardata == "two":
         try:
-            Tick = requests.get(FAIRexchangeURL2, verify=False)
-            return Tick.json()['[last_price]']
-        except Exception as Err:
+            Tick = requests.get(FAIRexchangeURL2)
+            return Tick.json()['last_price']
+        except Exception:
             print "FAIRpriceBTC API error"
-            print FAIRexchangeURL2
-            print Err
             return 0
     if FAIRexchangeNamevardata == "three":
         try:
             Tick = requests.get(FAIRexchangeURL3)
-            return Tick.json()['fair_btc']['price']
+            return Tick.json()['last_price']
         except Exception:
             print "FAIRpriceBTC API error"
             return 0
