@@ -15,6 +15,7 @@ MyNXT = 794
 MyXCP = 3.4032
 MyNMC = 5.4
 MyXMR = 20
+MyBTS = 1025
 MyFAIR = 33408
 
 
@@ -60,6 +61,9 @@ NMCexchangeURL3 = 'http://pubapi.cryptsy.com/api.php?method=singlemarketdata&mar
 XMRexchangeURL1 = 'https://poloniex.com/public?command=returnTicker'
 XMRexchangeURL2 = 'https://api.hitbtc.com/api/1/public/ticker'
 XMRexchangeURL3 = 'http://data.bter.com/api/1/ticker/xmr_btc'
+BTSexchangeURL1 = 'http://data.bter.com/api/1/ticker/BTS_btc'
+BTSexchangeURL2 = 'http://api.btc38.com/v1/ticker.php?c=bts&mk_type=btc'
+BTSexchangeURL3 = 'https://poloniex.com/public?command=returnTicker'
 FAIRexchangeURL1 = 'https://bittrex.com/api/v1.1/public/getticker?market=BTC-FAIR'
 FAIRexchangeURL2 = 'https://api.vaultex.io/v1/market/stats/FAIR/BTC'
 FAIRexchangeURL3 = 'https://alcurex.org/api/market.php?pair=fair_btc&last=last'
@@ -113,6 +117,10 @@ XMRexchangeName1text = " Poloniex "
 XMRexchangeName2text = " HitBTC "
 XMRexchangeName3text = " Bter "
 
+BTSexchangeName1text = " Bter "
+BTSexchangeName2text = " BTC38 "
+BTSexchangeName3text = " Poloniex "
+
 FAIRexchangeName1text = " Bittrex "
 FAIRexchangeName2text = " Vaultex "
 FAIRexchangeName3text = " Alcurex "
@@ -139,6 +147,8 @@ global NMCexchangeNamevardata
 NMCexchangeNamevardata = "one"
 global XMRexchangeNamevardata
 XMRexchangeNamevardata = "one"
+global BTSexchangeNamevardata
+BTSexchangeNamevardata = "one"
 global FAIRexchangeNamevardata
 FAIRexchangeNamevardata = "one"
 
@@ -183,6 +193,7 @@ MyNXTtext = " My NXT "
 MyXCPtext = " My XCP "
 MyNMCtext = " My NMC "
 MyXMRtext = " My XMR "
+MyBTStext = " My BTS "
 MyFAIRtext = " My FAIR "
 BTCpriceUSDtext = str(" BTC Price in USD ")
 BLKpriceBTCtext = str(" BLK Price in BTC ")
@@ -203,6 +214,8 @@ NMCpriceBTCtext = str(" NMC Price in BTC ")
 NMCpriceUSDtext = str(" NMC Price in USD ")
 XMRpriceBTCtext = str(" XMR Price in BTC ")
 XMRpriceUSDtext = str(" XMR Price in USD ")
+BTSpriceBTCtext = str(" BTS Price in BTC ")
+BTSpriceUSDtext = str(" BTS Price in USD ")
 FAIRpriceBTCtext = str(" FAIR Price in BTC ")
 FAIRpriceUSDtext = str(" FAIR Price in USD ")
 MyBTCValuetext = str(" My BTC Value in USD ")
@@ -224,6 +237,8 @@ MyNMCValueUSDtext = str(" My NMC Value in USD ")
 MyNMCValueBTCtext = str(" My NMC Value in BTC ")
 MyXMRValueUSDtext = str(" My XMR Value in USD ")
 MyXMRValueBTCtext = str(" My XMR Value in BTC ")
+MyBTSValueUSDtext = str(" My BTS Value in USD ")
+MyBTSValueBTCtext = str(" My BTS Value in BTC ")
 MyFAIRValueUSDtext = str(" My FAIR Value in USD ")
 MyFAIRValueBTCtext = str(" My FAIR Value in BTC ")
 MyTotalValueUSDtext = str(" My Total Value in USD ")
@@ -265,8 +280,10 @@ NMCrowtext = 17
 NMCrowdata = 18
 XMRrowtext = 19
 XMRrowdata = 20
-FAIRrowtext = 21
-FAIRrowdata = 22
+BTSrowtext = 21
+BTSrowdata = 22
+FAIRrowtext = 23
+FAIRrowdata = 24
 
 # Columns
 BTCUSDcol = 0
@@ -1229,6 +1246,96 @@ def MyXMRValueBTCupdate():
 
 
 
+#BitShares
+# Import and Update API DATA for BitShares price in BTC
+def BTSexchangeNameUpdate(BTSexchangeNameValue):
+    if BTSexchangeNameValue == BTSexchangeName1text:
+        print BTSexchangeName1text
+        global BTSexchangeNamevardata
+        BTSexchangeNamevardata = "one"
+        print BTSexchangeNamevardata
+        BTSupdateALL()
+    elif BTSexchangeNameValue == BTSexchangeName2text:
+        print BTSexchangeName2text
+        BTSexchangeNamevardata = "two"
+        print BTSexchangeNamevardata
+        BTSupdateALL()
+    else:
+        print BTSexchangeName3text
+        BTSexchangeNamevardata = "three"
+        print BTSexchangeNamevardata
+        BTSupdateALL()
+
+def BTSpriceBTC():
+    if BTSexchangeNamevardata == "one":
+        try:
+            Tick = requests.get(BTSexchangeURL1)
+            return Tick.json()['last']
+        except Exception:
+            print "BTSpriceBTC API error"
+            return 0
+    if BTSexchangeNamevardata == "two":
+        try:
+            Tick = requests.get(BTSexchangeURL2)
+            print Tick
+            print BTSexchangeURL2
+            print Tick.json
+            return Tick.json()["ticker"]["last"]
+        except Exception as Err:
+            print Err
+            print "BTSpriceBTC API error"
+            return 0
+    if BTSexchangeNamevardata == "three":
+        try:
+            Tick = requests.get(BTSexchangeURL3)
+            return Tick.json()['BTC_BTSX']['last']
+        except Exception as Err:
+            print Err
+            print "BTSpriceBTC API error"
+            return 0
+
+def BTSpriceBTCupdate():
+    global BTSpriceBTCvardata
+    BTSpriceBTCvardata.set(str.format("{0:.8f}", (float(BTSpriceBTC()))))
+    root.after(UpdateInterval, BTSpriceBTCupdate)
+
+
+# Calculate and Update with Price Average DATA for BitShares price in USD
+def BTSpriceUSD():
+    BTSpriceUSD = float(BTSpriceBTCvardata.get()) * float(PriceAverageUSDvardata.get())
+    return BTSpriceUSD
+
+def BTSpriceUSDupdate():
+    global BTSpriceUSDvardata
+    BTSpriceUSDvardata.set(str.format("{0:.8f}", (float(BTSpriceUSD()))))
+    root.after(UpdateInterval, BTSpriceUSDupdate)
+
+
+# Calculate and Update my BitShares Value in USD
+def MyBTSValueUSD():
+    global BTSpriceUSDvardata
+    MyBTSValueUSD = float(BTSpriceUSDvardata.get()) * float(MyBTSvardata.get())
+    return MyBTSValueUSD
+
+def MyBTSValueUSDupdate():
+    global MyBTSValueUSDvardata
+    MyBTSValueUSDvardata.set(str.format("{0:.2f}", (float(MyBTSValueUSD()))))
+    root.after(UpdateInterval, MyBTSValueUSDupdate)
+
+
+# Calculate and Update my BitShares Value in BTC
+def MyBTSValueBTC():
+    MyBTSValueBTC = float(BTSpriceBTCvardata.get()) * float(MyBTSvardata.get())
+    return MyBTSValueBTC
+
+def MyBTSValueBTCupdate():
+    global MyBTSValueBTCvardata
+    MyBTSValueBTCvardata.set(str.format("{0:.8f}", (float(MyBTSValueBTC()))))
+    root.after(UpdateInterval, MyBTSValueBTCupdate)
+
+
+
+
 #FAIRCOIN
 # Import and Update API DATA for Faircoin price in BTC
 def FAIRexchangeNameUpdate(FAIRexchangeNameValue):
@@ -1273,9 +1380,12 @@ def FAIRpriceBTC():
     if FAIRexchangeNamevardata == "three":
         try:
             Tick = requests.get(FAIRexchangeURL3)
-            return Tick.json()['fair_btc']['price']
-        except Exception:
+            print Tick
+            print Tick.json()["fair_btc"[["price"]]]
+            return Tick.json()["fair_btc"[["price"]]]
+        except Exception as Err:
             print "FAIRpriceBTC API error"
+            print Err
             return 0
 
 
@@ -1334,7 +1444,7 @@ def MyTotalValueUSDupdate():
 
 # Calculate and Update my Total Value in BTC
 def MyTotalValueBTC():
-    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyNMCValueBTCvardata.get()) + float(MyXMRValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
+    MyTotalValueBTC = MyBTC + float(MyBLKValueBTCvardata.get()) + float(MyLTCValueBTCvardata.get()) + float(MyDOGEValueBTCvardata.get()) + float(MyDRKValueBTCvardata.get()) + float(MyPPCValueBTCvardata.get()) + float(MyNXTValueBTCvardata.get()) + float(MyXCPValueBTCvardata.get()) + float(MyNMCValueBTCvardata.get()) + float(MyXMRValueBTCvardata.get()) + float(MyBTSValueBTCvardata.get()) + float(MyFAIRValueBTCvardata.get())
     return MyTotalValueBTC
 
 def MyTotalValueBTCupdate():
@@ -1488,6 +1598,18 @@ def MyXMRupdate():
     print MyXMR
     return MyXMR
 
+# My BitShares Update
+def MyBTSupdate():
+    global MyBTS
+    MyBTS = float(MyBTSvardata.get())
+    BTSpriceBTCupdate()
+    BTSpriceUSDupdate()
+    MyBTSValueUSDupdate()
+    MyBTSValueBTCupdate()
+    MyTotalValueUSDupdate()
+    MyTotalValueBTCupdate()
+    print MyBTS
+    return MyBTS
 
 # My Faircoin Update
 def MyFAIRupdate():
@@ -1598,6 +1720,15 @@ def XMRupdateALL():
         MyTotalValueBTCupdate()
         MyTotalValueUSDupdate()
 
+# BitShares Update ALL
+def BTSupdateALL():
+        BTSpriceBTCupdate()
+        BTSpriceUSDupdate()
+        MyBTSValueBTCupdate()
+        MyBTSValueUSDupdate()
+        MyTotalValueBTCupdate()
+        MyTotalValueUSDupdate()
+
 # Faircoin Update ALL
 def FAIRupdateALL():
         FAIRpriceBTCupdate()
@@ -1630,6 +1761,8 @@ def updateALLvalue():
     MyNMCValueBTCupdate()
     MyXMRValueUSDupdate()
     MyXMRValueBTCupdate()
+    MyBTSValueUSDupdate()
+    MyBTSValueBTCupdate()
     MyFAIRValueUSDupdate()
     MyFAIRValueBTCupdate()
     MyTotalValueUSDupdate()
@@ -1741,6 +1874,11 @@ XMRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 MoneroImage = PhotoImage(file='./images/MoneroImage.gif')
 XMRimage.image_create(END, image=MoneroImage)
 XMRimage.grid(row=XMRrowtext, column=COINSimagecol, rowspan=2)
+
+BTSimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
+BitSharesImage = PhotoImage(file='./images/BitSharesImage.gif')
+BTSimage.image_create(END, image=BitSharesImage)
+BTSimage.grid(row=BTSrowtext, column=COINSimagecol, rowspan=2)
 
 FAIRimage = Text(app, height=3.1, width=6, bg=COINSbackgroundColor, bd=0)
 FaircoinImage = PhotoImage(file='./images/FaircoinImage.gif')
@@ -1910,6 +2048,20 @@ if XMRexchangeNamevardata == "three":
 option = OptionMenu(app, XMRexchangeNamevartext, *XMRexchangeNameChoices, command=XMRexchangeNameUpdate)
 option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
 option.grid(row=XMRrowdata, column=exchangeNamecol)
+
+#BitShares Exchange Name
+BTSexchangeNameChoices = [BTSexchangeName1text, BTSexchangeName2text, BTSexchangeName3text]
+BTSexchangeNamevartext = StringVar(app)
+if BTSexchangeNamevardata == "one":
+    BTSexchangeNamevartext.set(BTSexchangeNameChoices[0])
+if BTSexchangeNamevardata == "two":
+    BTSexchangeNamevartext.set(BTSexchangeNameChoices[1])
+if BTSexchangeNamevardata == "three":
+    BTSexchangeNamevartext.set(BTSexchangeNameChoices[2])
+option = OptionMenu(app, BTSexchangeNamevartext, *BTSexchangeNameChoices, command=BTSexchangeNameUpdate)
+option.config(relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor, activebackground=ExchangeNameActiveBackgroundColor, activeforeground=TextForegroundColor)
+option.grid(row=BTSrowdata, column=exchangeNamecol)
+
 
 #Faircoin Exchange Name
 FAIRexchangeNameChoices = [FAIRexchangeName1text, FAIRexchangeName2text, FAIRexchangeName3text]
@@ -2600,6 +2752,68 @@ MyXMRValueUSDvardata = StringVar()
 MyXMRValueUSDlabeldata = Label(app, textvariable=MyXMRValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
 MyXMRValueUSDupdate()
 MyXMRValueUSDlabeldata.grid(row=XMRrowdata, column=ValueUSDcol)
+
+
+
+#BitShares
+#MyBTS
+MyBTSvartext = StringVar()
+MyBTSlabeltext = Label(app, textvariable=MyBTSvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyBTSvartext.set(MyBTStext)
+MyBTSlabeltext.grid(row=BTSrowtext, column=MyCOINScol)
+
+MyBTSvardata = StringVar()
+MyBTSvardata.set(MyBTS)
+MyBTSentry = Entry(app, textvariable=MyBTSvardata, relief=RAISED, font=(DataFontType, DataFontSize), width=9, borderwidth=3, justify=CENTER, bg=EntryBackgroundColor, fg=EntryForegroundColor)
+MyBTSentry.grid(row=BTSrowdata, column=MyCOINScol)
+
+MyBTSupdatebutton = Button(app, text='Update NOW', command=MyBTSupdate, bg=ButtonBackGroundColor, fg=ButtonForegroundColor).grid(row=BTSrowdata, column=updateMyCOINScol)
+
+
+# Display Data and Text for BitShares price in BTC
+BTSpriceBTCvartext = StringVar()
+BTSpriceBTClabeltext = Label(app, textvariable=BTSpriceBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+BTSpriceBTCvartext.set(BTSpriceBTCtext)
+BTSpriceBTClabeltext.grid(row=BTSrowtext, column=PriceBTCcol)
+BTSpriceBTCvardata = StringVar()
+BTSpriceBTClabeldata = Label(app, textvariable=BTSpriceBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+BTSpriceBTCupdate()
+BTSpriceBTClabeldata.grid(row=BTSrowdata, column=PriceBTCcol)
+
+
+# Display Data and Text for BitShares price in USD
+BTSpriceUSDvartext = StringVar()
+BTSpriceUSDlabeltext = Label(app, textvariable=BTSpriceUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+BTSpriceUSDvartext.set(BTSpriceUSDtext)
+BTSpriceUSDlabeltext.grid(row=BTSrowtext, column=PriceUSDcol)
+BTSpriceUSDvardata = StringVar()
+BTSpriceUSDlabeldata = Label(app, textvariable=BTSpriceUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+BTSpriceUSDupdate()
+BTSpriceUSDlabeldata.grid(row=BTSrowdata, column=PriceUSDcol)
+
+
+#My BTS Value in BTC
+MyBTSValueBTCvartext = StringVar()
+MyBTSValueBTClabeltext = Label(app, textvariable=MyBTSValueBTCvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyBTSValueBTCvartext.set(MyBTSValueBTCtext)
+MyBTSValueBTClabeltext.grid(row=BTSrowtext, column=ValueBTCcol)
+
+MyBTSValueBTCvardata = StringVar()
+MyBTSValueBTClabeldata = Label(app, textvariable=MyBTSValueBTCvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyBTSValueBTCupdate()
+MyBTSValueBTClabeldata.grid(row=BTSrowdata, column=ValueBTCcol)
+
+
+#My BTS Value in USD
+MyBTSValueUSDvartext = StringVar()
+MyBTSValueUSDlabeltext = Label(app, textvariable=MyBTSValueUSDvartext, relief=FLAT, font=(TextFontType, TextFontSize), bg=TextBackgroundColor, fg=TextForegroundColor)
+MyBTSValueUSDvartext.set(MyBTSValueUSDtext)
+MyBTSValueUSDlabeltext.grid(row=BTSrowtext, column=ValueUSDcol)
+
+MyBTSValueUSDvardata = StringVar()
+MyBTSValueUSDlabeldata = Label(app, textvariable=MyBTSValueUSDvardata, relief=RAISED, font=(DataFontType, DataFontSize), bg=DataBackgroundColor, fg=DataForegroundColor)
+MyBTSValueUSDupdate()
+MyBTSValueUSDlabeldata.grid(row=BTSrowdata, column=ValueUSDcol)
 
 
 
